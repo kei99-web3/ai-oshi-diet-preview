@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="AI食事トレーナー icon">
+  <rect width="512" height="512" rx="92" fill="#315d5a"/>
+  <circle cx="256" cy="222" r="132" fill="#f7f4ec"/>
+  <path d="M146 222c22-58 62-90 121-90 55 0 91 28 108 84-24-12-52-19-83-19-59 0-103 19-146 25z" fill="#e36f4a"/>
+  <circle cx="211" cy="239" r="14" fill="#24312f"/>
+  <circle cx="302" cy="239" r="14" fill="#24312f"/>
+  <path d="M212 298c31 25 60 25 88 0" fill="none" stroke="#24312f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M148 384c26-52 62-78 108-78s82 26 108 78" fill="none" stroke="#f2c14e" stroke-width="34" stroke-linecap="round"/>
+</svg>

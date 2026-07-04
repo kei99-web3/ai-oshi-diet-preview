@@ -1,3 +1,4 @@
 ﻿# AI Oshi Diet Preview
 
-Static preview for onboarding screen specification.
+GitHub Pages preview for the AI食事パートナー PWA and onboarding spec.
+
