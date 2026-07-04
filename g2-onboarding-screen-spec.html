@@ -406,18 +406,42 @@
 
       .trainer-list {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         margin-top: 12px;
       }
 
-      .trainer-card {
+      .featured-trainer {
+        margin-top: 12px;
         padding: 8px;
+        border: 1px solid var(--green);
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: inset 0 0 0 1px var(--green);
+      }
+
+      .featured-trainer img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border-radius: 8px;
+        object-fit: cover;
+        object-position: top center;
+        background: #f6f6f0;
+      }
+
+      .featured-trainer strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.95rem;
+      }
+
+      .trainer-card {
+        padding: 6px;
       }
 
       .trainer-card img {
         width: 100%;
-        aspect-ratio: 1;
+        aspect-ratio: 3 / 4;
         border-radius: 8px;
         object-fit: cover;
         object-position: top center;
@@ -425,20 +449,28 @@
       }
 
       .trainer-card.face-only img {
-        transform: scale(1.28);
+        transform: none;
         transform-origin: 50% 16%;
       }
 
       .trainer-card strong {
         display: block;
-        margin-top: 6px;
-        font-size: 0.85rem;
+        margin-top: 5px;
+        font-size: 0.78rem;
       }
 
       .trainer-card span {
         display: block;
         color: var(--muted);
         font-size: 0.72rem;
+      }
+
+      .trainer-list.compact {
+        margin-top: 8px;
+      }
+
+      .trainer-list.compact .trainer-card img {
+        aspect-ratio: 1;
       }
 
       .style-cards,
@@ -1024,9 +1056,9 @@
               <div class="phone-top"><span>Step 1</span><div class="progress"><span style="width: 8%"></span></div></div>
               <div class="phone-body">
                 <div class="face-strip">
-                  <div class="face-chip"><img src="assets/character-sheets/01_miku_motif_character_sheet.png" alt=""></div>
-                  <div class="face-chip"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div>
-                  <div class="face-chip"><img src="assets/character-sheets/06_gojo_motif_character_sheet.png" alt=""></div>
+                  <div class="face-chip"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div>
+                  <div class="face-chip"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
+                  <div class="face-chip"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""></div>
                 </div>
                 <h2>あなただけのトレーナーを作ろう</h2>
                 <p>顔も、距離感も、呼び方も。まずは見た目から。</p>
@@ -1048,7 +1080,7 @@
               <span class="route-badge common">共通</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>カスタム作成を上、サンプル選択を下に置く。</li><li>顔アップだけを見せ、キャラクターシート全体は出さない。</li><li>コピーは「パーソナライズできること」を主価値として伝える。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>カスタム作成を上、サンプル選択を下に置く。</li><li>キャラクターシートではなく、オンボード表示用の魅力訴求ポートレートを見せる。</li><li>コピーは「パーソナライズできること」を主価値として伝える。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面だけで「自分専用を作れる」と伝わるか。</li><li>サンプル選択が逃げ道として軽く見えるか。</li></ul></div>
             </div>
           </div>
@@ -1059,14 +1091,15 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 14%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>気になる顔をタップ</h2>
-                <div class="trainer-list">
-                  <div class="trainer-card face-only selected"><img src="assets/character-sheets/01_miku_motif_character_sheet.png" alt=""><strong>ミナ</strong></div>
-                  <div class="trainer-card face-only"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""><strong>レイ</strong></div>
-                  <div class="trainer-card face-only"><img src="assets/character-sheets/03_asuna_motif_character_sheet.png" alt=""><strong>カナ</strong></div>
-                  <div class="trainer-card face-only"><img src="assets/character-sheets/04_isagi_motif_character_sheet.png" alt=""><strong>ソウ</strong></div>
-                  <div class="trainer-card face-only"><img src="assets/character-sheets/05_meguro_ren_motif_character_sheet.png" alt=""><strong>ハル</strong></div>
-                  <div class="trainer-card face-only"><img src="assets/character-sheets/06_gojo_motif_character_sheet.png" alt=""><strong>アオ</strong></div>
+                <h2>気になる人を選ぶ</h2>
+                <div class="featured-trainer"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
+                <div class="trainer-list compact">
+                  <div class="trainer-card face-only selected"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
+                  <div class="trainer-card face-only"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""><strong>レイ</strong></div>
+                  <div class="trainer-card face-only"><img src="assets/trainer-previews/03_kana_onboarding_preview.webp" alt=""><strong>カナ</strong></div>
+                  <div class="trainer-card face-only"><img src="assets/trainer-previews/04_sou_onboarding_preview.webp" alt=""><strong>ソウ</strong></div>
+                  <div class="trainer-card face-only"><img src="assets/trainer-previews/05_haru_onboarding_preview.webp" alt=""><strong>ハル</strong></div>
+                  <div class="trainer-card face-only"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""><strong>アオ</strong></div>
                 </div>
               </div>
               <div class="phone-bottom"><button class="button">この人にする</button><button class="button secondary">自分で作る</button></div>
@@ -1078,8 +1111,8 @@
               <span class="route-badge">サンプル経路</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>6体は「サンプル」として顔アップで見せる。</li><li>説明文は置かず、名前と顔だけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URLを出さない。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>顔アップだけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が十分か。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>選択中の1体を大きなポートレートで見せ、その下で6体から選ばせる。</li><li>説明文は置かず、名前とビジュアルだけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URLを出さない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>1枚絵だけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が十分か。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1091,9 +1124,9 @@
               <div class="phone-body">
                 <h2>絵のタッチは？</h2>
                 <div class="style-cards">
-                  <div class="style-card with-image selected"><div class="style-sample"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div><div><strong>アニメ</strong><p>明るく親しみやすい</p></div></div>
-                  <div class="style-card with-image"><div class="style-sample"><img src="assets/character-sheets/04_isagi_motif_character_sheet.png" alt=""></div><div><strong>実写</strong><p>写真っぽい存在感</p></div></div>
-                  <div class="style-card with-image"><div class="style-sample"><img src="assets/character-sheets/01_miku_motif_character_sheet.png" alt=""></div><div><strong>セミリアル</strong><p>リアルとイラストの間</p></div></div>
+                  <div class="style-card with-image selected"><div class="style-sample"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div><div><strong>アニメ</strong><p>明るく親しみやすい</p></div></div>
+                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/04_sou_onboarding_preview.webp" alt=""></div><div><strong>実写</strong><p>写真っぽい存在感</p></div></div>
+                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div><div><strong>セミリアル</strong><p>リアルとイラストの間</p></div></div>
                 </div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
@@ -1102,7 +1135,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-003</p><h2>絵のタッチ</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>アニメ、実写、セミリアルをサンプル顔つきで提示する。</li><li>6サンプルのうち、どれが近い絵柄かを見て選べる状態にする。</li><li>デフォルトはアニメ。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>アニメ、実写、セミリアルをサンプル画像つきで提示する。</li><li>6サンプルのうち、どれが近い絵柄かを見て選べる状態にする。</li><li>デフォルトはアニメ。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>3つの違いが一目で伝わるか。</li><li>ここで絵柄を先に決める流れでよいか。</li></ul></div>
             </div>
           </div>
@@ -1277,8 +1310,8 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 82%"></span></div></div>
               <div class="phone-body">
-                <h2>この子で決定？</h2>
-                <div class="trainer-photo"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div>
+                <h2>この人で決定？</h2>
+                <div class="trainer-photo"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
                 <div class="name-edit"><strong>レイ</strong><span>名前を変更</span></div>
                 <div class="feedback-card"><strong>一言プレビュー</strong><p>けいさん、今日から一緒に食事を見ます。まずは、できるところから。</p></div>
                 <div class="feedback-card"><strong>あとから変更できます</strong><p>顔、名前、言葉づかいは設定から調整できます。</p></div>
@@ -1289,7 +1322,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-010</p><h2>トレーナー確定</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>確認は正面の顔ポートレートと名前だけ。</li><li>名前は自動提案後、確定前に変更可。</li><li>「顔・名前・言葉づかいは後で変えられる」を一言で出す。</li><li>サンプル経路では「6人から選び直す」「自分でオリジナルを作る」を出す。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>確認はオンボード表示用ポートレートと名前だけ。</li><li>名前は自動提案後、確定前に変更可。</li><li>「顔・名前・言葉づかいは後で変えられる」を一言で出す。</li><li>サンプル経路では「6人から選び直す」「自分でオリジナルを作る」を出す。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>課金前の満足感が出るか。</li><li>後から変えられる安心感が強すぎて確定の重みを下げないか。</li></ul></div>
             </div>
           </div>
@@ -1302,7 +1335,7 @@
               <div class="phone-body scroll">
                 <h2>どこを直す？</h2>
                 <p>1回だけ、無料で作り直せます。</p>
-                <div class="trainer-photo" style="width:190px;height:190px;"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div>
+                <div class="trainer-photo" style="width:190px;height:190px;"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
                 <div class="input-card"><h3>顔まわり</h3><div class="textarea">もう少しやさしい表情にしたい</div></div>
                 <div class="input-card"><h3>髪</h3><div class="textarea">前髪を少し軽く、色は暗めに</div></div>
                 <div class="input-card"><h3>雰囲気</h3><div class="textarea">大人っぽく、落ち着いた感じ</div></div>
@@ -1351,7 +1384,7 @@
               <div class="phone-body scroll">
                 <h2>レイからの一言</h2>
                 <div class="feedback-card reply">
-                  <img class="mini-avatar" src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt="">
+                  <img class="mini-avatar" src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt="">
                   <div><strong>レイ</strong><p>けいさん、昼の内容はかなり整っています。たんぱく質と汁物があるので、午後の空腹も抑えやすいです。</p></div>
                 </div>
                 <div class="feedback-card"><strong>良かった点</strong><p>おにぎりだけで済ませず、サラダチキンと野菜スープを足せています。</p></div>
