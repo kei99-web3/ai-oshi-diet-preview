@@ -1,0 +1,1101 @@
+﻿<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <title>G2オンボーディング画面仕様 | AI食事トレーナー</title>
+    <style>
+      :root {
+        --ink: #17211f;
+        --muted: #66716c;
+        --paper: #fff8ee;
+        --panel: #ffffff;
+        --line: #d9ded6;
+        --green: #315d5a;
+        --green-soft: #eaf4f0;
+        --yellow: #f2c14e;
+        --rose: #b85265;
+        --shadow: 0 20px 60px rgba(31, 42, 37, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: var(--green);
+      }
+
+      .shell {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+        padding: 20px 14px 56px;
+      }
+
+      .hero {
+        padding: 18px 0 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .kicker,
+      .screen-id {
+        margin: 0 0 8px;
+        color: var(--green);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 8vw, 3.35rem);
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 1.28rem;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1rem;
+        line-height: 1.25;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 860px;
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .status-row,
+      .chip-row,
+      .option-grid,
+      .preset-grid,
+      .mini-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .status-row {
+        margin-top: 14px;
+      }
+
+      .status-pill,
+      .chip,
+      .mini-pill {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: #fff;
+        color: var(--ink);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .status-pill.good,
+      .chip.selected {
+        border-color: rgba(49, 93, 90, 0.45);
+        background: var(--green-soft);
+      }
+
+      .status-pill.warn {
+        border-color: rgba(242, 193, 78, 0.8);
+        background: #fff8df;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .summary-card,
+      .screen-card,
+      .note-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      .summary-card {
+        padding: 14px;
+      }
+
+      .summary-card p {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .note-panel {
+        margin-top: 18px;
+        padding: 14px;
+      }
+
+      .note-panel p {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+
+      .flow-strip {
+        display: grid;
+        grid-template-columns: repeat(8, minmax(128px, 1fr));
+        gap: 8px;
+        overflow-x: auto;
+        padding: 12px 0 4px;
+      }
+
+      .flow-step {
+        min-height: 74px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+      }
+
+      .flow-step strong {
+        display: block;
+        font-size: 0.8rem;
+      }
+
+      .flow-step span {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.75rem;
+      }
+
+      .section-title {
+        margin: 28px 0 12px;
+      }
+
+      .section-title p {
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .storyboard {
+        display: grid;
+        gap: 18px;
+      }
+
+      .screen-card {
+        display: grid;
+        grid-template-columns: 390px minmax(0, 1fr);
+        gap: 20px;
+        padding: 16px;
+      }
+
+      .phone {
+        width: 360px;
+        height: 780px;
+        border: 10px solid #111817;
+        border-radius: 32px;
+        background: #fff;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        justify-self: center;
+      }
+
+      .phone-screen {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 100%;
+        background: #fffaf1;
+      }
+
+      .phone-top {
+        min-height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px 8px;
+        font-size: 0.75rem;
+        font-weight: 800;
+      }
+
+      .back {
+        width: 32px;
+        height: 32px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .progress {
+        flex: 1;
+        height: 6px;
+        margin-left: 12px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e7e9df;
+      }
+
+      .progress span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--green);
+      }
+
+      .phone-body {
+        overflow: hidden;
+        padding: 10px 18px 90px;
+      }
+
+      .phone-body.scroll {
+        overflow-y: auto;
+      }
+
+      .phone-body h2 {
+        font-size: 1.45rem;
+      }
+
+      .phone-body p {
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .phone-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 12px 18px 18px;
+        border-top: 1px solid rgba(217, 222, 214, 0.72);
+        background: linear-gradient(180deg, rgba(255, 250, 241, 0), #fffaf1 22px);
+      }
+
+      .button {
+        width: 100%;
+        min-height: 48px;
+        display: grid;
+        place-items: center;
+        border: 0;
+        border-radius: 8px;
+        background: var(--green);
+        color: #fff;
+        font-weight: 900;
+      }
+
+      .button.secondary {
+        margin-top: 8px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--ink);
+      }
+
+      .choice-card,
+      .trainer-card,
+      .input-card,
+      .feedback-card,
+      .pay-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .choice-card {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-top: 10px;
+        padding: 12px;
+      }
+
+      .choice-card.selected,
+      .trainer-card.selected {
+        border-color: var(--green);
+        box-shadow: inset 0 0 0 1px var(--green);
+      }
+
+      .choice-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+        background: var(--green-soft);
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+      }
+
+      .preview-row {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 6px;
+        margin: 12px 0 10px;
+      }
+
+      .preview-row img,
+      .mini-avatar,
+      .trainer-photo img {
+        width: 100%;
+        object-fit: cover;
+        object-position: top center;
+      }
+
+      .preview-row img {
+        aspect-ratio: 1;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+      }
+
+      .trainer-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .trainer-card {
+        padding: 8px;
+      }
+
+      .trainer-card img {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        object-fit: cover;
+        object-position: top center;
+        background: #f6f6f0;
+      }
+
+      .trainer-card strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.85rem;
+      }
+
+      .trainer-card span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+
+      .style-cards,
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .style-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+      }
+
+      .style-card.selected {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .input-card {
+        margin-top: 12px;
+        padding: 12px;
+      }
+
+      .input-line,
+      .textarea {
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .textarea {
+        min-height: 118px;
+      }
+
+      .loader {
+        display: grid;
+        place-items: center;
+        min-height: 350px;
+      }
+
+      .pulse {
+        width: 168px;
+        height: 168px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #fff 0 45%, var(--green-soft) 46% 100%);
+        display: grid;
+        place-items: center;
+        color: var(--green);
+        font-weight: 900;
+      }
+
+      .status-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .status-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      .trainer-photo {
+        margin: 14px auto 12px;
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 50%;
+        background: #fff;
+      }
+
+      .trainer-photo img {
+        height: 100%;
+      }
+
+      .name-edit {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px 12px;
+      }
+
+      .name-edit span {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .meal-photo {
+        height: 140px;
+        border: 1px dashed #a8b3ad;
+        border-radius: 8px;
+        background: #fff;
+        display: grid;
+        place-items: center;
+        margin-top: 12px;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .feedback-card,
+      .pay-card {
+        margin-top: 12px;
+        padding: 14px;
+      }
+
+      .reply {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+
+      .mini-avatar {
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid var(--line);
+      }
+
+      .pay-price {
+        margin-top: 12px;
+        border: 1px solid rgba(49, 93, 90, 0.35);
+        border-radius: 8px;
+        background: var(--green-soft);
+        padding: 14px;
+      }
+
+      .pay-price strong {
+        display: block;
+        font-size: 1.8rem;
+      }
+
+      .spec {
+        min-width: 0;
+      }
+
+      .spec-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: start;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+      }
+
+      .spec-body {
+        display: grid;
+        gap: 12px;
+        margin-top: 12px;
+      }
+
+      .spec-block {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+      }
+
+      .spec-block ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+      }
+
+      .spec-block li {
+        margin-top: 5px;
+      }
+
+      .route-badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        border-radius: 999px;
+        background: #fff8df;
+        padding: 3px 9px;
+        font-size: 0.78rem;
+        font-weight: 800;
+      }
+
+      .route-badge.custom {
+        background: var(--green-soft);
+      }
+
+      .route-badge.common {
+        background: #f1eef8;
+      }
+
+      code {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: #fff;
+        padding: 1px 5px;
+        font-size: 0.84em;
+      }
+
+      @media (max-width: 920px) {
+        .summary {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .screen-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .shell {
+          padding: 16px 10px 44px;
+        }
+
+        .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .screen-card {
+          padding: 10px;
+        }
+
+        .phone {
+          width: min(360px, 100%);
+          height: 760px;
+          border-width: 8px;
+          border-radius: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="kicker">G2-1 / Onboarding Screen Spec</p>
+        <h1>今作ろうとしているオンボーディング画面仕様</h1>
+        <p class="lead">これは最終デザインではなく、G3でUI画像を作る前の「画面仕様の見える版」です。ここで見るべきなのは、画面数、順番、質問の重さ、文言、CTA、既製経路とカスタム経路の分岐です。</p>
+        <div class="status-row">
+          <span class="status-pill warn">未承認ドラフト</span>
+          <span class="status-pill good">スマホ375px想定</span>
+          <span class="status-pill good">既製6体あり</span>
+          <span class="status-pill good">シートは内部・確認はポートレート</span>
+          <span class="status-pill">2026-07-04</span>
+        </div>
+      </section>
+
+      <section class="summary">
+        <div class="summary-card">
+          <h3>何を見せているか</h3>
+          <p>オンボード全14画面のワイヤー。最終ビジュアルではなく仕様確認用。</p>
+        </div>
+        <div class="summary-card">
+          <h3>勝ち筋</h3>
+          <p>食事管理設定ではなく「自分に合うトレーナーができた」体験を先に出す。</p>
+        </div>
+        <div class="summary-card">
+          <h3>軽い経路</h3>
+          <p>作るのが面倒な人は、既製6体から選んで食事目的だけ答える。</p>
+        </div>
+        <div class="summary-card">
+          <h3>重い経路</h3>
+          <p>こだわる人は、見た目を選択式で作り、補足や参考URLも入れられる。</p>
+        </div>
+      </section>
+
+      <section class="note-panel">
+        <h2>フロー全体</h2>
+        <p>既製経路は短く、カスタム経路は見た目作成に寄せます。どちらも最後は初回食事報告とフィードバックまで進めます。</p>
+        <div class="flow-strip" aria-label="flow overview">
+          <div class="flow-step"><strong>001 分岐</strong><span>6人から選ぶ / 自分で作る</span></div>
+          <div class="flow-step"><strong>002 既製</strong><span>6体から選ぶ</span></div>
+          <div class="flow-step"><strong>003-007 外見</strong><span>絵柄・雰囲気・髪・服装</span></div>
+          <div class="flow-step"><strong>008A 目的</strong><span>食事で整えたいこと</span></div>
+          <div class="flow-step"><strong>008B 声</strong><span>距離感・呼ばれ方</span></div>
+          <div class="flow-step"><strong>009 生成</strong><span>内部シートとポートレート</span></div>
+          <div class="flow-step"><strong>010 確定</strong><span>ポートレート確認</span></div>
+          <div class="flow-step"><strong>012-014 価値</strong><span>食事報告・返信・仮課金</span></div>
+        </div>
+      </section>
+
+      <section class="section-title">
+        <h2>スマホ画面ワイヤー</h2>
+        <p>左が画面イメージ、右が仕様メモです。この粒度で違和感を潰してから、G3のUI画像に進みます。</p>
+      </section>
+
+      <section class="storyboard">
+        <article class="screen-card" id="scr-001">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>Step 1</span><div class="progress"><span style="width: 8%"></span></div></div>
+              <div class="phone-body">
+                <div class="preview-row">
+                  <img src="assets/character-sheets/01_miku_motif_character_sheet.png" alt="">
+                  <img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt="">
+                  <img src="assets/character-sheets/03_asuna_motif_character_sheet.png" alt="">
+                  <img src="assets/character-sheets/04_isagi_motif_character_sheet.png" alt="">
+                  <img src="assets/character-sheets/05_meguro_ren_motif_character_sheet.png" alt="">
+                  <img src="assets/character-sheets/06_gojo_motif_character_sheet.png" alt="">
+                </div>
+                <h2>トレーナーの見た目、どうやって決めますか？</h2>
+                <p>迷う場合は、6人から選んですぐ始められます。</p>
+                <div class="choice-card selected">
+                  <div class="choice-icon">6</div>
+                  <div><strong>6人から選ぶ</strong><p>見た目の違う候補から選びます</p></div>
+                </div>
+                <div class="choice-card">
+                  <div class="choice-icon">作</div>
+                  <div><strong>見た目を自分で作る</strong><p>絵柄や雰囲気を選んで作ります</p></div>
+                </div>
+              </div>
+              <div class="phone-bottom"><button class="button">選んで進む</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header">
+              <div><p class="screen-id">SCR-ONB-001</p><h2>見た目の決め方</h2></div>
+              <span class="route-badge common">共通</span>
+            </div>
+            <div class="spec-body">
+              <div class="spec-block">
+                <h3>この画面の狙い</h3>
+                <ul><li>最初に「外見を決める体験」だと伝える。</li><li>作るのが面倒な人を既製6体へ逃がす。</li></ul>
+              </div>
+              <div class="spec-block">
+                <h3>判断ポイント</h3>
+                <ul><li>最初から6体を見せるか。</li><li>「見た目を自分で作る」の言い方が重くないか。</li></ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-002">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 14%"></span></div></div>
+              <div class="phone-body scroll">
+                <h2>6人から選ぶ</h2>
+                <p>あとから選び直せます。外見の調整はありません。</p>
+                <div class="trainer-list">
+                  <div class="trainer-card selected"><img src="assets/character-sheets/01_miku_motif_character_sheet.png" alt=""><strong>ミナ</strong><span>未来系セミリアル</span></div>
+                  <div class="trainer-card"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""><strong>レイ</strong><span>透明感アニメ</span></div>
+                  <div class="trainer-card"><img src="assets/character-sheets/03_asuna_motif_character_sheet.png" alt=""><strong>カナ</strong><span>王道ヒロイン</span></div>
+                  <div class="trainer-card"><img src="assets/character-sheets/04_isagi_motif_character_sheet.png" alt=""><strong>ソウ</strong><span>実写寄り</span></div>
+                  <div class="trainer-card"><img src="assets/character-sheets/05_meguro_ren_motif_character_sheet.png" alt=""><strong>ハル</strong><span>令和アイドル</span></div>
+                  <div class="trainer-card"><img src="assets/character-sheets/06_gojo_motif_character_sheet.png" alt=""><strong>アオ</strong><span>銀髪カリスマ</span></div>
+                </div>
+              </div>
+              <div class="phone-bottom"><button class="button">この人にする</button><button class="button secondary">見た目を自分で作る</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header">
+              <div><p class="screen-id">SCR-ONB-002</p><h2>既製トレーナー選択</h2></div>
+              <span class="route-badge">既製経路</span>
+            </div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>6体は画像キャラクターシートを正式ソースにする。</li><li>既製経路では外見調整、補足、参考URLを出さない。</li><li>次は食事目的へ進む。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>キャラカードの見せ方は、シート全体より顔の見えやすさ優先でよいか。</li><li>既製は「選び直しだけ」で十分か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-003">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 18%"></span></div></div>
+              <div class="phone-body">
+                <h2>絵のタッチはどれがいい？</h2>
+                <p>最初の見た目に一番効く項目です。</p>
+                <div class="style-cards">
+                  <div class="style-card selected"><strong>アニメイラスト</strong><p>明るく親しみやすい。標準はこちら。</p></div>
+                  <div class="style-card"><strong>実写調</strong><p>写真のような存在感で作る。</p></div>
+                  <div class="style-card"><strong>セミリアル</strong><p>写真感とイラスト感の中間。</p></div>
+                </div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-003</p><h2>絵のタッチ</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>デフォルトはアニメイラスト。</li><li>実写調、セミリアルも選べる。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この3択で足りるか。</li><li>先に絵柄を聞く順番でよいか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-004">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 26%"></span></div></div>
+              <div class="phone-body">
+                <h2>どんな雰囲気の人がいい？</h2>
+                <p>細かく決めなくても、おまかせで進められます。</p>
+                <div class="input-card">
+                  <h3>性別の印象</h3>
+                  <div class="chips"><span class="chip selected">女性寄り</span><span class="chip">男性寄り</span><span class="chip">中性的</span><span class="chip">おまかせ</span></div>
+                </div>
+                <div class="input-card">
+                  <h3>年齢感</h3>
+                  <div class="chips"><span class="chip selected">同世代</span><span class="chip">少し年上</span><span class="chip">落ち着いた大人</span><span class="chip">おまかせ</span></div>
+                </div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-004</p><h2>雰囲気の大枠</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>性別印象と年齢感を分ける。</li><li>必ず「おまかせ」を置く。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面は必要か。既製/カスタムの価値に効くか。</li><li>表現が直感的か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-005">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 34%"></span></div></div>
+              <div class="phone-body">
+                <h2>第一印象はどれが近い？</h2>
+                <p>3つまで選べます。</p>
+                <div class="chips"><span class="chip selected">やさしい</span><span class="chip">きれいめ</span><span class="chip selected">明るい</span><span class="chip">クール</span><span class="chip selected">透明感</span><span class="chip">健康的</span><span class="chip">知的</span><span class="chip">親しみやすい</span><span class="chip">おまかせ</span></div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-005</p><h2>第一印象</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>最大3つまで。</li><li>4つ目はトーストで止める。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>選択肢が日本語として自然か。</li><li>画像生成に効く語彙になっているか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-006">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 42%"></span></div></div>
+              <div class="phone-body">
+                <h2>髪の長さと色を選んでください</h2>
+                <p>同じ人らしさを保つために使います。</p>
+                <div class="input-card"><h3>長さ</h3><div class="chips"><span class="chip selected">短め</span><span class="chip">ふつう</span><span class="chip">長め</span><span class="chip">まとめ髪</span><span class="chip">ゆるいウェーブ</span><span class="chip">おまかせ</span></div></div>
+                <div class="input-card"><h3>色</h3><div class="chips"><span class="chip selected">黒</span><span class="chip">暗めブラウン</span><span class="chip">ブラウン</span><span class="chip">アッシュ</span><span class="chip">明るめ</span><span class="chip">おまかせ</span></div></div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-006</p><h2>髪の長さと色</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>髪は画像ブレに効くため独立画面にする。</li><li>細かい指定は後の補足欄へ逃がす。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>選択肢の粒度が細かすぎないか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-007">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 50%"></span></div></div>
+              <div class="phone-body">
+                <h2>服装と場所を選んでください</h2>
+                <p>食事を見てもらいやすい清潔感を作ります。</p>
+                <div class="input-card"><h3>服装</h3><div class="chips"><span class="chip selected">白いウェア</span><span class="chip">スポーツウェア</span><span class="chip">シンプルな私服</span><span class="chip">シャツ・ジャケット</span><span class="chip">エプロン</span><span class="chip">おまかせ</span></div></div>
+                <div class="input-card"><h3>場所</h3><div class="chips"><span class="chip selected">明るいキッチン</span><span class="chip">カフェ</span><span class="chip">白いスタジオ</span><span class="chip">自然光の部屋</span><span class="chip">シンプル背景</span><span class="chip">おまかせ</span></div></div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-007</p><h2>服装・場所</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>白/スポーツ/私服/ジャケット/エプロンで幅を出す。</li><li>背景はスマホプロフィールで見やすいものに限定する。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>服装の選択肢が食事トレーナーらしいか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-008a">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 60%"></span></div></div>
+              <div class="phone-body">
+                <h2>食事で、まず何を整えたい？</h2>
+                <p>最初の返信に使います。</p>
+                <div class="chips"><span class="chip selected">食事バランス</span><span class="chip">体重をゆるく管理</span><span class="chip">間食を減らす</span><span class="chip">外食を整える</span><span class="chip">たんぱく質を増やす</span><span class="chip">夜遅い食事</span></div>
+                <div class="input-card"><h3>前提があれば</h3><div class="chips"><span class="chip selected">特になし</span><span class="chip">苦手な食材あり</span><span class="chip">アレルギーあり</span><span class="chip">外食多め</span><span class="chip">自炊少なめ</span><span class="chip">その他</span></div></div>
+              </div>
+              <div class="phone-bottom"><button class="button">次へ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-008A</p><h2>食事目的</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>既製経路でもここは聞く。</li><li>体調の困りごとは聞かない。</li><li>アレルギー選択時だけ任意テキストを出す。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>ここで食事目的を聞く重さは許容か。</li><li>選択肢の言葉が自然か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-008b">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 70%"></span></div></div>
+              <div class="phone-body scroll">
+                <h2>どう声をかけてほしい？</h2>
+                <p>毎日の返信の距離感に使います。</p>
+                <div class="input-card"><h3>距離感</h3><div class="chips"><span class="chip">丁寧に</span><span class="chip selected">やさしい先輩みたいに</span><span class="chip">友だち寄り</span><span class="chip">短く具体的に</span><span class="chip">ほめ多め</span><span class="chip">おまかせ</span></div></div>
+                <div class="input-card"><h3>呼ばれ方</h3><div class="chips"><span class="chip selected">名前で</span><span class="chip">ニックネームで</span><span class="chip">まだ決めない</span></div><div class="input-line">けい</div></div>
+                <div class="input-card"><h3>見た目のこだわり</h3><div class="textarea">短めの黒髪、白い服、落ち着いた笑顔がいい</div><div class="input-line" style="margin-top:8px;">参考URLがあれば貼る</div></div>
+              </div>
+              <div class="phone-bottom"><button class="button">トレーナーを作る</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-008B</p><h2>声のかけ方</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>既製経路では見た目補足と参考URLを非表示。</li><li>カスタム経路では補足と参考URLを任意表示。</li><li>入力文は直接プロンプトにせず、内部シートへ変換する。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面に項目が多すぎないか。</li><li>見た目補足をここに置くのが自然か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-009">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>生成中</span><div class="progress"><span style="width: 78%"></span></div></div>
+              <div class="phone-body">
+                <h2>あなた用に整えています</h2>
+                <p>キャラクターシートは内部で固定します。表示するのは完成したポートレートだけです。</p>
+                <div class="loader"><div class="pulse">生成中</div></div>
+                <div class="status-list">
+                  <div class="status-line"><span class="dot"></span>キャラクターシートをまとめています</div>
+                  <div class="status-line"><span class="dot"></span>担当トレーナー像を作っています</div>
+                  <div class="status-line"><span class="dot"></span>初回の声かけを準備しています</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-009</p><h2>生成中</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>内部では画像キャラクターシートを作るが、ユーザーには見せない。</li><li>30秒超過時は6人から選ぶ逃げ道を出す。</li><li>失敗時は再試行と既製選択を出す。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>内部シートを説明しすぎていないか。</li><li>待ち時間の不安を抑えられそうか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-010">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 82%"></span></div></div>
+              <div class="phone-body">
+                <h2>担当トレーナーができました</h2>
+                <div class="trainer-photo"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div>
+                <div class="name-edit"><strong>レイ</strong><span>名前を変更</span></div>
+                <p>自然体で、食べすぎた日も責めずに次の一手を出してくれます。</p>
+                <div class="feedback-card"><strong>一言プレビュー</strong><p>けいさん、今日から食事を一緒に見ます。できる範囲で整えていきましょう。</p></div>
+              </div>
+              <div class="phone-bottom"><button class="button">この人で始める</button><button class="button secondary">1回だけ調整する</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-010</p><h2>トレーナー確定</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>ユーザーが確認するのはポートレートのみ。</li><li>名前は自動提案後、確定前に変更可。</li><li>既製経路では「1回だけ調整する」は出さず「6人から選び直す」にする。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面で課金前の満足感が出るか。</li><li>名前変更の導線が必要十分か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-011">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 82%"></span></div></div>
+              <div class="phone-body">
+                <h2>1回だけ調整できます</h2>
+                <p>無料の修正1式を使います。外見の調整はここで最後です。</p>
+                <div class="trainer-photo" style="width:190px;height:190px;"><img src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt=""></div>
+                <div class="chips"><span class="chip selected">髪を短く</span><span class="chip">もっと明るく</span><span class="chip">落ち着いた雰囲気に</span><span class="chip">服を変える</span><span class="chip">背景を変える</span></div>
+                <div class="textarea" style="margin-top:12px;">もう少し大人っぽくしたい</div>
+              </div>
+              <div class="phone-bottom"><button class="button">調整して作り直す</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-011</p><h2>1回だけ調整</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>初回1式＋修正1式の合計2回。</li><li>入力文は既存シート属性へ変換してから使う。</li><li>変換できない内容は再入力を求める。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>修正1回の表示が厳しすぎないか。</li><li>自由入力を許す範囲が妥当か。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-012">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>レイ</span><div class="progress"><span style="width: 88%"></span></div></div>
+              <div class="phone-body">
+                <h2>最初の食事を見てもらいましょう</h2>
+                <p>写真でも、食べたものを1行でもOKです。</p>
+                <div class="meal-photo">写真を追加</div>
+                <div class="textarea" style="margin-top:12px;">昼はサラダチキン、おにぎり、野菜スープ</div>
+                <div class="input-card"><h3>体重</h3><div class="input-line">任意で入力</div></div>
+              </div>
+              <div class="phone-bottom"><button class="button">食事を見てもらう</button><button class="button secondary">あとで記録する</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-012</p><h2>初回食事報告</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>写真中心、テキスト逃げ道あり。</li><li>体重は任意。</li><li>オンボード中に免責同意チェックは置かない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>トレーナー確定直後に食事報告へ進める重さはどうか。</li><li>写真なしでも進める見え方になっているか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-013">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>初回返信</span><div class="progress"><span style="width: 94%"></span></div></div>
+              <div class="phone-body scroll">
+                <h2>レイから返信が届きました</h2>
+                <div class="feedback-card reply">
+                  <img class="mini-avatar" src="assets/character-sheets/02_yui_aragaki_motif_character_sheet.png" alt="">
+                  <div><strong>レイ</strong><p>けいさん、昼の内容はかなり整っています。たんぱく質と汁物があるので、午後の空腹も抑えやすいです。</p></div>
+                </div>
+                <div class="feedback-card"><strong>良かった点</strong><p>おにぎりだけで済ませず、サラダチキンと野菜スープを足せています。</p></div>
+                <div class="feedback-card"><strong>次の一手</strong><p>夜は主食を抜かず、魚か卵を足して戻しましょう。</p></div>
+                <p style="font-size:.78rem;"><a href="disclaimer.html">免責事項</a></p>
+              </div>
+              <div class="phone-bottom"><button class="button">続ける</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-013</p><h2>初回フィードバック</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>課金前に「このトレーナーが見てくれる」を体験させる。</li><li>返信、良かった点、次の一手を分ける。</li><li>免責は末尾の小さいリンクにする。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>ここで価値が伝わるか。</li><li>返信の粒度は短すぎ/長すぎないか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-014">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>Plan</span><div class="progress"><span style="width: 100%"></span></div></div>
+              <div class="phone-body">
+                <h2>このトレーナーと続けますか？</h2>
+                <p>毎日の食事写真に、あなた専用のトレーナーが短く返します。</p>
+                <div class="pay-card">
+                  <h3>パーソナル食事トレーナー</h3>
+                  <div class="pay-price"><span>月額目安</span><strong>980円</strong><span>実際の請求は発生しません</span></div>
+                </div>
+                <div class="feedback-card"><strong>含まれるもの</strong><p>食事写真への返信、履歴、体重の任意記録、トレーナー設定の編集。</p></div>
+              </div>
+              <div class="phone-bottom"><button class="button">続けたい</button><button class="button secondary">今は無料のままにする</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-014</p><h2>仮ペイウォール</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>MVPでは実決済なし。</li><li>月額980円目安を表示。</li><li>クリックで課金意向を記録する。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>価格をここで出すのが自然か。</li><li>初回返信後のタイミングでよいか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
