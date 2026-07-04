@@ -625,12 +625,116 @@
         font-size: 0.84em;
       }
 
+      .review-guide,
+      .review-panel,
+      .review-output {
+        border: 1px solid rgba(184, 82, 101, 0.28);
+        border-radius: 8px;
+        background: #fffdf8;
+      }
+
+      .review-guide {
+        margin-top: 18px;
+        padding: 14px;
+      }
+
+      .review-guide p {
+        margin-top: 6px;
+        color: var(--muted);
+      }
+
+      .review-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .tool-button {
+        min-height: 38px;
+        border: 1px solid rgba(49, 93, 90, 0.35);
+        border-radius: 8px;
+        background: var(--green);
+        color: #fff;
+        padding: 8px 12px;
+        font: inherit;
+        font-weight: 800;
+      }
+
+      .tool-button.secondary {
+        background: #fff;
+        color: var(--green);
+      }
+
+      .cross-review-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .review-panel {
+        padding: 12px;
+      }
+
+      .review-panel p {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .review-textarea {
+        width: 100%;
+        min-height: 128px;
+        margin-top: 10px;
+        border: 1px solid rgba(184, 82, 101, 0.35);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        padding: 10px;
+        font: inherit;
+        line-height: 1.5;
+        resize: vertical;
+      }
+
+      .review-textarea:focus {
+        outline: 3px solid rgba(242, 193, 78, 0.35);
+        border-color: var(--rose);
+      }
+
+      .review-saved {
+        display: block;
+        min-height: 18px;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.76rem;
+      }
+
+      .review-output {
+        display: block;
+        overflow: auto;
+        max-height: 360px;
+        margin-top: 12px;
+        padding: 12px;
+        white-space: pre-wrap;
+        color: var(--ink);
+        font: 0.82rem/1.5 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+      }
+
+      .review-output[hidden] {
+        display: none;
+      }
+
       @media (max-width: 920px) {
         .summary {
           grid-template-columns: 1fr 1fr;
         }
 
         .screen-card {
+          grid-template-columns: 1fr;
+        }
+
+        .cross-review-grid {
           grid-template-columns: 1fr;
         }
       }
@@ -703,6 +807,60 @@
           <div class="flow-step"><strong>009 生成</strong><span>内部シートとポートレート</span></div>
           <div class="flow-step"><strong>010 確定</strong><span>ポートレート確認</span></div>
           <div class="flow-step"><strong>012-014 価値</strong><span>食事報告・返信・仮課金</span></div>
+        </div>
+      </section>
+
+      <section class="review-guide" id="review-guide">
+        <h2>レビュー記入欄</h2>
+        <p>各画面の右側に個別レビュー欄があります。下の横断レビュー欄には、画面単位では判断しづらい論点を書いてください。記入内容はこのブラウザ内に自動保存されます。</p>
+        <div class="review-tools">
+          <button class="tool-button" type="button" id="export-review">レビューを書き出す</button>
+          <button class="tool-button secondary" type="button" id="clear-review">この端末の記入内容を消す</button>
+        </div>
+        <pre class="review-output" id="review-output" hidden></pre>
+      </section>
+
+      <section class="section-title">
+        <h2>横断レビュー</h2>
+        <p>画面別ではなく、体験全体として判断が必要な項目です。</p>
+      </section>
+
+      <section class="cross-review-grid" aria-label="cross review fields">
+        <div class="review-panel">
+          <h3>フロー全体</h3>
+          <p>画面数、順番、既製/カスタムの分岐、離脱しそうな箇所。</p>
+          <textarea class="review-textarea" data-review-key="cross-flow" data-review-title="横断: フロー全体" placeholder="例: 最初に既製6体を見せるのは良いが、カスタム経路は1画面減らしたい。"></textarea>
+          <span class="review-saved" data-review-status="cross-flow"></span>
+        </div>
+        <div class="review-panel">
+          <h3>質問文・選択肢</h3>
+          <p>日本語の自然さ、直感性、選択肢の粒度、答えにくい表現。</p>
+          <textarea class="review-textarea" data-review-key="cross-copy" data-review-title="横断: 質問文・選択肢" placeholder="例: 「性別の印象」は少し硬い。もっと自然な言い方にしたい。"></textarea>
+          <span class="review-saved" data-review-status="cross-copy"></span>
+        </div>
+        <div class="review-panel">
+          <h3>既製6体</h3>
+          <p>男女比、絵柄幅、名前、カード表示、選び直しだけでよいか。</p>
+          <textarea class="review-textarea" data-review-key="cross-presets" data-review-title="横断: 既製6体" placeholder="例: 男性3体の差が伝わるか再確認したい。名前はこのままでよい。"></textarea>
+          <span class="review-saved" data-review-status="cross-presets"></span>
+        </div>
+        <div class="review-panel">
+          <h3>生成・修正・キャラクターシート</h3>
+          <p>初回生成、修正1回、内部シート非表示、ポートレート確認の妥当性。</p>
+          <textarea class="review-textarea" data-review-key="cross-generation" data-review-title="横断: 生成・修正・キャラクターシート" placeholder="例: シート非表示でよい。修正は1回で足りるが、文言を柔らかくしたい。"></textarea>
+          <span class="review-saved" data-review-status="cross-generation"></span>
+        </div>
+        <div class="review-panel">
+          <h3>初回価値・仮ペイウォール</h3>
+          <p>初回食事報告、初回返信、価格表示、課金意向計測のタイミング。</p>
+          <textarea class="review-textarea" data-review-key="cross-paywall" data-review-title="横断: 初回価値・仮ペイウォール" placeholder="例: 価格は初回返信後でよい。980円の見せ方はもう少し検討。"></textarea>
+          <span class="review-saved" data-review-status="cross-paywall"></span>
+        </div>
+        <div class="review-panel">
+          <h3>実装前提・計測</h3>
+          <p>N1で必要なイベント、保存データ、画像生成まわり、E2E証拠。</p>
+          <textarea class="review-textarea" data-review-key="cross-implementation" data-review-title="横断: 実装前提・計測" placeholder="例: まずは各CTAのクリック計測と、課金意向イベントを必須にしたい。"></textarea>
+          <span class="review-saved" data-review-status="cross-implementation"></span>
         </div>
       </section>
 
@@ -1097,5 +1255,118 @@
         </article>
       </section>
     </main>
+    <script>
+      (() => {
+        const storagePrefix = "ai-oshi-diet-onboarding-review-v1:";
+        const screenPrompts = {
+          "SCR-ONB-001": "最初の分岐が直感的か。6人から選ぶ/見た目を自分で作るの言い方、CTA、最初に見せる情報量。",
+          "SCR-ONB-002": "既製6体の見せ方、男女比、名前、選び直しだけで十分か。カード上のラベルが伝わるか。",
+          "SCR-ONB-003": "絵柄3択の順番、言葉、デフォルトの妥当性。アニメ/実写/セミリアルの違いが伝わるか。",
+          "SCR-ONB-004": "性別印象と年齢感の聞き方。質問が重くないか、選択肢が自然か。",
+          "SCR-ONB-005": "第一印象の語彙。最大3つ選択が適切か、画像生成に効く言葉になっているか。",
+          "SCR-ONB-006": "髪の長さ/色の粒度。選択肢が多すぎないか、同一キャラクター維持に必要十分か。",
+          "SCR-ONB-007": "服装/場所の選択肢。食事トレーナーらしさ、プロフィール画像としての見やすさ。",
+          "SCR-ONB-008A": "食事目的の聞き方。困りごとを削った状態で、初回返信に必要な情報が取れているか。",
+          "SCR-ONB-008B": "声のかけ方、呼ばれ方、補足/参考URLの位置。カスタム経路だけに見た目補足を出す方針でよいか。",
+          "SCR-ONB-009": "生成待ち画面の説明量。内部シート非表示の方針、待ち時間/失敗時の逃げ道。",
+          "SCR-ONB-010": "ポートレート確認、名前変更、一言プレビュー。課金前の満足感が出るか。",
+          "SCR-ONB-011": "無料修正1回の見せ方。調整項目と自由入力の範囲、厳しすぎない表現。",
+          "SCR-ONB-012": "初回食事報告への流れ。写真/テキスト/体重任意の重さ、あとで記録する導線。",
+          "SCR-ONB-013": "初回フィードバックの価値。返信量、次の一手、免責リンクの位置。",
+          "SCR-ONB-014": "仮ペイウォール。価格、文言、CTA、課金意向計測のタイミング。"
+        };
+
+        const nowLabel = () => {
+          const d = new Date();
+          const pad = (n) => String(n).padStart(2, "0");
+          return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        };
+
+        const makeReviewPanel = (key, title, prompt) => {
+          const panel = document.createElement("div");
+          panel.className = "review-panel";
+          panel.innerHTML = `
+            <h3>レビュー記入欄</h3>
+            <p>${prompt}</p>
+            <textarea class="review-textarea" data-review-key="${key}" data-review-title="${title}" placeholder="違和感、修正指示、承認/保留理由を書いてください。"></textarea>
+            <span class="review-saved" data-review-status="${key}"></span>
+          `;
+          return panel;
+        };
+
+        document.querySelectorAll(".screen-card .spec").forEach((spec) => {
+          const id = spec.querySelector(".screen-id")?.textContent.trim();
+          const title = spec.querySelector(".spec-header h2")?.textContent.trim();
+          if (!id || !title) return;
+          const key = `screen-${id.toLowerCase()}`;
+          const prompt = screenPrompts[id] || "この画面の違和感、修正指示、承認/保留理由。";
+          spec.appendChild(makeReviewPanel(key, `${id} ${title}`, prompt));
+        });
+
+        const statusFor = (key) => document.querySelector(`[data-review-status="${key}"]`);
+
+        const bindReviewFields = () => {
+          document.querySelectorAll(".review-textarea[data-review-key]").forEach((field) => {
+            const key = field.dataset.reviewKey;
+            const saved = localStorage.getItem(storagePrefix + key);
+            if (saved) field.value = saved;
+            const status = statusFor(key);
+            if (saved && status) status.textContent = "この端末に保存済み";
+            field.addEventListener("input", () => {
+              localStorage.setItem(storagePrefix + key, field.value);
+              const nextStatus = statusFor(key);
+              if (nextStatus) nextStatus.textContent = `${nowLabel()} 保存`;
+            });
+          });
+        };
+
+        const collectReviews = () => {
+          const lines = ["# オンボーディング画面仕様レビュー", "", `書き出し: ${nowLabel()}`, ""];
+          document.querySelectorAll(".review-textarea[data-review-key]").forEach((field) => {
+            const value = field.value.trim();
+            if (!value) return;
+            lines.push(`## ${field.dataset.reviewTitle || field.dataset.reviewKey}`);
+            lines.push(value);
+            lines.push("");
+          });
+          if (lines.length === 4) lines.push("未記入です。");
+          return lines.join("\n");
+        };
+
+        document.getElementById("export-review")?.addEventListener("click", async () => {
+          const text = collectReviews();
+          const output = document.getElementById("review-output");
+          if (output) {
+            output.hidden = false;
+            output.textContent = text;
+          }
+          try {
+            await navigator.clipboard.writeText(text);
+            alert("レビューを書き出してコピーしました。");
+          } catch {
+            alert("レビューを書き出しました。表示された内容をコピーしてください。");
+          }
+        });
+
+        document.getElementById("clear-review")?.addEventListener("click", () => {
+          if (!confirm("この端末に保存されたレビュー記入内容を消します。よろしいですか？")) return;
+          Object.keys(localStorage)
+            .filter((key) => key.startsWith(storagePrefix))
+            .forEach((key) => localStorage.removeItem(key));
+          document.querySelectorAll(".review-textarea[data-review-key]").forEach((field) => {
+            field.value = "";
+            const status = statusFor(field.dataset.reviewKey);
+            if (status) status.textContent = "";
+          });
+          const output = document.getElementById("review-output");
+          if (output) {
+            output.hidden = true;
+            output.textContent = "";
+          }
+        });
+
+        bindReviewFields();
+      })();
+    </script>
   </body>
 </html>
