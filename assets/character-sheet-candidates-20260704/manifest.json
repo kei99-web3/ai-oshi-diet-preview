@@ -1,0 +1,288 @@
+[
+  {
+    "id": "C001",
+    "group": "現行アプリ採用中",
+    "label": "現在の01 ミナ系",
+    "source_name": "01_miku_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\01_miku_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 941,
+    "height": 1672,
+    "sha256": "f633d99a3dd7a733c974e699d12c46cc4169b6dec77792165f715915fbff8068",
+    "image": "assets/character-sheet-candidates-20260704/C001.webp",
+    "size": 2460902,
+    "duplicates": [
+      "C007"
+    ]
+  },
+  {
+    "id": "C002",
+    "group": "現行アプリ採用中",
+    "label": "現在の02 レイ系",
+    "source_name": "02_yui_aragaki_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\02_yui_aragaki_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 941,
+    "height": 1672,
+    "sha256": "7d3c97d5931586d6c5744a8414069bcbd5f11c5a7111667585cfb4bf67675c5b",
+    "image": "assets/character-sheet-candidates-20260704/C002.webp",
+    "size": 1941913,
+    "duplicates": [
+      "C008"
+    ]
+  },
+  {
+    "id": "C003",
+    "group": "現行アプリ採用中",
+    "label": "現在の03 カナ系",
+    "source_name": "03_asuna_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\03_asuna_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 941,
+    "height": 1672,
+    "sha256": "ce2e60983d2a5fa2404b4622af2f6af64077976f6d7cccfde832d60357c3773d",
+    "image": "assets/character-sheet-candidates-20260704/C003.webp",
+    "size": 2373915,
+    "duplicates": [
+      "C009"
+    ]
+  },
+  {
+    "id": "C004",
+    "group": "現行アプリ採用中",
+    "label": "現在の04 ソウ系",
+    "source_name": "04_isagi_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\04_isagi_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 941,
+    "height": 1672,
+    "sha256": "e7f9cbdda2975216f154e1be2263b15e8de3c0d4b03f325437fa2c1530e427c3",
+    "image": "assets/character-sheet-candidates-20260704/C004.webp",
+    "size": 2109602,
+    "duplicates": [
+      "C010"
+    ]
+  },
+  {
+    "id": "C005",
+    "group": "現行アプリ採用中",
+    "label": "現在の05 ハル系 / 差し替え後",
+    "source_name": "05_meguro_ren_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\05_meguro_ren_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 720,
+    "height": 1280,
+    "sha256": "7adc17f2a78f4dca56a37a6c046766e4e837e59739a6aa395063ccefc5b41cac",
+    "image": "assets/character-sheet-candidates-20260704/C005.webp",
+    "size": 665022,
+    "duplicates": []
+  },
+  {
+    "id": "C006",
+    "group": "現行アプリ採用中",
+    "label": "現在の06 アオ系",
+    "source_name": "06_gojo_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Desktop\\AI_Workspace\\01_Projects\\app_studio\\70_builds\\ai_oshi_diet_pwa\\web\\assets\\character-sheets\\06_gojo_motif_character_sheet.png",
+    "zip_member": "",
+    "width": 941,
+    "height": 1672,
+    "sha256": "5c62968bdffc655b9c1398878ca8e84878bd45d17b6937466c10589a33592423",
+    "image": "assets/character-sheet-candidates-20260704/C006.webp",
+    "size": 2243963,
+    "duplicates": [
+      "C012"
+    ]
+  },
+  {
+    "id": "C007",
+    "group": "character_sheets_6_latest.zip",
+    "label": "01_miku_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/01_miku_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/01_miku_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "f633d99a3dd7a733c974e699d12c46cc4169b6dec77792165f715915fbff8068",
+    "image": "assets/character-sheet-candidates-20260704/C007.webp",
+    "size": 2460902,
+    "duplicates": [
+      "C001"
+    ]
+  },
+  {
+    "id": "C008",
+    "group": "character_sheets_6_latest.zip",
+    "label": "02_yui_aragaki_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/02_yui_aragaki_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/02_yui_aragaki_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "7d3c97d5931586d6c5744a8414069bcbd5f11c5a7111667585cfb4bf67675c5b",
+    "image": "assets/character-sheet-candidates-20260704/C008.webp",
+    "size": 1941913,
+    "duplicates": [
+      "C002"
+    ]
+  },
+  {
+    "id": "C009",
+    "group": "character_sheets_6_latest.zip",
+    "label": "03_asuna_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/03_asuna_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/03_asuna_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "ce2e60983d2a5fa2404b4622af2f6af64077976f6d7cccfde832d60357c3773d",
+    "image": "assets/character-sheet-candidates-20260704/C009.webp",
+    "size": 2373915,
+    "duplicates": [
+      "C003"
+    ]
+  },
+  {
+    "id": "C010",
+    "group": "character_sheets_6_latest.zip",
+    "label": "04_isagi_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/04_isagi_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/04_isagi_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "e7f9cbdda2975216f154e1be2263b15e8de3c0d4b03f325437fa2c1530e427c3",
+    "image": "assets/character-sheet-candidates-20260704/C010.webp",
+    "size": 2109602,
+    "duplicates": [
+      "C004"
+    ]
+  },
+  {
+    "id": "C011",
+    "group": "character_sheets_6_latest.zip",
+    "label": "05_meguro_ren_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/05_meguro_ren_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/05_meguro_ren_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "f75a4eef5542b7f2b1ce1ce2dbd153f79c3290351bda29e77e96939f4e61825d",
+    "image": "assets/character-sheet-candidates-20260704/C011.webp",
+    "size": 1921455,
+    "duplicates": []
+  },
+  {
+    "id": "C012",
+    "group": "character_sheets_6_latest.zip",
+    "label": "06_gojo_motif_character_sheet.png",
+    "source_name": "character_sheet_download_pack/06_gojo_motif_character_sheet.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_6_latest.zip",
+    "zip_member": "character_sheet_download_pack/06_gojo_motif_character_sheet.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "5c62968bdffc655b9c1398878ca8e84878bd45d17b6937466c10589a33592423",
+    "image": "assets/character-sheet-candidates-20260704/C012.webp",
+    "size": 2243963,
+    "duplicates": [
+      "C006"
+    ]
+  },
+  {
+    "id": "C013",
+    "group": "character_sheets_final_pack.zip",
+    "label": "01_女性_未来的アイドル_オリジナル修正版.png",
+    "source_name": "01_女性_未来的アイドル_オリジナル修正版.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "01_女性_未来的アイドル_オリジナル修正版.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "c3107ed32dae017ab6dd48ae7bed02db78fb9a3b49aaa07a60510f7f21798fd3",
+    "image": "assets/character-sheet-candidates-20260704/C013.webp",
+    "size": 2069385,
+    "duplicates": []
+  },
+  {
+    "id": "C014",
+    "group": "character_sheets_final_pack.zip",
+    "label": "02_女性_新垣結衣モチーフ_アニメ調.png",
+    "source_name": "02_女性_新垣結衣モチーフ_アニメ調.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "02_女性_新垣結衣モチーフ_アニメ調.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "a6bb4c782e0ef9991f8da4c957deac7a9a29d48051ba98d264800bd000507c30",
+    "image": "assets/character-sheet-candidates-20260704/C014.webp",
+    "size": 1559254,
+    "duplicates": []
+  },
+  {
+    "id": "C015",
+    "group": "character_sheets_final_pack.zip",
+    "label": "03_女性_現代服キャラクター_アスナモチーフ修正版.png",
+    "source_name": "03_女性_現代服キャラクター_アスナモチーフ修正版.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "03_女性_現代服キャラクター_アスナモチーフ修正版.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "106cf38784f24067f2318ee9fa3cbf8508f69bb09ef8211f9adc3b5659a6f15f",
+    "image": "assets/character-sheet-candidates-20260704/C015.webp",
+    "size": 1890646,
+    "duplicates": []
+  },
+  {
+    "id": "C016",
+    "group": "character_sheets_final_pack.zip",
+    "label": "04_男性_現代服キャラクター_潔世一モチーフ修正版.png",
+    "source_name": "04_男性_現代服キャラクター_潔世一モチーフ修正版.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "04_男性_現代服キャラクター_潔世一モチーフ修正版.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "ac8e959eb494688f81418f587917c772256ca3691b0415512df76f84841e8ad9",
+    "image": "assets/character-sheet-candidates-20260704/C016.webp",
+    "size": 2108476,
+    "duplicates": []
+  },
+  {
+    "id": "C017",
+    "group": "character_sheets_final_pack.zip",
+    "label": "05_男性_目黒蓮モチーフ_アニメ調.png",
+    "source_name": "05_男性_目黒蓮モチーフ_アニメ調.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "05_男性_目黒蓮モチーフ_アニメ調.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "2b67c0263988883189501ec7899d2a82ff522ae7794fd4be2b997722882db0a9",
+    "image": "assets/character-sheet-candidates-20260704/C017.webp",
+    "size": 1501835,
+    "duplicates": []
+  },
+  {
+    "id": "C018",
+    "group": "character_sheets_final_pack.zip",
+    "label": "06_男性_ゴシック風キャラクター_五条悟モチーフ修正版.png",
+    "source_name": "06_男性_ゴシック風キャラクター_五条悟モチーフ修正版.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "06_男性_ゴシック風キャラクター_五条悟モチーフ修正版.png",
+    "width": 1055,
+    "height": 1491,
+    "sha256": "6088f48b844863e47075669cfc6c9444b793c79731c59470a79b3ba2f428281e",
+    "image": "assets/character-sheet-candidates-20260704/C018.webp",
+    "size": 1938736,
+    "duplicates": []
+  },
+  {
+    "id": "C019",
+    "group": "character_sheets_final_pack.zip",
+    "label": "07_テンプレート_パターン3_顔_雰囲気固定特化シート.png",
+    "source_name": "07_テンプレート_パターン3_顔_雰囲気固定特化シート.png",
+    "source_path": "C:\\Users\\PC_User\\Downloads\\character_sheets_final_pack.zip",
+    "zip_member": "07_テンプレート_パターン3_顔_雰囲気固定特化シート.png",
+    "width": 941,
+    "height": 1672,
+    "sha256": "ea89f5077ac4d7e536dbc1468ef4d31cd09c4cd182232511c1c2379041cd6ec7",
+    "image": "assets/character-sheet-candidates-20260704/C019.webp",
+    "size": 1746532,
+    "duplicates": []
+  }
+]
