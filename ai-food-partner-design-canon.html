@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>AI食事パートナー デザイン正本</title>
+<link rel="stylesheet" href="./design-tokens.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:var(--surface-base);color:var(--ink-main);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:var(--lh-body)}.wrap{max-width:1120px;margin:0 auto;padding:20px 14px 72px}.hero{padding:28px 0 20px}.kicker{margin:0 0 var(--space-2);color:var(--trust-metric);font-size:var(--text-note);font-weight:900;letter-spacing:.04em;text-transform:uppercase}h1{margin:0 0 var(--space-4);font-size:clamp(36px,9vw,76px);line-height:1.04;letter-spacing:0}h2{margin:0;font-size:clamp(24px,5.8vw,40px);line-height:1.14;letter-spacing:0}h3,p{margin:0}.lead,.muted,li{color:var(--ink-muted)}.pills{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}.pill{display:inline-flex;align-items:center;min-height:32px;border:1px solid var(--line-soft);border-radius:var(--radius-pill);background:var(--surface-raised);color:var(--trust-metric);padding:4px 11px;font-size:13px;font-weight:850}.section{margin:22px 0;padding:18px;border:1px solid var(--line-soft);border-radius:24px;background:var(--surface-raised);box-shadow:var(--shadow-card)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.card{border:1px solid var(--line-soft);border-radius:var(--radius-m);background:#fff;padding:14px}.card b{display:block;margin-bottom:4px}.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.swatch{min-height:96px;border:1px solid var(--line-soft);border-radius:18px;background:var(--c);padding:10px;display:flex;flex-direction:column;justify-content:flex-end}.swatch code{font-weight:900;color:var(--ink-main);background:rgba(255,255,255,.7);border-radius:999px;padding:3px 8px;width:max-content}.type-grid{display:grid;gap:10px;margin-top:14px}.type-row{display:grid;grid-template-columns:180px 1fr;gap:10px;align-items:center;border-bottom:1px solid var(--line-soft);padding:10px 0}.display{font-size:var(--text-display);line-height:var(--lh-display);font-weight:800}.h1sample{font-size:var(--text-h1);line-height:var(--lh-h1);font-weight:800}.bodysample{font-size:var(--text-body);line-height:var(--lh-body)}.phone-zone{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:16px}.phone{background:var(--surface-raised);border:7px solid #fff;border-radius:34px;box-shadow:var(--shadow-float);padding:16px;min-height:560px;display:flex;flex-direction:column}.avatar{width:58px;height:58px;border-radius:var(--radius-avatar);background:linear-gradient(135deg,var(--brand-core),var(--accent-highlight));box-shadow:var(--shadow-card);position:relative}.avatar:after{content:"";position:absolute;top:17px;left:15px;width:7px;height:7px;border-radius:50%;background:var(--ink-main);box-shadow:21px 0 0 var(--ink-main),10px 18px 0 -2px var(--ink-main)}.bubble{border-radius:var(--radius-bubble);background:var(--surface-soft);padding:12px;margin:14px 0;font-weight:800}.cta{width:100%;min-height:var(--cta-height);border:0;border-radius:var(--radius-button);background:var(--brand-core);color:var(--ink-on-brand);font:inherit;font-size:var(--text-cta);font-weight:900;margin-top:auto}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.metric{border-radius:var(--radius-s);background:#fff;border:1px solid var(--line-soft);padding:10px}.metric small{display:block;color:var(--trust-metric);font-size:var(--text-note);font-weight:900}.metric strong{display:block;color:var(--trust-metric);font-variant-numeric:tabular-nums;font-size:22px;line-height:1.1}.meal{height:132px;border-radius:var(--radius-photo);background:radial-gradient(circle at 30% 30%,#fff 0 18px,transparent 19px),linear-gradient(135deg,var(--accent-highlight),var(--trust-metric));margin:16px 0}.reveal{background:linear-gradient(135deg,var(--reveal-grad-start),var(--reveal-grad-end))}.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:14px}.do{border-left:5px solid var(--trust-metric)}.dont{border-left:5px solid #b85265}.checklist{display:grid;gap:8px;margin-top:12px}.check{padding:10px 12px;border-radius:12px;background:#fff;border:1px solid var(--line-soft)}.source a{color:var(--trust-metric);font-weight:850}@media(max-width:900px){.grid,.phone-zone,.do-dont,.swatches{grid-template-columns:1fr}.type-row{grid-template-columns:1fr}.phone{min-height:auto}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<p class="kicker">Canonical Design Sheet / Direction 1</p>
+<h1>わたしの担当。</h1>
+<p class="lead">AI食事パートナーのデザイン正本。以後の画面、コピー、画像、LP、実装はこのシートを基準に判断します。</p>
+<div class="pills"><span class="pill">食事パートナー</span><span class="pill">TikTok流入</span><span class="pill">自分専用感</span><span class="pill">責めない</span></div>
+</section>
+
+<section class="section">
+<p class="kicker">Positioning</p>
+<h2>食事管理アプリでも、AI彼女でもない。</h2>
+<p class="lead">あなたの食事を見てくれる担当。普段は静かで使いやすく、大事な瞬間だけ、食事パートナーがこちらを見てくれる。</p>
+<div class="grid"><div class="card"><b>中心感情</b><p class="muted">この子は私が作った、私の担当。</p></div><div class="card"><b>判断軸</b><p class="muted">会いたくなるか。信用できるか。標準アプリっぽさが消えたか。</p></div></div>
+</section>
+
+<section class="section">
+<p class="kicker">Tokens</p>
+<h2>色</h2>
+<div class="swatches">
+<div class="swatch" style="--c:var(--surface-base)"><code>surface-base</code><span>#FFF4E6</span></div>
+<div class="swatch" style="--c:var(--brand-core)"><code>brand-core</code><span>#E8735A</span></div>
+<div class="swatch" style="--c:var(--trust-metric)"><code>trust-metric</code><span>#3A6B5C</span></div>
+<div class="swatch" style="--c:var(--accent-highlight)"><code>accent</code><span>#F5C556</span></div>
+</div>
+<p class="muted" style="margin-top:12px">緑は数字とメトリクス専用。グラデーションはリビール専用。</p>
+</section>
+
+<section class="section">
+<p class="kicker">Typography</p>
+<h2>文字</h2>
+<div class="type-grid">
+<div class="type-row"><code>display</code><div class="display">会えました。</div></div>
+<div class="type-row"><code>h1</code><div class="h1sample">今日のごはん、見せて？</div></div>
+<div class="type-row"><code>body</code><div class="bodysample">見せてくれてありがとう。たんぱく質、いい感じ（目安）。明日は汁物を足せたら戻せます。</div></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">Core Screens</p>
+<h2>画面適用</h2>
+<div class="phone-zone">
+<div class="phone"><div class="avatar"></div><h3 class="h1sample" style="margin-top:20px">今日のごはん、見せて？</h3><p class="muted">あなた専用の食事パートナーをつくります。</p><div class="bubble">まずは、どんな担当にする？</div><button class="cta">担当をつくる</button></div>
+<div class="phone reveal"><div class="avatar" style="width:92px;height:92px;margin:auto auto 16px"></div><div class="display">会えました。</div><p class="lead">あなた専用の食事パートナーです。</p><button class="cta">さっそく見せる</button></div>
+<div class="phone"><div class="avatar"></div><div class="meal"></div><div class="bubble">見せてくれてありがとう。今日はここまでで十分。明日は野菜を一品足せたら戻せます。</div><div class="metric-row"><div class="metric"><small>目安</small><strong>450</strong></div><div class="metric"><small>たんぱく</small><strong>25g</strong></div><div class="metric"><small>次</small><strong>一品</strong></div></div><button class="cta">この子と続ける</button></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">Voice</p>
+<h2>言葉</h2>
+<div class="do-dont">
+<div class="card do"><b>使う</b><p class="muted">食事パートナー、担当、会う、覚えてる、見せる、ひと工夫、大丈夫、おかえり。</p></div>
+<div class="card dont"><b>使わない</b><p class="muted">AIが解析、彼女、彼氏、恋人、管理、入力してください、失敗、我慢、正確に計測。</p></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">Do / Don't</p>
+<h2>判断例</h2>
+<div class="do-dont">
+<div class="card do"><b>DO</b><p class="muted">顔と吹き出しで開く。数値は目安チップ。食べすぎた日も戻れる言葉。課金は「この子と続ける」。</p></div>
+<div class="card dont"><b>DON'T</b><p class="muted">機能説明で開く。栄養素を表で詰める。カロリーオーバーを赤く出す。恋愛記号を強くする。</p></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">QA</p>
+<h2>チェック</h2>
+<div class="checklist">
+<div class="check">AIが主語のコピーがない</div>
+<div class="check">すべての数値に「目安」が付いている</div>
+<div class="check">主ボタンが画面に1つだけ</div>
+<div class="check">恋愛記号の強い画像がない</div>
+<div class="check">TikTok LPは3秒で顔+吹き出し+約束ピルが見える</div>
+</div>
+</section>
+
+<section class="section source">
+<p class="kicker">Source</p>
+<p class="muted">正本Markdown: docs/rebuild/30_ui/CANONICAL_DESIGN_SHEET.md<br>Token CSS: web/design-tokens.css<br>Fable 5 format decision: docs/rebuild/80_reviews/fable5_design_canonical_format_response_2026-07-04.md</p>
+</section>
+</main>
+</body>
+</html>

@@ -1,0 +1,54 @@
+:root {
+  --surface-base: #fff4e6;
+  --surface-raised: #fffbf4;
+  --surface-soft: #ffe4d7;
+  --ink-main: #33261f;
+  --ink-muted: #7a6a5f;
+  --ink-on-brand: #33261f;
+  --brand-core: #e8735a;
+  --accent-highlight: #f5c556;
+  --trust-metric: #3a6b5c;
+  --line-soft: #ecd8ca;
+  --reveal-grad-start: #ffe3c9;
+  --reveal-grad-end: #ffd1c4;
+
+  --text-display: clamp(32px, 8vw, 51px);
+  --text-h1: 22px;
+  --text-h2: 18px;
+  --text-body: 16px;
+  --text-sub: 15px;
+  --text-note: 13px;
+  --text-cta: 17px;
+
+  --lh-display: 1.1;
+  --lh-h1: 1.3;
+  --lh-h2: 1.4;
+  --lh-body: 1.7;
+  --lh-sub: 1.6;
+  --lh-note: 1.5;
+  --lh-cta: 1.2;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  --radius-s: 12px;
+  --radius-m: 16px;
+  --radius-button: 18px;
+  --radius-bubble: 18px 18px 18px 6px;
+  --radius-photo: 24px;
+  --radius-avatar: 40%;
+  --radius-pill: 999px;
+
+  --shadow-card: 0 14px 34px rgba(51, 38, 31, 0.08);
+  --shadow-float: 0 22px 60px rgba(51, 38, 31, 0.12);
+
+  --content-max: 480px;
+  --screen-padding: 20px;
+  --touch-target: 44px;
+  --cta-height: 54px;
+}
