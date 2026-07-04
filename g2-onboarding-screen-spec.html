@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Cache-Control" content="no-store">
     <title>G2オンボーディング画面仕様 | AI食事パートナー</title>
+    <link rel="stylesheet" href="./design-tokens.css">
     <style>
       :root {
         --ink: #17211f;
@@ -63,7 +64,7 @@
       }
 
       h1 {
-        font-size: clamp(1.8rem, 8vw, 3.35rem);
+        font-size: 44px;
         line-height: 1.15;
         letter-spacing: 0;
       }
@@ -1143,6 +1144,621 @@
         }
       }
     </style>
+    <style id="direction-1-polish">
+      :root {
+        --ink: var(--ink-main);
+        --muted: var(--ink-muted);
+        --paper: var(--surface-base);
+        --panel: var(--surface-raised);
+        --line: var(--line-soft);
+        --green: var(--brand-core);
+        --green-soft: var(--surface-soft);
+        --yellow: var(--accent-highlight);
+        --rose: var(--brand-core);
+        --shadow: var(--shadow-float);
+        --text-display: 44px;
+      }
+
+      html {
+        background: var(--surface-base);
+      }
+
+      body {
+        background:
+          linear-gradient(180deg, rgba(255, 244, 230, 0.98) 0%, rgba(255, 251, 244, 0.9) 42%, rgba(255, 244, 230, 1) 100%);
+        color: var(--ink-main);
+        font-size: var(--text-body);
+        line-height: var(--lh-body);
+      }
+
+      a {
+        color: var(--brand-core);
+        font-weight: 800;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+
+      .shell {
+        width: min(1220px, 100%);
+        padding: var(--space-6) var(--space-5) var(--space-7);
+      }
+
+      .hero {
+        position: relative;
+        padding: var(--space-6) 0 var(--space-5);
+        border-bottom-color: var(--line-soft);
+      }
+
+      .kicker,
+      .screen-id {
+        color: var(--brand-core);
+        font-size: var(--text-note);
+        line-height: var(--lh-note);
+      }
+
+      h1 {
+        max-width: 920px;
+        font-size: var(--text-display);
+        line-height: var(--lh-display);
+        font-weight: 800;
+      }
+
+      h2 {
+        font-size: var(--text-h1);
+        line-height: var(--lh-h1);
+        font-weight: 800;
+      }
+
+      h3 {
+        font-size: var(--text-h2);
+        line-height: var(--lh-h2);
+        font-weight: 800;
+      }
+
+      .lead,
+      .section-title p,
+      .note-panel p,
+      .summary-card p,
+      .research-card p,
+      .term-card p,
+      .tree-card p,
+      .review-guide p,
+      .review-panel p {
+        color: var(--ink-muted);
+        font-size: var(--text-sub);
+        line-height: var(--lh-sub);
+      }
+
+      .lead {
+        max-width: 880px;
+        margin-top: var(--space-3);
+      }
+
+      .status-row,
+      .chip-row,
+      .option-grid,
+      .preset-grid,
+      .mini-grid {
+        gap: var(--space-2);
+      }
+
+      .status-pill,
+      .chip,
+      .mini-pill {
+        min-height: 36px;
+        border-color: rgba(236, 216, 202, 0.95);
+        border-radius: var(--radius-pill);
+        background: var(--surface-raised);
+        color: var(--ink-main);
+        padding: var(--space-1) var(--space-3);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.65) inset;
+      }
+
+      .status-pill.good,
+      .chip.selected {
+        border-color: rgba(232, 115, 90, 0.42);
+        background: var(--surface-soft);
+      }
+
+      .status-pill.warn {
+        border-color: rgba(245, 197, 86, 0.72);
+        background: rgba(245, 197, 86, 0.2);
+      }
+
+      .summary {
+        gap: var(--space-4);
+        margin-top: var(--space-5);
+      }
+
+      .summary-card,
+      .screen-card,
+      .note-panel,
+      .research-card,
+      .term-card,
+      .tree-card,
+      .flow-step,
+      .review-guide,
+      .review-panel,
+      .review-output {
+        border-color: rgba(236, 216, 202, 0.95);
+        border-radius: var(--radius-m);
+        background: rgba(255, 251, 244, 0.9);
+        box-shadow: var(--shadow-card);
+      }
+
+      .summary-card,
+      .note-panel,
+      .research-card,
+      .term-card,
+      .tree-card,
+      .review-guide,
+      .review-panel {
+        padding: var(--space-4);
+      }
+
+      .note-panel {
+        margin-top: var(--space-5);
+      }
+
+      .research-grid,
+      .term-grid,
+      .flow-tree {
+        gap: var(--space-4);
+        margin-top: var(--space-4);
+      }
+
+      .term-card.recommended {
+        border-color: rgba(232, 115, 90, 0.5);
+        background: var(--surface-soft);
+      }
+
+      .tree-card::before {
+        background: var(--line-soft);
+      }
+
+      .tree-lane {
+        gap: var(--space-4);
+      }
+
+      .flow-strip {
+        gap: var(--space-3);
+        padding: var(--space-4) 0 var(--space-2);
+      }
+
+      .flow-step {
+        min-height: 84px;
+        padding: var(--space-3);
+      }
+
+      .flow-step strong {
+        color: var(--ink-main);
+        font-size: var(--text-note);
+      }
+
+      .flow-step span {
+        color: var(--ink-muted);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .section-title {
+        margin: var(--space-7) 0 var(--space-4);
+      }
+
+      .storyboard {
+        gap: var(--space-5);
+      }
+
+      .screen-card {
+        grid-template-columns: 415px minmax(0, 1fr);
+        gap: var(--space-5);
+        padding: var(--space-4);
+      }
+
+      .phone {
+        width: 375px;
+        height: 812px;
+        border: 8px solid var(--ink-main);
+        border-radius: 36px;
+        background: var(--surface-raised);
+        box-shadow: 0 24px 64px rgba(51, 38, 31, 0.18);
+      }
+
+      .phone-screen {
+        background: var(--surface-base);
+      }
+
+      .phone-top {
+        min-height: 56px;
+        padding: 14px 20px 8px;
+        color: var(--ink-muted);
+        font-size: var(--text-note);
+      }
+
+      .back {
+        width: 36px;
+        height: 36px;
+        border-color: var(--line-soft);
+        background: var(--surface-raised);
+        color: var(--ink-main);
+      }
+
+      .progress {
+        height: 7px;
+        margin-left: var(--space-3);
+        background: rgba(236, 216, 202, 0.75);
+      }
+
+      .progress span {
+        background: var(--brand-core);
+      }
+
+      .phone-body {
+        padding: 14px var(--screen-padding) var(--space-5);
+      }
+
+      .phone-body h2 {
+        font-size: var(--text-h1);
+        line-height: var(--lh-h1);
+        font-weight: 800;
+      }
+
+      .phone-body p {
+        margin-top: var(--space-2);
+        color: var(--ink-muted);
+        font-size: var(--text-sub);
+        line-height: var(--lh-sub);
+      }
+
+      .phone-bottom {
+        padding: var(--space-3) var(--screen-padding) calc(var(--space-4) + env(safe-area-inset-bottom));
+        border-top-color: rgba(236, 216, 202, 0.8);
+        background: rgba(255, 251, 244, 0.94);
+      }
+
+      .button,
+      .tool-button {
+        min-height: var(--cta-height);
+        border-radius: var(--radius-button);
+        background: var(--brand-core);
+        color: var(--ink-on-brand);
+        font-size: var(--text-cta);
+        line-height: var(--lh-cta);
+        font-weight: 800;
+        box-shadow: 0 10px 20px rgba(232, 115, 90, 0.22);
+      }
+
+      .button.secondary {
+        min-height: 44px;
+        margin-top: var(--space-2);
+        border: 0;
+        background: transparent;
+        color: var(--brand-core);
+        box-shadow: none;
+      }
+
+      .tool-button.secondary {
+        border-color: rgba(232, 115, 90, 0.28);
+        background: var(--surface-raised);
+        color: var(--brand-core);
+        box-shadow: none;
+      }
+
+      .choice-card,
+      .trainer-card,
+      .input-card,
+      .feedback-card,
+      .pay-card,
+      .style-card,
+      .option-card,
+      .tip-card,
+      .action-card,
+      .name-edit {
+        border-color: rgba(236, 216, 202, 0.95);
+        border-radius: var(--radius-m);
+        background: var(--surface-raised);
+        box-shadow: var(--shadow-card);
+      }
+
+      .choice-card {
+        grid-template-columns: 58px 1fr;
+        gap: var(--space-3);
+        margin-top: var(--space-3);
+        padding: var(--space-3);
+      }
+
+      .choice-card.selected,
+      .trainer-card.selected,
+      .style-card.selected,
+      .option-card.selected {
+        border-color: rgba(245, 197, 86, 0.95);
+        background: rgba(245, 197, 86, 0.18);
+        box-shadow: inset 0 0 0 1px rgba(245, 197, 86, 0.8), var(--shadow-card);
+      }
+
+      .choice-icon,
+      .action-icon {
+        border-radius: var(--radius-s);
+        background: var(--surface-soft);
+        color: var(--brand-core);
+      }
+
+      .face-marquee {
+        margin: var(--space-2) calc(var(--screen-padding) * -1) var(--space-4);
+        padding: 0 var(--screen-padding);
+      }
+
+      .face-track {
+        gap: var(--space-2);
+      }
+
+      .face-track .face-chip {
+        width: 90px;
+      }
+
+      .face-chip,
+      .face-sample,
+      .preview-row img,
+      .featured-trainer,
+      .featured-trainer img,
+      .trainer-card img,
+      .style-sample {
+        border-color: var(--line-soft);
+      }
+
+      .face-sample,
+      .featured-trainer,
+      .featured-trainer img,
+      .trainer-card img,
+      .style-sample,
+      .style-card.with-image {
+        border-radius: var(--radius-m);
+      }
+
+      .featured-trainer {
+        padding: var(--space-2);
+        border-color: rgba(245, 197, 86, 0.95);
+        background: rgba(255, 251, 244, 0.96);
+      }
+
+      .featured-trainer strong,
+      .trainer-card strong,
+      .style-card strong,
+      .option-card strong,
+      .feedback-card strong,
+      .action-card strong {
+        color: var(--ink-main);
+      }
+
+      .trainer-list,
+      .style-cards,
+      .two-col,
+      .chips,
+      .color-grid,
+      .status-list {
+        gap: var(--space-2);
+      }
+
+      .input-card,
+      .feedback-card,
+      .pay-card {
+        margin-top: var(--space-3);
+        padding: var(--space-4);
+      }
+
+      .input-line,
+      .textarea,
+      .review-textarea {
+        border-color: var(--line-soft);
+        border-radius: var(--radius-s);
+        background: var(--surface-raised);
+        color: var(--ink-main);
+        padding: var(--space-3) var(--space-4);
+      }
+
+      .input-line {
+        min-height: var(--cta-height);
+      }
+
+      .textarea {
+        min-height: 104px;
+      }
+
+      .textarea.compact {
+        min-height: 78px;
+      }
+
+      .review-textarea:focus,
+      .input-line:focus,
+      .textarea:focus {
+        outline: 3px solid rgba(232, 115, 90, 0.22);
+        border-color: var(--brand-core);
+      }
+
+      .range-pill,
+      .mini-button {
+        border-color: var(--line-soft);
+        border-radius: var(--radius-pill);
+        background: var(--surface-raised);
+        color: var(--ink-muted);
+      }
+
+      .range-pill.selected {
+        border-color: rgba(245, 197, 86, 0.95);
+        background: rgba(245, 197, 86, 0.22);
+        color: var(--ink-main);
+      }
+
+      .hair-track {
+        height: 44px;
+        background: linear-gradient(90deg, #33261f, #b98559 34%, #f5c556 68%, #fff6dc);
+      }
+
+      .hair-knob {
+        background: var(--brand-core);
+        box-shadow: 0 8px 18px rgba(51, 38, 31, 0.22);
+      }
+
+      .field-label {
+        background: rgba(236, 216, 202, 0.6);
+        color: var(--ink-muted);
+      }
+
+      .field-label.required {
+        background: var(--surface-soft);
+        color: var(--brand-core);
+      }
+
+      .swatch {
+        border-color: rgba(51, 38, 31, 0.18);
+        border-radius: var(--radius-s);
+      }
+
+      .swatch.selected {
+        outline: 3px solid rgba(245, 197, 86, 0.9);
+        outline-offset: 2px;
+      }
+
+      .loading-note,
+      .mini-note {
+        border-color: rgba(232, 115, 90, 0.24);
+        border-radius: var(--radius-m);
+        background: var(--surface-soft);
+        color: var(--brand-core);
+      }
+
+      .pulse {
+        color: var(--brand-core);
+        background: radial-gradient(circle, var(--surface-raised) 0 45%, var(--surface-soft) 46% 100%);
+        box-shadow: 0 0 0 10px rgba(255, 228, 215, 0.55), 0 18px 48px rgba(232, 115, 90, 0.18);
+      }
+
+      .dot {
+        background: var(--brand-core);
+      }
+
+      .trainer-photo {
+        border-color: var(--line-soft);
+        background: var(--surface-raised);
+        box-shadow: 0 20px 46px rgba(51, 38, 31, 0.16);
+      }
+
+      .meal-photo,
+      .generated-image {
+        border-color: rgba(232, 115, 90, 0.32);
+        border-radius: var(--radius-photo);
+        background: rgba(255, 228, 215, 0.36);
+      }
+
+      .reply {
+        grid-template-columns: 50px 1fr;
+        gap: var(--space-3);
+      }
+
+      .mini-avatar {
+        width: 50px;
+        height: 50px;
+        border-color: var(--line-soft);
+      }
+
+      .pay-price {
+        border-color: rgba(58, 107, 92, 0.35);
+        border-radius: var(--radius-m);
+        background: rgba(58, 107, 92, 0.08);
+        color: var(--trust-metric);
+      }
+
+      .spec-header {
+        border-bottom-color: var(--line-soft);
+      }
+
+      .spec-body {
+        gap: var(--space-3);
+      }
+
+      .spec-block {
+        border-color: rgba(236, 216, 202, 0.95);
+        border-radius: var(--radius-m);
+        background: var(--surface-raised);
+        padding: var(--space-4);
+      }
+
+      .spec-block li {
+        color: var(--ink-main);
+        line-height: 1.72;
+      }
+
+      .route-badge {
+        background: rgba(245, 197, 86, 0.22);
+        color: var(--ink-main);
+      }
+
+      .route-badge.custom {
+        background: var(--surface-soft);
+        color: var(--brand-core);
+      }
+
+      .route-badge.common {
+        background: rgba(58, 107, 92, 0.1);
+        color: var(--trust-metric);
+      }
+
+      code {
+        border-color: var(--line-soft);
+        background: var(--surface-raised);
+        color: var(--ink-main);
+      }
+
+      .review-guide,
+      .review-panel,
+      .review-output {
+        border-color: rgba(232, 115, 90, 0.25);
+        background: rgba(255, 251, 244, 0.96);
+      }
+
+      .review-tools {
+        gap: var(--space-2);
+      }
+
+      .review-saved {
+        color: var(--ink-muted);
+      }
+
+      @media (max-width: 920px) {
+        .shell {
+          padding-inline: var(--space-4);
+        }
+
+        .screen-card {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 520px) {
+        :root {
+          --text-display: 32px;
+        }
+
+        .shell {
+          padding: var(--space-4) var(--space-3) var(--space-7);
+        }
+
+        .screen-card {
+          padding: var(--space-3);
+        }
+
+        .phone {
+          width: min(375px, 100%);
+          height: 812px;
+          border-width: 7px;
+          border-radius: 32px;
+        }
+
+        .phone-body {
+          padding-inline: 18px;
+        }
+      }
+    </style>
   </head>
   <body>
     <main class="shell">
@@ -1530,7 +2146,7 @@
                   <div class="style-cards">
                     <div class="option-card selected"><strong>食事バランス</strong><p>迷ったらこれ。主食、たんぱく質、野菜を整える。</p></div>
                     <div class="option-card"><strong>PFC・マクロ</strong><p>数字で管理したい人向け。筋トレや減量と相性がよい。</p></div>
-                    <div class="option-card"><strong>カロリー目安</strong><p>体重を落とす時に使いやすい。</p></div>
+                    <div class="option-card"><strong>カロリー管理</strong><p>体重を落とす時に使いやすい。</p></div>
                     <div class="option-card"><strong>ゆる糖質オフ</strong><p>夜や間食を整えたい人向け。</p></div>
                     <div class="option-card"><strong>相談しながら</strong><p>まだ決めきれない人向け。</p></div>
                   </div>
