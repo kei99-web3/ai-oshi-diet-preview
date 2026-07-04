@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Cache-Control" content="no-store">
-    <title>G2オンボーディング画面仕様 | AI食事トレーナー</title>
+    <title>G2オンボーディング画面仕様 | AI食事パートナー</title>
     <style>
       :root {
         --ink: #17211f;
@@ -170,6 +170,65 @@
         padding: 12px 0 4px;
       }
 
+      .research-grid,
+      .term-grid,
+      .flow-tree {
+        display: grid;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .research-grid,
+      .term-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .research-card,
+      .term-card,
+      .tree-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 12px;
+      }
+
+      .research-card p,
+      .term-card p,
+      .tree-card p {
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .term-card.recommended {
+        border-color: rgba(49, 93, 90, 0.5);
+        background: var(--green-soft);
+      }
+
+      .tree-card {
+        position: relative;
+      }
+
+      .tree-card::before {
+        content: "";
+        position: absolute;
+        left: 18px;
+        top: -13px;
+        width: 1px;
+        height: 12px;
+        background: var(--line);
+      }
+
+      .tree-card.root::before {
+        display: none;
+      }
+
+      .tree-lane {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
       .flow-step {
         min-height: 74px;
         border: 1px solid var(--line);
@@ -268,7 +327,7 @@
 
       .phone-body {
         overflow: hidden;
-        padding: 10px 18px 90px;
+        padding: 10px 18px 18px;
       }
 
       .phone-body.scroll {
@@ -286,13 +345,9 @@
       }
 
       .phone-bottom {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
         padding: 12px 18px 18px;
         border-top: 1px solid rgba(217, 222, 214, 0.72);
-        background: linear-gradient(180deg, rgba(255, 250, 241, 0), #fffaf1 22px);
+        background: #fffaf1;
       }
 
       .button {
@@ -376,6 +431,29 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
         margin: 12px 0;
+      }
+
+      .face-marquee {
+        overflow: hidden;
+        margin: 12px -18px 14px;
+        padding: 0 18px;
+      }
+
+      .face-track {
+        display: flex;
+        gap: 8px;
+        width: max-content;
+        animation: face-scroll 18s linear infinite;
+      }
+
+      .face-track .face-chip {
+        width: 86px;
+        flex: 0 0 auto;
+      }
+
+      @keyframes face-scroll {
+        from { transform: translateX(0); }
+        to { transform: translateX(-282px); }
       }
 
       .face-chip,
@@ -546,6 +624,66 @@
 
       .textarea {
         min-height: 118px;
+      }
+
+      .textarea.compact {
+        min-height: 70px;
+      }
+
+      .range-scale {
+        display: grid;
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 10px;
+      }
+
+      .range-pill {
+        min-height: 48px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .range-pill.selected {
+        border-color: var(--green);
+        background: var(--green-soft);
+        color: var(--ink);
+      }
+
+      .option-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+      }
+
+      .option-card.selected {
+        border-color: var(--green);
+        background: var(--green-soft);
+      }
+
+      .option-card p {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .loading-note,
+      .mini-note {
+        margin-top: 8px;
+        border: 1px solid rgba(49, 93, 90, 0.26);
+        border-radius: 8px;
+        background: var(--green-soft);
+        padding: 9px 10px;
+        color: var(--green);
+        font-size: 0.8rem;
+        font-weight: 800;
       }
 
       .color-grid {
@@ -910,6 +1048,12 @@
           grid-template-columns: 1fr 1fr;
         }
 
+        .research-grid,
+        .term-grid,
+        .tree-lane {
+          grid-template-columns: 1fr;
+        }
+
         .screen-card {
           grid-template-columns: 1fr;
         }
@@ -925,6 +1069,12 @@
         }
 
         .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .research-grid,
+        .term-grid,
+        .tree-lane {
           grid-template-columns: 1fr;
         }
 
@@ -959,11 +1109,11 @@
       <section class="summary">
         <div class="summary-card">
           <h3>何を見せているか</h3>
-          <p>オンボード全15画面のワイヤー。レビューを書き込みながら判断する仕様確認用。</p>
+          <p>オンボード全体のワイヤー。レビューを書き込みながら判断する仕様確認用。</p>
         </div>
         <div class="summary-card">
           <h3>勝ち筋</h3>
-          <p>食事管理設定より先に「自分だけのトレーナーを作る」体験を出す。</p>
+          <p>食事管理設定より先に「自分だけの食事パートナーが生まれる」体験を出す。</p>
         </div>
         <div class="summary-card">
           <h3>軽い経路</h3>
@@ -971,22 +1121,54 @@
         </div>
         <div class="summary-card">
           <h3>重い経路</h3>
-          <p>こだわる人は、顔・髪・関係性を軽いタップ中心で作れる。</p>
+          <p>こだわる人は、参考URL、顔、髪、服、関係性をタップ中心で作れる。</p>
         </div>
       </section>
 
       <section class="note-panel">
+        <h2>用語検討</h2>
+        <p>現時点の推奨は、アプリ内の総称を「食事パートナー」に寄せることです。「トレーナー」はフィットネス寄りで、恋人・友達・先輩のような関係性と少し衝突します。一方で「栄養士」は資格・監修の印象が強いため、MVPでは避けます。</p>
+        <div class="term-grid">
+          <div class="term-card recommended"><h3>食事パートナー</h3><p>食事管理と伴走の両方が伝わる。UIの正式総称として最有力。</p></div>
+          <div class="term-card"><h3>相棒</h3><p>感情訴求が強い。短い見出しやCTAでは使いやすいが、食事アプリ文脈は補足が必要。</p></div>
+          <div class="term-card"><h3>食事コーチ</h3><p>行動改善は伝わるが少し硬い。数字管理やPFC文脈では相性がよい。</p></div>
+          <div class="term-card"><h3>トレーナー</h3><p>既存方針と近いが、運動アプリに寄って見える。関係性候補として残す。</p></div>
+          <div class="term-card"><h3>食事ナビ</h3><p>軽いがキャラクター性は弱い。機能名向き。</p></div>
+          <div class="term-card"><h3>栄養士</h3><p>信頼感はあるが資格・医療監修の印象が強い。現段階のUI総称にはしない。</p></div>
+        </div>
+      </section>
+
+      <section class="note-panel">
+        <h2>外部リサーチ要点</h2>
+        <p>AIパートナー系は「外見・関係性・話し方」を先に作り、食事管理系は「写真/記録・目標・体重・フィードバック」を短く聞きます。このMVPでは、見た目生成の待ち時間に食事入力を進め、両方の強みをつなぎます。</p>
+        <div class="research-grid">
+          <div class="research-card"><h3>AIパートナー系</h3><p>Replika、Nomi、Kindroid、Candy AI系は、相手の見た目・関係性・性格を先に選ばせ、会話開始前に「自分の相手」という感覚を作る。</p></div>
+          <div class="research-card"><h3>画像/キャラ生成系</h3><p>絵柄、年齢、髪、顔、服、参考イメージを選択式で扱うパターンが多い。自由記述は補助に回す方が軽い。</p></div>
+          <div class="research-card"><h3>食事管理系</h3><p>あすけん、カロミル、MacroFactor系は、食事記録、体重/目標、栄養フィードバックが中心。初回価値は「入力直後の返答」で出す。</p></div>
+        </div>
+        <p>参考: <a href="https://replika.com/" target="_blank" rel="noreferrer">Replika</a> / <a href="https://nomi.ai/" target="_blank" rel="noreferrer">Nomi</a> / <a href="https://kindroid.ai/" target="_blank" rel="noreferrer">Kindroid</a> / <a href="https://candy.ai/" target="_blank" rel="noreferrer">Candy AI</a> / <a href="https://www.asken.jp/" target="_blank" rel="noreferrer">あすけん</a> / <a href="https://www.calomeal.com/" target="_blank" rel="noreferrer">カロミル</a></p>
+      </section>
+
+      <section class="note-panel">
         <h2>フロー全体</h2>
-        <p>サンプル経路は短く、カスタム経路は顔と人物像の作成に寄せます。どちらも最後は初回食事報告、フィードバック、継続したくなる行動選択まで進めます。</p>
+        <p>サンプル経路は短く、カスタム経路は顔と人物像の作成に寄せます。どちらも最後は初回食事報告、フィードバック、継続したくなる行動選択まで進めます。参考URLがある場合は早い段階で読み込み、以降の選択肢を仮選択済みにします。</p>
         <div class="flow-strip" aria-label="flow overview">
           <div class="flow-step"><strong>001 分岐</strong><span>自分で作る / サンプルから選ぶ</span></div>
           <div class="flow-step"><strong>002 サンプル</strong><span>顔アップ6人から選ぶ</span></div>
-          <div class="flow-step"><strong>003-007 外見</strong><span>絵柄・見た目性別・年齢・顔・髪</span></div>
-          <div class="flow-step"><strong>008A 目的</strong><span>維持 / 減量 / 増量と進め方</span></div>
+          <div class="flow-step"><strong>003-007 外見</strong><span>絵柄・URL・年齢・国籍・顔・髪・服</span></div>
+          <div class="flow-step"><strong>007T 遷移</strong><span>見た目を組み立て中</span></div>
+          <div class="flow-step"><strong>008A 目的</strong><span>維持 / 減量 / 増量 / 食生活改善</span></div>
           <div class="flow-step"><strong>008B 関係性</strong><span>距離感と呼ばれ方</span></div>
-          <div class="flow-step"><strong>009 生成</strong><span>約60秒、Tipsと入力補助</span></div>
-          <div class="flow-step"><strong>010 確定</strong><span>正面顔と名前を確認</span></div>
+          <div class="flow-step"><strong>009 生成</strong><span>約60秒、食事入力を同時進行</span></div>
           <div class="flow-step"><strong>012-014 価値</strong><span>直前の食事・返信・継続導線</span></div>
+        </div>
+        <div class="flow-tree" aria-label="user flow tree">
+          <div class="tree-card root"><h3>開始</h3><p>食事パートナーを作るか、サンプルから選ぶ。</p></div>
+          <div class="tree-lane">
+            <div class="tree-card"><h3>カスタム経路</h3><p>絵柄 → 参考URL → 見た目の性別/年齢/国籍 → 顔 → 髪 → 服/NG → 見た目生成中 → 食事目的/体重 → 関係性/呼ばれ方 → 画像生成中に初回食事入力。</p></div>
+            <div class="tree-card"><h3>サンプル経路</h3><p>6人から選ぶ → 食事目的/体重 → 関係性/呼ばれ方 → 初回食事入力。外見調整、任意補足、参考URLは出さない。</p></div>
+          </div>
+          <div class="tree-card"><h3>共通ゴール</h3><p>生成/選択した相手とご対面 → 必要なら1回だけ調整 → 初回食事フィードバック → 応援画像 → 継続したい行動を選ぶ。</p></div>
         </div>
       </section>
 
@@ -1055,13 +1237,21 @@
             <div class="phone-screen">
               <div class="phone-top"><span>Step 1</span><div class="progress"><span style="width: 8%"></span></div></div>
               <div class="phone-body">
-                <div class="face-strip">
-                  <div class="face-chip"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div>
-                  <div class="face-chip"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
-                  <div class="face-chip"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""></div>
+                <div class="face-marquee">
+                  <div class="face-track">
+                    <div class="face-chip"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/03_kana_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/04_sou_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/05_haru_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
+                    <div class="face-chip"><img src="assets/trainer-previews/03_kana_onboarding_preview.webp" alt=""></div>
+                  </div>
                 </div>
-                <h2>あなただけのトレーナーを作ろう</h2>
-                <p>顔も、距離感も、呼び方も。まずは見た目から。</p>
+                <h2>あなただけの<br>食事パートナーを作ろう</h2>
+                <p>顔も、呼び方も、あなた次第。</p>
                 <div class="choice-card selected">
                   <div class="choice-icon">作</div>
                   <div><strong>自分で作る</strong><p>世界に一人の相棒にする</p></div>
@@ -1076,12 +1266,12 @@
           </div>
           <div class="spec">
             <div class="spec-header">
-              <div><p class="screen-id">SCR-ONB-001</p><h2>見た目の決め方</h2></div>
+              <div><p class="screen-id">SCR-ONB-001</p><h2>作り方の分岐</h2></div>
               <span class="route-badge common">共通</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>カスタム作成を上、サンプル選択を下に置く。</li><li>キャラクターシートではなく、オンボード表示用の魅力訴求ポートレートを見せる。</li><li>コピーは「パーソナライズできること」を主価値として伝える。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面だけで「自分専用を作れる」と伝わるか。</li><li>サンプル選択が逃げ道として軽く見えるか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>UI総称は暫定で「食事パートナー」。短い情緒コピーでは「相棒」も使う。</li><li>カスタム作成を上、サンプル選択を下に置く。</li><li>上部の顔は6体が横に流れる見せ方にし、サンプルの幅を自然に伝える。</li><li>説明文は最小限にし、パーソナライズ価値を見出しで伝える。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面だけで「自分専用を作れる」と伝わるか。</li><li>サンプル選択が逃げ道として軽く見えるか。</li><li>「食事パートナー」という呼び方が直感的か。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1091,7 +1281,7 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 14%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>気になる人を選ぶ</h2>
+                <h2>気になる人を一人選ぶ</h2>
                 <div class="featured-trainer"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
                 <div class="trainer-list compact">
                   <div class="trainer-card face-only selected"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
@@ -1102,7 +1292,7 @@
                   <div class="trainer-card face-only"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""><strong>アオ</strong></div>
                 </div>
               </div>
-              <div class="phone-bottom"><button class="button">この人にする</button><button class="button secondary">自分で作る</button></div>
+              <div class="phone-bottom"><button class="button">この人にする</button><button class="button secondary">やっぱり自分で作る</button></div>
             </div>
           </div>
           <div class="spec">
@@ -1111,8 +1301,8 @@
               <span class="route-badge">サンプル経路</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>選択中の1体を大きなポートレートで見せ、その下で6体から選ばせる。</li><li>説明文は置かず、名前とビジュアルだけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URLを出さない。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>1枚絵だけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が十分か。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>選択中の1体を大きなポートレートで見せ、その下で6体から選ばせる。</li><li>説明文は置かず、名前とビジュアルだけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URLを出さない。</li><li>下半分が寂しく見えても、余計な機能を足さず「顔を選ぶ」ことに集中させる。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>1枚絵だけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が十分か。</li><li>選択肢を増やさなくても画面密度が成立するか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1122,11 +1312,11 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 18%"></span></div></div>
               <div class="phone-body">
-                <h2>絵のタッチは？</h2>
+                <h2>どのタッチが好き？</h2>
                 <div class="style-cards">
-                  <div class="style-card with-image selected"><div class="style-sample"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div><div><strong>アニメ</strong><p>明るく親しみやすい</p></div></div>
-                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/04_sou_onboarding_preview.webp" alt=""></div><div><strong>実写</strong><p>写真っぽい存在感</p></div></div>
-                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div><div><strong>セミリアル</strong><p>リアルとイラストの間</p></div></div>
+                  <div class="style-card with-image selected"><div class="style-sample"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div><div><strong>アニメ</strong><p>やわらかい</p></div></div>
+                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/04_sou_onboarding_preview.webp" alt=""></div><div><strong>実写</strong><p>存在感がある</p></div></div>
+                  <div class="style-card with-image"><div class="style-sample"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""></div><div><strong>セミリアル</strong><p>きれいめ</p></div></div>
                 </div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
@@ -1135,8 +1325,34 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-003</p><h2>絵のタッチ</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>アニメ、実写、セミリアルをサンプル画像つきで提示する。</li><li>6サンプルのうち、どれが近い絵柄かを見て選べる状態にする。</li><li>デフォルトはアニメ。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>アニメ、実写、セミリアルをサンプル画像つきで提示する。</li><li>説明は短い補助語だけにし、画像で違いを判断させる。</li><li>デフォルトはアニメ。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>3つの違いが一目で伝わるか。</li><li>ここで絵柄を先に決める流れでよいか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-003b">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 22%"></span></div></div>
+              <div class="phone-body">
+                <h2>イメージに近いものある？</h2>
+                <p>URLがあれば貼るだけ。この先を仮で選んでおきます。</p>
+                <div class="input-card">
+                  <h3>参考URL</h3>
+                  <div class="input-line">https://example.com/...</div>
+                  <div class="loading-note">参考URLを読み込んでいます</div>
+                </div>
+                <div class="mini-note">あとから全部変えられます。なければスキップでOK。</div>
+              </div>
+              <div class="phone-bottom"><button class="button">これで進める</button><button class="button secondary">スキップ</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-003B</p><h2>参考URL</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>参考URLは見た目質問の早い段階で受け取る。</li><li>URLがある場合は短いローディングを挟み、以降の年齢、国籍、顔、髪、服の候補をAIで仮選択済みにする。</li><li>仮選択は間違っていてもよく、ユーザーが軽く直せる状態を優先する。</li><li>サンプル経路には表示しない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>参考URLを貼る価値が伝わるか。</li><li>ローディングが重く見えず、後続質問の負担軽減として機能するか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1144,8 +1360,8 @@
         <article class="screen-card" id="scr-004">
           <div class="phone">
             <div class="phone-screen">
-              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 26%"></span></div></div>
-              <div class="phone-body">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 28%"></span></div></div>
+              <div class="phone-body scroll">
                 <h2>見た目はどんな人？</h2>
                 <div class="input-card">
                   <h3>見た目の性別</h3>
@@ -1153,17 +1369,21 @@
                 </div>
                 <div class="input-card">
                   <h3>見た目年齢</h3>
-                  <div class="chips"><span class="chip">10代後半</span><span class="chip selected">20代前半</span><span class="chip">20代後半</span><span class="chip">30代前半</span><span class="chip">30代後半</span><span class="chip">40代以上</span></div>
+                  <div class="chips"><span class="chip">10代前半</span><span class="chip">10代後半</span><span class="chip selected">20代前半</span><span class="chip">20代後半</span><span class="chip">30代前半</span><span class="chip">30代後半</span><span class="chip">40代前半</span><span class="chip">40代後半</span><span class="chip">50代前半</span><span class="chip">50代後半</span><span class="chip">60代以上</span></div>
+                </div>
+                <div class="input-card">
+                  <h3>国籍・ルーツ</h3>
+                  <div class="chips"><span class="chip selected">お任せ</span><span class="chip">日本</span><span class="chip">韓国</span><span class="chip">中国</span><span class="chip">東南アジア</span><span class="chip">欧米</span><span class="chip">ラテン</span><span class="chip">ミックス</span><span class="chip">その他</span></div>
                 </div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
             </div>
           </div>
           <div class="spec">
-            <div class="spec-header"><div><p class="screen-id">SCR-ONB-004</p><h2>見た目の性別・年齢</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-004</p><h2>見た目の性別・年齢・国籍</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>「性別の印象」ではなく「見た目の性別」として聞く。</li><li>この画面では「おまかせ」を出さない。</li><li>年齢は年代の前半/後半で選べるようにする。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>見た目指定として迷わず答えられるか。</li><li>年齢の粒度が画像生成に十分か。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>「性別の印象」ではなく「見た目の性別」として聞く。</li><li>見た目年齢は10代前半から60代以上まで選べる。</li><li>国籍・ルーツは「お任せ」を先頭に置き、その他も選べるようにする。</li><li>参考URLがある場合、この画面は仮選択済みで表示する。</li><li>見た目年齢が10代の場合、後続の強い恋愛関係演出は出さず、健康アプリとして自然な関係性に寄せる。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>見た目指定として迷わず答えられるか。</li><li>国籍・ルーツの選択が重く見えないか。</li><li>年齢粒度が細かすぎないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1176,7 +1396,9 @@
                 <h2>どんな顔が好き？</h2>
                 <p>近いものを3つまで。</p>
                 <div class="chips"><span class="chip selected">かわいい</span><span class="chip">きれい</span><span class="chip">かっこいい</span><span class="chip selected">やさしい</span><span class="chip">凛とした</span><span class="chip">ミステリアス</span><span class="chip">中性的</span><span class="chip">大人っぽい</span></div>
-                <div class="input-card"><h3>顔立ち</h3><div class="chips"><span class="chip selected">目が大きめ</span><span class="chip">切れ長の目</span><span class="chip">丸顔</span><span class="chip">すっきり</span><span class="chip">童顔</span><span class="chip">シャープ</span></div></div>
+                <div class="input-card"><h3>目元</h3><div class="chips"><span class="chip selected">目が大きめ</span><span class="chip">切れ長</span><span class="chip">たれ目</span><span class="chip">つり目</span><span class="chip">まつ毛しっかり</span><span class="chip">すっきり</span></div></div>
+                <div class="input-card"><h3>輪郭</h3><div class="chips"><span class="chip">丸顔</span><span class="chip selected">卵型</span><span class="chip">シャープ</span><span class="chip">小顔</span><span class="chip">大人っぽい</span><span class="chip">童顔</span></div></div>
+                <div class="input-card"><h3>表情</h3><div class="chips"><span class="chip selected">やさしく笑う</span><span class="chip">自然な笑顔</span><span class="chip">クール</span><span class="chip">照れ笑い</span><span class="chip">頼れる</span></div></div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
             </div>
@@ -1184,8 +1406,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-005</p><h2>顔の雰囲気</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>曖昧な「第一印象」ではなく、画像生成に効く顔・顔立ちの情報を取る。</li><li>雰囲気は最大3つ、顔立ちは任意で選ぶ。</li><li>服装や場所より先に人物そのものを固める。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>ユーザーが好きな顔を直感的に選べるか。</li><li>この語彙で生成結果のブレを減らせるか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>AIパートナー/画像生成系の作り方を参考に、自由記述ではなく選択式を主にする。</li><li>「印象」「目元」「輪郭」「表情」に分け、ユーザーが顔を言語化しなくても選べるようにする。</li><li>参考URLがある場合は仮選択済みにする。</li><li>服装や場所より先に人物そのものを固める。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>ユーザーが好きな顔を直感的に選べるか。</li><li>この語彙で生成結果のブレを減らせるか。</li><li>選択数が多すぎて疲れないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1196,14 +1418,15 @@
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 42%"></span></div></div>
               <div class="phone-body scroll">
                 <h2>髪はどうする？</h2>
-                <div class="input-card"><h3>長さ</h3><div class="chips"><span class="chip">ベリーショート</span><span class="chip selected">ショート</span><span class="chip">ボブ</span><span class="chip">ミディアム</span><span class="chip">セミロング</span><span class="chip">ロング</span><span class="chip">結んだ髪</span><span class="chip">ウェーブ</span></div></div>
+                <div class="input-card"><h3>長さ</h3><div class="range-scale"><span class="range-pill">ベリショ</span><span class="range-pill selected">ショート</span><span class="range-pill">ボブ</span><span class="range-pill">ミディアム</span><span class="range-pill">セミロング</span><span class="range-pill">ロング</span><span class="range-pill">超ロング</span></div></div>
+                <div class="input-card"><h3>髪型</h3><div class="chips"><span class="chip selected">前髪あり</span><span class="chip">前髪なし</span><span class="chip">センター分け</span><span class="chip">ストレート</span><span class="chip">ウェーブ</span><span class="chip">外ハネ</span><span class="chip">ポニーテール</span><span class="chip">ツインテール</span><span class="chip">ハーフアップ</span><span class="chip">お団子</span><span class="chip">編み込み</span><span class="chip">ウルフ</span><span class="chip">マッシュ</span><span class="chip">清潔感ショート</span></div></div>
                 <div class="input-card"><h3>色</h3><div class="color-grid">
                   <span class="swatch selected" style="background:#151515"></span><span class="swatch" style="background:#3a251d"></span><span class="swatch" style="background:#6a3d26"></span><span class="swatch" style="background:#9a623a"></span><span class="swatch" style="background:#c69258"></span><span class="swatch" style="background:#d9ba82"></span>
                   <span class="swatch" style="background:#f0c45d"></span><span class="swatch" style="background:#f4e4b1"></span><span class="swatch" style="background:#a7a7a7"></span><span class="swatch" style="background:#d8d8d8"></span><span class="swatch" style="background:#f8f8f2"></span><span class="swatch" style="background:#74889d"></span>
                   <span class="swatch" style="background:#102a4c"></span><span class="swatch" style="background:#2d62b7"></span><span class="swatch" style="background:#71d0b6"></span><span class="swatch" style="background:#285d41"></span><span class="swatch" style="background:#b9a1dc"></span><span class="swatch" style="background:#6a3aa6"></span>
                   <span class="swatch" style="background:#f4a7c8"></span><span class="swatch" style="background:#c44868"></span><span class="swatch" style="background:#c83f35"></span><span class="swatch" style="background:#e97335"></span><span class="swatch" style="background:linear-gradient(135deg,#151515 0 50%,#f4a7c8 50% 100%)"></span><span class="swatch" style="background:linear-gradient(135deg,#3a251d 0 50%,#d9ba82 50% 100%)"></span>
                 </div></div>
-                <div class="input-card"><h3>髪のメモ</h3><div class="textarea">前髪あり。毛先だけ少し明るめ。</div></div>
+                <div class="input-card"><h3>色のこだわり</h3><div class="input-line">例: 毛先だけ少し明るめ</div></div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
             </div>
@@ -1211,8 +1434,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-006</p><h2>髪の長さと色</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>髪の長さは8択。</li><li>髪色は24色相当のパレットで選ぶ。</li><li>こだわりのあるユーザー向けに髪専用の自由記述欄を置く。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>24色が多すぎず、楽しい選択に見えるか。</li><li>自由記述が生成の精度向上に効くか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>髪の長さは短いから長いへ並ぶスケールUIにする。</li><li>髪型は選択肢を多めにし、ユーザーが名前を知らなくても近いものを選べるようにする。</li><li>髪色は24色相当のパレットで選ぶ。</li><li>こだわりのあるユーザー向けに、色の自由記入欄を置く。</li><li>参考URLがある場合は長さ、髪型、色を仮選択済みにする。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>長さが直感的に分かるか。</li><li>24色が多すぎず、楽しい選択に見えるか。</li><li>髪型の選択肢が画像生成に効くか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1222,20 +1445,42 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 50%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>見た目のこだわりは？</h2>
-                <p>任意。あとで変えられます。</p>
-                <div class="input-card"><h3>顔まわり</h3><div class="textarea">笑うとやさしい。目元は少しきりっと。</div></div>
-                <div class="input-card"><h3>服の雰囲気</h3><div class="chips"><span class="chip selected">シンプル</span><span class="chip">トレーナー感</span><span class="chip">私服っぽく</span><span class="chip">きれいめ</span><span class="chip">スポーティ</span></div></div>
-                <div class="input-card"><h3>参考URL</h3><div class="input-line">URLを貼る</div></div>
+                <h2>最後に、服とNGだけ</h2>
+                <p>なければ飛ばしてOK。</p>
+                <div class="input-card"><h3>服の雰囲気</h3><div class="chips"><span class="chip selected">シンプル</span><span class="chip">私服っぽく</span><span class="chip">きれいめ</span><span class="chip">スポーティ</span><span class="chip">制服風</span><span class="chip">白衣風</span><span class="chip">ストリート</span><span class="chip">和風</span><span class="chip">近未来</span></div></div>
+                <div class="input-card"><h3>避けたいもの</h3><div class="chips"><span class="chip selected">派手すぎる</span><span class="chip">露出が多い</span><span class="chip">怖い雰囲気</span><span class="chip">幼すぎる</span><span class="chip">ビジネス感</span><span class="chip">筋トレ感</span></div></div>
+                <div class="input-card"><h3>ひとことメモ</h3><div class="textarea compact">例: 清潔感はほしい。医療っぽくはしない。</div></div>
               </div>
-              <div class="phone-bottom"><button class="button">次へ</button></div>
+              <div class="phone-bottom"><button class="button">次へ</button><button class="button secondary">スキップ</button></div>
             </div>
           </div>
           <div class="spec">
-            <div class="spec-header"><div><p class="screen-id">SCR-ONB-007</p><h2>見た目メモ</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-007</p><h2>服とNG</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>場所・背景の質問は廃止し、人物そのものの補足に寄せる。</li><li>自由記述と参考URLはカスタム経路だけに出す。</li><li>服装は主質問ではなく、軽い雰囲気指定に留める。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>ユーザーの頭の中の人物像を拾えているか。</li><li>この画面が重すぎないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>場所・背景の質問は廃止し、人物そのものに関わる服とNGだけを聞く。</li><li>顔まわりの自由記述は削除し、顔はSCR-ONB-005の選択式に集約する。</li><li>参考URLはSCR-ONB-003Bへ移動済み。</li><li>服装は主質問ではなく、軽い雰囲気指定に留める。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>最後の質問として重すぎないか。</li><li>NG要素が生成事故の回避に効くか。</li></ul></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="screen-card" id="scr-007t">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top"><span>準備中</span><div class="progress"><span style="width: 56%"></span></div></div>
+              <div class="phone-body">
+                <h2>見た目、いい感じ。</h2>
+                <p>あなた向けに組み立てています。次は、食事のことを少しだけ。</p>
+                <div class="loader" style="min-height:260px;"><div class="pulse">整理中</div></div>
+                <div class="tip-card"><strong>Tips</strong><p>ここまでの内容はあとから変えられます。</p></div>
+              </div>
+              <div class="phone-bottom"><button class="button">続ける</button></div>
+            </div>
+          </div>
+          <div class="spec">
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-007T</p><h2>見た目完了の遷移</h2></div><span class="route-badge custom">カスタム</span></div>
+            <div class="spec-body">
+              <div class="spec-block"><h3>仕様</h3><ul><li>見た目質問から食事目的へ急に飛ぶ違和感を消すための短い遷移。</li><li>実装上は、参考URL解析や仮キャラクターシート生成の待ち時間として使う。</li><li>1.5〜3秒で自動遷移、またはボタンで進める。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>食事質問へ自然につながるか。</li><li>待ち時間が演出として機能するか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1243,11 +1488,20 @@
         <article class="screen-card" id="scr-008a">
           <div class="phone">
             <div class="phone-screen">
-              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 60%"></span></div></div>
-              <div class="phone-body">
+              <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 62%"></span></div></div>
+              <div class="phone-body scroll">
                 <h2>体づくりの目的は？</h2>
-                <div class="chips"><span class="chip selected">今をキープ</span><span class="chip">体重を落としたい</span><span class="chip">筋肉をつけたい</span></div>
-                <div class="input-card"><h3>進め方</h3><div class="chips"><span class="chip selected">PFC・マクロ</span><span class="chip">カロリー目安</span><span class="chip">ゆる糖質オフ</span><span class="chip">食事バランス</span><span class="chip">相談しながら</span></div></div>
+                <div class="chips"><span class="chip selected">今をキープ</span><span class="chip">体重を落としたい</span><span class="chip">筋肉をつけたい</span><span class="chip">食生活を整えたい</span></div>
+                <div class="input-card"><h3>進め方</h3>
+                  <div class="style-cards">
+                    <div class="option-card selected"><strong>食事バランス</strong><p>迷ったらこれ。主食、たんぱく質、野菜を整える。</p></div>
+                    <div class="option-card"><strong>PFC・マクロ</strong><p>数字で管理したい人向け。筋トレや減量と相性がよい。</p></div>
+                    <div class="option-card"><strong>カロリー目安</strong><p>体重を落としたい時に使いやすい。</p></div>
+                    <div class="option-card"><strong>ゆる糖質オフ</strong><p>夜や間食を整えたい人向け。</p></div>
+                    <div class="option-card"><strong>相談しながら</strong><p>まだ決めきれない人向け。</p></div>
+                  </div>
+                </div>
+                <div class="input-card"><h3>体重</h3><div class="input-line">いまの体重（任意）</div><div class="input-line" style="margin-top:8px;">目標体重（任意）</div><div class="mini-note">未入力でも進めます。</div></div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
             </div>
@@ -1255,8 +1509,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-008A</p><h2>食事目的</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>サンプル経路でもここは聞く。</li><li>目的は維持、減量、筋肉増量の3方向に絞る。</li><li>手法はPFC/マクロ、カロリー、糖質、食事バランスから軽く選ばせる。</li><li>前提条件やアレルギーはN1オンボードでは聞かない。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>食事管理ニーズとして自然か。</li><li>初回フィードバックに必要な最低限になっているか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>サンプル経路でもここは聞く。</li><li>目的は「今をキープ」「体重を落としたい」「筋肉をつけたい」を主軸にし、迷う人向けに「食生活を整えたい」を置く。</li><li>進め方は単語だけではなく、短い説明付きカードにする。</li><li>おすすめは目的に応じて上に出す。未選択なら「食事バランス」を推奨。</li><li>いまの体重と目標体重は任意でここに入れる。入力UIは別画面/モーダル化も検討。</li><li>前提条件やアレルギーはN1オンボードでは聞かない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>食事管理ニーズとして自然か。</li><li>体重入力が任意に見えるか。</li><li>進め方の説明が長すぎないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1267,17 +1521,18 @@
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 70%"></span></div></div>
               <div class="phone-body scroll">
                 <h2>どんな存在がいい？</h2>
-                <div class="input-card"><h3>関係性</h3><div class="chips"><span class="chip selected">やさしい先輩</span><span class="chip">師匠</span><span class="chip">恋人</span><span class="chip">友達</span><span class="chip">専属トレーナー</span><span class="chip">先生</span><span class="chip">親みたいに見守る</span></div></div>
-                <div class="input-card"><h3>なんて呼ばれたい？</h3><div class="input-line">けい</div></div>
+                <div class="input-card"><h3>関係性</h3><div class="chips"><span class="chip selected">やさしい先輩</span><span class="chip">ほめ上手な友達</span><span class="chip">専属トレーナー</span><span class="chip">先生</span><span class="chip">師匠</span><span class="chip">相棒</span><span class="chip">ライバル</span><span class="chip">恋人っぽい距離感</span><span class="chip">兄・姉</span><span class="chip">後輩</span><span class="chip">見守る親</span><span class="chip">淡々と管理</span></div></div>
+                <div class="input-card"><h3>関係性のこだわり</h3><div class="input-line">自由に書く（任意）</div></div>
+                <div class="input-card"><h3>なんて呼ばれたい？</h3><div class="input-line">あなた</div></div>
               </div>
-              <div class="phone-bottom"><button class="button">トレーナーを作る</button></div>
+              <div class="phone-bottom"><button class="button">食事パートナーを作る</button></div>
             </div>
           </div>
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-008B</p><h2>声のかけ方</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>距離感は抽象語ではなく関係性で選ばせる。</li><li>呼ばれ方は選択式をやめ、自由入力のみ。</li><li>見た目補足はSCR-ONB-007へ移動済み。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>AIパートナー/トレーナーとして関係性が想像しやすいか。</li><li>恋人など強い関係性を健康文脈で許容するか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>距離感は抽象語ではなく関係性で選ばせる。</li><li>候補はAIパートナー系でよくある「友達/恋人/先生/相棒」系と、健康アプリ文脈の「専属トレーナー/淡々と管理」を混ぜる。</li><li>関係性は自由記入も可。</li><li>呼ばれ方は自由入力のみ。デフォルトは「あなた」。</li><li>見た目補足はSCR-ONB-007へ移動済み。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>AIパートナー/食事パートナーとして関係性が想像しやすいか。</li><li>候補が多すぎないか。</li><li>恋人っぽい距離感を健康文脈でどこまで許容するか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1287,20 +1542,20 @@
             <div class="phone-screen">
               <div class="phone-top"><span>生成中</span><div class="progress"><span style="width: 78%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>いま描いています</h2>
-                <p>だいたい60秒。待っている間に、最初の食事も入れられます。</p>
+                <h2>相棒、誕生中。</h2>
+                <p>だいたい60秒。待つ間に、さっきの食事を入れておきましょう。</p>
                 <div class="loader" style="min-height:170px;"><div class="pulse">生成中</div></div>
-                <div class="tip-card"><strong>Tips</strong><p>顔も呼び方も、あとから変えられます。</p></div>
-                <div class="action-card"><div class="action-icon">飯</div><div><strong>直前の食事を入れる</strong><p>あとでフィードバックに使います</p></div></div>
-                <div class="action-card"><div class="action-icon">kg</div><div><strong>体重を入れる</strong><p>任意。数値コメントが出せます</p></div></div>
+                <div class="tip-card"><strong>Tips</strong><p>写真がなくても、食べたものを一言で書けばOKです。</p></div>
+                <div class="action-card"><div class="action-icon">飯</div><div><strong>直前の食事を入れる</strong><p>最初の一言に使います</p></div></div>
+                <div class="action-card"><div class="action-icon">kg</div><div><strong>体重を確認する</strong><p>任意。あとからでも入力できます</p></div></div>
               </div>
             </div>
           </div>
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-009</p><h2>生成中</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>生成待ちは約60秒前提。</li><li>単なるローディングではなく、Tips、食事入力、体重入力を表示する。</li><li>生成失敗時は入力データを保持し、「再試行」または「サンプルから選ぶ」を出す。</li><li>内部シートという言葉はユーザー向けには出さない。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>60秒待ちでも離脱しにくいか。</li><li>待ち時間中の入力が重く見えないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>生成待ちは約60秒前提。</li><li>単なるローディングではなく、Tipsと初回食事入力への導線を表示する。</li><li>初回食事報告は生成待ち中に済ませるのを基本導線にする。生成が先に終わっても、食事報告を済ませてから初回フィードバックへ進める。</li><li>生成失敗時は入力データを保持し、「再試行」または「サンプルから選ぶ」を出す。</li><li>内部シートという言葉はユーザー向けには出さない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>60秒待ちでも離脱しにくいか。</li><li>食事入力が自然に見えるか。</li><li>生成演出が特別感につながるか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1310,20 +1565,20 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 82%"></span></div></div>
               <div class="phone-body">
-                <h2>この人で決定？</h2>
+                <h2>会えました。</h2>
                 <div class="trainer-photo"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
                 <div class="name-edit"><strong>レイ</strong><span>名前を変更</span></div>
-                <div class="feedback-card"><strong>一言プレビュー</strong><p>けいさん、今日から一緒に食事を見ます。まずは、できるところから。</p></div>
-                <div class="feedback-card"><strong>あとから変更できます</strong><p>顔、名前、言葉づかいは設定から調整できます。</p></div>
+                <div class="feedback-card"><strong>あなた専用の食事パートナーです</strong><p>あなた、今日から一緒に見ていくね。まずは、さっきの食事から。</p></div>
+                <p class="mini-note">顔、名前、言葉づかいはあとから変えられます。</p>
               </div>
-              <div class="phone-bottom"><button class="button">これで決定</button><button class="button secondary">少し調整</button></div>
+              <div class="phone-bottom"><button class="button">この子と始める</button><button class="button secondary">少し調整</button></div>
             </div>
           </div>
           <div class="spec">
-            <div class="spec-header"><div><p class="screen-id">SCR-ONB-010</p><h2>トレーナー確定</h2></div><span class="route-badge common">共通</span></div>
+            <div class="spec-header"><div><p class="screen-id">SCR-ONB-010</p><h2>ご対面・確定</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>確認はオンボード表示用ポートレートと名前だけ。</li><li>名前は自動提案後、確定前に変更可。</li><li>「顔・名前・言葉づかいは後で変えられる」を一言で出す。</li><li>サンプル経路では「6人から選び直す」「自分でオリジナルを作る」を出す。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>課金前の満足感が出るか。</li><li>後から変えられる安心感が強すぎて確定の重みを下げないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>確認はオンボード表示用ポートレートと名前だけ。</li><li>名前は自動提案後、確定前に変更可。</li><li>「あなた専用」の特別感を見出しと一言プレビューで出す。</li><li>「顔・名前・言葉づかいは後で変えられる」は控えめに出す。</li><li>サンプル経路では「6人から選び直す」「自分でオリジナルを作る」を出す。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>課金前の満足感が出るか。</li><li>ババーン感がありつつ、安っぽくならないか。</li><li>後から変えられる安心感が強すぎて確定の重みを下げないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1334,20 +1589,20 @@
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 82%"></span></div></div>
               <div class="phone-body scroll">
                 <h2>どこを直す？</h2>
-                <p>1回だけ、無料で作り直せます。</p>
+                <p>気になるところだけ書いてください。</p>
                 <div class="trainer-photo" style="width:190px;height:190px;"><img src="assets/trainer-previews/02_rei_onboarding_preview.webp" alt=""></div>
-                <div class="input-card"><h3>顔まわり</h3><div class="textarea">もう少しやさしい表情にしたい</div></div>
-                <div class="input-card"><h3>髪</h3><div class="textarea">前髪を少し軽く、色は暗めに</div></div>
-                <div class="input-card"><h3>雰囲気</h3><div class="textarea">大人っぽく、落ち着いた感じ</div></div>
+                <div class="input-card"><h3>どこを直す？</h3><div class="textarea compact">顔、髪、服、全体の雰囲気など</div></div>
+                <div class="input-card"><h3>どう変える？</h3><div class="textarea compact">もう少しやさしい表情に。髪色は暗めに。</div></div>
+                <div class="input-card"><h3>NGな要素</h3><div class="textarea compact">幼すぎる雰囲気は避けたい</div></div>
               </div>
-              <div class="phone-bottom"><button class="button">調整して作り直す</button><button class="button secondary">調整をやめる</button></div>
+              <div class="phone-bottom"><button class="button">調整して作り直す</button><button class="button secondary">このまま始める</button></div>
             </div>
           </div>
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-011</p><h2>1回だけ調整</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>調整は選択肢ではなく、顔まわり・髪・雰囲気の分割自由入力。</li><li>入力文は直接プロンプトにせず、既存シート属性へ変換してから使う。</li><li>CTAは「調整して作り直す」と「調整をやめる」。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>修正したい場所と方向が具体的に書けるか。</li><li>1回だけの制限が圧迫感にならないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>調整は「どこを直すか」「どう変えるか」「NGな要素」の3入力に分ける。</li><li>顔周り、髪型、雰囲気といった固定カテゴリだけではなく、ユーザーの言葉で修正意図を書けるようにする。</li><li>入力文は直接プロンプトにせず、最新キャラクターシートの属性へ反映してから再生成する。</li><li>「1回だけ無料」は初回画面では強調しない。2回目以降に調整しようとした時点で表示し、課金導線へつなぐ。</li><li>CTAは「調整して作り直す」と「このまま始める」。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>修正したい場所と方向が具体的に書けるか。</li><li>無料制限を隠しすぎて後で不満にならないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1357,7 +1612,7 @@
             <div class="phone-screen">
               <div class="phone-top"><span>レイ</span><div class="progress"><span style="width: 88%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>さっき、何を食べた？</h2>
+                <h2>さっき、何食べた？</h2>
                 <p>このサービスを開く前の食事でOK。</p>
                 <div class="helper-row"><button class="mini-button" type="button">サンプルを入れる</button></div>
                 <div class="meal-photo">写真を追加</div>
@@ -1365,14 +1620,14 @@
                 <div class="input-card"><h3>いまの体重</h3><div class="input-line">任意で入力</div></div>
                 <div class="input-card"><h3>目標体重</h3><div class="input-line">任意で入力</div></div>
               </div>
-              <div class="phone-bottom"><button class="button">フィードバックを見る</button><button class="button secondary">あとで入力する</button></div>
+              <div class="phone-bottom"><button class="button">感想をもらう</button><button class="button secondary">あとで入力する</button></div>
             </div>
           </div>
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-012</p><h2>初回食事報告</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>「直前に食べた食事」を入力してもらう。</li><li>手元に写真や記録がない人向けにサンプル入力ボタンを置く。</li><li>任意項目として、いまの体重と目標体重を分けて置く。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>サンプル入力が逃げ道として機能するか。</li><li>体重入力が任意に見えるか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>「直前に食べた食事」を入力してもらう。</li><li>生成中の待ち時間からこの入力へ進める。生成が終わっていても、初回フィードバック前に報告を済ませてもらう。</li><li>手元に写真や記録がない人向けにサンプル入力ボタンを置く。</li><li>任意項目として、いまの体重と目標体重を分けて置く。SCR-ONB-008Aで入力済みならプリセット表示にする。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>サンプル入力が逃げ道として機能するか。</li><li>体重入力が任意に見えるか。</li><li>生成中から入力する流れが自然か。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1388,7 +1643,7 @@
                   <div><strong>レイ</strong><p>けいさん、昼の内容はかなり整っています。たんぱく質と汁物があるので、午後の空腹も抑えやすいです。</p></div>
                 </div>
                 <div class="feedback-card"><strong>良かった点</strong><p>おにぎりだけで済ませず、サラダチキンと野菜スープを足せています。</p></div>
-                <div class="feedback-card"><strong>PFCメモ</strong><p>たんぱく質は良いペース。夜は脂質を控えめにすると整えやすいです。</p></div>
+                <div class="feedback-card"><strong>今日のメモ</strong><p>食事バランスは良いペース。PFCで見るなら、夜は脂質を控えめにすると整えやすいです。</p></div>
                 <div class="feedback-card"><strong>次の一手</strong><p>夜は主食を抜かず、魚か卵を足して戻しましょう。</p></div>
                 <div class="generated-image"><strong>応援画像を生成</strong></div>
               </div>
@@ -1398,8 +1653,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-013</p><h2>初回フィードバック</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>最初に正面顔と名前を見せ、その下にチャット返信を出す。</li><li>良かった点、PFC/数値メモ、次の一手を分ける。</li><li>免責リンクはここから外し、設定画面に集約する。</li><li>最後に「トレーナー＋今回の食事」を反映した応援画像を1枚生成する。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>他サービスとの差がここで伝わるか。</li><li>応援画像が感動ポイントとして機能しそうか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>最初に正面顔と名前を見せ、その下にチャット返信を出す。</li><li>良かった点、今日のメモ、次の一手を分ける。</li><li>今日のメモは、選んだ進め方に応じてPFC、カロリー、食事バランス、糖質などを動的に変える。</li><li>免責リンクはここから外し、設定画面に集約する。</li><li>最後に「食事パートナー＋今回の食事」を反映した応援画像を1枚生成する。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>他サービスとの差がここで伝わるか。</li><li>食事アプリとして具体的に役立つ返答になっているか。</li><li>応援画像が感動ポイントとして機能しそうか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1410,10 +1665,10 @@
               <div class="phone-top"><span>Plan</span><div class="progress"><span style="width: 100%"></span></div></div>
               <div class="phone-body">
                 <h2>このまま、もっと一緒に</h2>
-                <p>続きは、やりたいことを選んで進みます。</p>
-                <div class="action-card"><div class="action-icon">顔</div><div><strong>トレーナーを育てる</strong><p>見た目や言葉づかいを調整</p></div></div>
-                <div class="action-card"><div class="action-icon">飯</div><div><strong>次の食事を入れる</strong><p>続けてフィードバックを見る</p></div></div>
-                <div class="action-card"><div class="action-icon">kg</div><div><strong>体のデータを足す</strong><p>体重や目標で精度を上げる</p></div></div>
+                <p>次にやりたいことを選んでください。</p>
+                <div class="action-card"><div class="action-icon">顔</div><div><strong>相棒を育てる</strong><p>見た目や言葉づかいを調整</p></div></div>
+                <div class="action-card"><div class="action-icon">飯</div><div><strong>もう1食見てもらう</strong><p>次の食事もすぐ返してもらう</p></div></div>
+                <div class="action-card"><div class="action-icon">kg</div><div><strong>体のデータで精度アップ</strong><p>体重や目標に合わせる</p></div></div>
                 <p>選ぶと、続けるプランへ進みます。</p>
               </div>
               <div class="phone-bottom"><button class="button">続ける</button><button class="button secondary">今はここまで</button></div>
@@ -1422,8 +1677,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-014</p><h2>仮ペイウォール</h2></div><span class="route-badge common">共通</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>MVPでは実決済なし。</li><li>価格カードを直接出すのではなく、継続したい行動を選ばせる。</li><li>「トレーナーを育てる」「次の食事を入れる」「体のデータを足す」の選択で課金意向を記録する。</li><li>選択後に仮課金導線へ進む。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>押したい行動が課金導線として自然か。</li><li>初回返信後の熱量を逃さないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>MVPでは実決済なし。</li><li>価格カードを直接出すのではなく、継続したい行動を選ばせる。</li><li>「相棒を育てる」「もう1食見てもらう」「体のデータで精度アップ」の選択で課金意向を記録する。</li><li>選択後に仮課金導線へ進む。</li><li>文言は引き続きリサーチとレビューでブラッシュアップ対象。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>押したい行動が課金導線として自然か。</li><li>初回返信後の熱量を逃さないか。</li><li>どの選択肢が一番課金意向を取りやすいか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1431,22 +1686,24 @@
     </main>
     <script>
       (() => {
-        const storagePrefix = "ai-oshi-diet-onboarding-review-v1:";
+        const storagePrefix = "ai-oshi-diet-onboarding-review-v2:";
         const screenPrompts = {
-          "SCR-ONB-001": "カスタム作成が主価値として伝わるか。サンプル経路は下の逃げ道として自然か。",
+          "SCR-ONB-001": "食事パートナーという呼び方で価値が伝わるか。6体の横スクロールは魅力に見えるか。",
           "SCR-ONB-002": "顔アップの6サンプルが魅力的に見えるか。説明なしで選べるか。",
           "SCR-ONB-003": "アニメ/実写/セミリアルの違いがサンプル顔で伝わるか。",
-          "SCR-ONB-004": "見た目の性別・見た目年齢として答えやすいか。年齢の粒度は十分か。",
-          "SCR-ONB-005": "顔の雰囲気と顔立ちの質問で、ユーザーのイメージを拾えているか。",
-          "SCR-ONB-006": "髪の長さ、24色パレット、髪メモの量が重すぎず楽しいか。",
-          "SCR-ONB-007": "顔まわりメモ、服の雰囲気、参考URLの位置が自然か。",
-          "SCR-ONB-008A": "維持/減量/筋肉増量と進め方の選択で、食事管理ニーズに合っているか。",
-          "SCR-ONB-008B": "関係性の選択肢と呼ばれ方自由入力が、トレーナー体験に効いているか。",
-          "SCR-ONB-009": "60秒生成待ち中のTips/食事/体重入力が離脱防止になりそうか。",
-          "SCR-ONB-010": "正面顔、名前、一言プレビュー、後で変更可の見せ方で満足感が出るか。",
-          "SCR-ONB-011": "顔まわり・髪・雰囲気の分割自由入力で、修正意図を具体化できるか。",
-          "SCR-ONB-012": "直前の食事、サンプル入力、現体重/目標体重任意の流れが自然か。",
-          "SCR-ONB-013": "顔と名前から始まる返信、PFCメモ、応援画像が差別化になるか。",
+          "SCR-ONB-003B": "参考URLをここで聞く流れが自然か。読み込み後に仮選択済みにする価値があるか。",
+          "SCR-ONB-004": "見た目の性別・年齢・国籍として答えやすいか。粒度は多すぎないか。",
+          "SCR-ONB-005": "顔の印象/目元/輪郭/表情の選択で、ユーザーのイメージを拾えているか。",
+          "SCR-ONB-006": "髪の長さスケール、髪型、24色パレット、色の自由入力が直感的か。",
+          "SCR-ONB-007": "服とNGだけに絞ったことで、最後の見た目質問として軽くなっているか。",
+          "SCR-ONB-007T": "見た目完了から食事質問へ移るための遷移として自然か。",
+          "SCR-ONB-008A": "目的/進め方/体重入力が、食事管理ニーズに合っているか。",
+          "SCR-ONB-008B": "関係性の選択肢と呼ばれ方自由入力が、食事パートナー体験に効いているか。",
+          "SCR-ONB-009": "60秒生成待ち中のTips/食事入力が離脱防止になりそうか。",
+          "SCR-ONB-010": "ご対面演出、名前、一言プレビュー、後で変更可の見せ方で満足感が出るか。",
+          "SCR-ONB-011": "どこを直す/どう変える/NGの3入力で、修正意図を具体化できるか。",
+          "SCR-ONB-012": "生成中から初回食事を入力する流れ、サンプル入力、体重任意の流れが自然か。",
+          "SCR-ONB-013": "顔と名前から始まる返信、動的メモ、応援画像が差別化になるか。",
           "SCR-ONB-014": "行動選択から課金意向へ進む流れが自然か。選択肢は足りているか。"
         };
 
