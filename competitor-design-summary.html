@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <title>競合デザイン調査サマリー | AI食事パートナー</title>
+    <style>
+      :root {
+        --bg: #f7f2ea;
+        --panel: #fffdf7;
+        --ink: #1f2d2a;
+        --muted: #68736f;
+        --line: #ddd8ce;
+        --brand: #315d5a;
+        --brand-soft: #e5f0ec;
+        --warm: #e36f4a;
+        --yellow: #f2c14e;
+        --rose: #b85265;
+        --blue: #485b82;
+        --shadow: 0 16px 40px rgba(31, 45, 42, 0.1);
+        --radius: 14px;
+        --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { background: var(--bg); }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--bg);
+        font-family: var(--font);
+        line-height: 1.65;
+      }
+
+      a { color: var(--brand); font-weight: 800; }
+
+      .shell {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        padding: 18px 14px 52px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 14px;
+        padding: 22px 0 18px;
+      }
+
+      .kicker {
+        margin: 0;
+        color: var(--brand);
+        font-size: 0.76rem;
+        font-weight: 900;
+      }
+
+      h1, h2, h3, p { margin: 0; }
+
+      h1 {
+        font-size: clamp(2rem, 10vw, 4.6rem);
+        line-height: 1.06;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        line-height: 1.22;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        font-size: 1rem;
+        line-height: 1.3;
+      }
+
+      .lead {
+        color: var(--muted);
+        font-size: 1rem;
+      }
+
+      .pill-row,
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .pill,
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        border: 1px solid rgba(49, 93, 90, 0.22);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.7);
+        color: var(--brand);
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        font-weight: 850;
+      }
+
+      .section {
+        padding: 22px 0;
+        border-top: 1px solid rgba(49, 93, 90, 0.14);
+      }
+
+      .section-head {
+        display: grid;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 12px;
+      }
+
+      .card {
+        grid-column: span 6;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        padding: 14px;
+        box-shadow: var(--shadow);
+      }
+
+      .card.compact {
+        grid-column: span 4;
+      }
+
+      .card.full {
+        grid-column: 1 / -1;
+      }
+
+      .card p,
+      .mini,
+      li {
+        color: var(--muted);
+      }
+
+      .stat {
+        display: grid;
+        gap: 4px;
+      }
+
+      .stat strong {
+        color: var(--brand);
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .type {
+        display: grid;
+        gap: 8px;
+        border-left: 5px solid var(--brand);
+      }
+
+      .type.camera { border-color: var(--warm); }
+      .type.lab { border-color: var(--blue); }
+      .type.coach { border-color: var(--brand); }
+      .type.journal { border-color: var(--rose); }
+
+      .compare {
+        display: grid;
+        gap: 10px;
+      }
+
+      .do {
+        border-color: rgba(49, 93, 90, 0.26);
+        background: #f0f8f4;
+      }
+
+      .dont {
+        border-color: rgba(184, 82, 101, 0.26);
+        background: #fff4f2;
+      }
+
+      .quote {
+        border: 0;
+        border-radius: 22px;
+        background:
+          radial-gradient(circle at 85% 10%, rgba(242, 193, 78, 0.45), transparent 32%),
+          linear-gradient(135deg, #315d5a, #b85265);
+        color: white;
+        padding: 20px;
+      }
+
+      .quote p {
+        color: rgba(255, 255, 255, 0.86);
+      }
+
+      .quote strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 1.35rem;
+        line-height: 1.25;
+      }
+
+      .service-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .service {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 10px;
+      }
+
+      .service strong {
+        display: block;
+      }
+
+      .service span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .source-list {
+        display: grid;
+        gap: 8px;
+        padding-left: 18px;
+      }
+
+      .source-list li {
+        overflow-wrap: anywhere;
+      }
+
+      .note {
+        border: 1px solid rgba(49, 93, 90, 0.2);
+        border-radius: var(--radius);
+        background: var(--brand-soft);
+        padding: 12px;
+        color: var(--brand);
+        font-weight: 800;
+      }
+
+      @media (max-width: 720px) {
+        .shell { padding: 14px 12px 44px; }
+        .grid { grid-template-columns: 1fr; }
+        .card, .card.compact, .card.full { grid-column: 1; }
+        .service-list { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="kicker">Competitive Design Summary / 2026-07-04</p>
+        <h1>食事管理アプリの標準を見て、外し方を決める。</h1>
+        <p class="lead">ダイエット・食生活管理系22サービスを、同じフォーマットで見たサマリーです。目的は、AI食事パートナーを「よくある食事記録アプリ」にしないための判断材料を作ることです。</p>
+        <div class="pill-row">
+          <span class="pill">22サービス</span>
+          <span class="pill">6デザイン型</span>
+          <span class="pill">スマホ確認用</span>
+          <span class="pill">詳細はMD/CSV保存済み</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="grid">
+          <article class="card compact stat">
+            <strong>22</strong>
+            <p>調査対象サービス</p>
+          </article>
+          <article class="card compact stat">
+            <strong>4</strong>
+            <p>日本の主要食事管理系</p>
+          </article>
+          <article class="card compact stat">
+            <strong>6</strong>
+            <p>デザイン型に分類</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Category Standard</p>
+          <h2>食事管理カテゴリの標準デザイン</h2>
+        </div>
+        <div class="grid">
+          <article class="card type">
+            <h3>残量ダッシュボード型</h3>
+            <p>今日あと何kcal、PFCがどれくらい、という管理画面。MyFitnessPal、Lose It!、FatSecretなど。</p>
+          </article>
+          <article class="card type camera">
+            <h3>AI写真ログ型</h3>
+            <p>撮るだけ、検索不要、数秒で解析。Cal AI、SnapCalorie、Foodvisorなど。</p>
+          </article>
+          <article class="card type coach">
+            <h3>生活改善コーチ型</h3>
+            <p>食事だけでなく、体重、歩数、睡眠、心理、習慣まで扱う。あすけん、Lifesum、Noomなど。</p>
+          </article>
+          <article class="card type journal">
+            <h3>写真日記型</h3>
+            <p>カロリーの圧を弱め、食事を振り返る。AteMate、See How You Eatなど。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Main Finding</p>
+          <h2>AI食事パートナーの狙いどころ</h2>
+        </div>
+        <article class="quote">
+          <strong>写真で軽く記録できる。数字はちゃんと出る。でも返してくれるのは、管理画面ではなく自分専用の食事パートナー。</strong>
+          <p>競合標準を踏まえると、ここが一番差別化しやすい位置です。</p>
+        </article>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Borrow / Avoid</p>
+          <h2>取り入れるもの、避けるもの</h2>
+        </div>
+        <div class="grid compare">
+          <article class="card do">
+            <h3>取り入れる</h3>
+            <ul>
+              <li>AI写真系の「検索しなくていい」軽さ</li>
+              <li>Ate/Noom系の罪悪感を下げる言葉</li>
+              <li>Cronometer/カロミル系の数字の信頼感</li>
+              <li>Lifesum/YAZIO系のライフスタイル感</li>
+              <li>Fooducate/WW系の複雑な栄養を簡単な指標にする発想</li>
+            </ul>
+          </article>
+          <article class="card dont">
+            <h3>避ける</h3>
+            <ul>
+              <li>初回から栄養素や数値を出しすぎる</li>
+              <li>総合ヘルスケア化して個性が薄くなる</li>
+              <li>写真AIツールだけに見える</li>
+              <li>キャラだけ強く、食事管理として信用できない</li>
+              <li>食事を裁くような色や言葉</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Deep Dive Candidates</p>
+          <h2>次に画像付きで深掘りしたい競合</h2>
+          <p class="lead">全部を同じ深さで見るより、この8件を先に深掘りするとスタイルタイルへつなげやすいです。</p>
+        </div>
+        <div class="service-list">
+          <div class="service"><strong>あすけん</strong><span>日本向けの親しみとアドバイス感</span></div>
+          <div class="service"><strong>カロミル</strong><span>PFC/栄養素の信頼感</span></div>
+          <div class="service"><strong>カロママプラス</strong><span>写真から助言が返る体験</span></div>
+          <div class="service"><strong>Cal AI</strong><span>AI写真ログの速さ</span></div>
+          <div class="service"><strong>SnapCalorie</strong><span>検索不要の摩擦削減</span></div>
+          <div class="service"><strong>Lifesum</strong><span>健康的なライフスタイル感</span></div>
+          <div class="service"><strong>Noom</strong><span>罪悪感を下げる言葉</span></div>
+          <div class="service"><strong>AteMate</strong><span>写真日記のやさしさ</span></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Design Hypothesis</p>
+          <h2>次のスタイルタイルに入れる要素</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <h3>写真入力の軽さ</h3>
+            <p>最初の価値がすぐ伝わること。検索、入力、登録の重さを見せない。</p>
+          </article>
+          <article class="card">
+            <h3>パートナーの顔</h3>
+            <p>キャラシートではなく、会いたくなる正面ポートレートを主役にする。</p>
+          </article>
+          <article class="card">
+            <h3>信頼できる数字</h3>
+            <p>カロリー/PFCは必要。ただし初回は出しすぎない。</p>
+          </article>
+          <article class="card">
+            <h3>責めない文言</h3>
+            <p>食べすぎた日も戻れる言葉。ここはNoom/Ate系から学ぶ。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">All Services</p>
+          <h2>調査対象 22件</h2>
+        </div>
+        <div class="chip-row">
+          <span class="chip">あすけん</span><span class="chip">カロミル</span><span class="chip">FiNC</span><span class="chip">カロママプラス</span>
+          <span class="chip">MyFitnessPal</span><span class="chip">Lose It!</span><span class="chip">Lifesum</span><span class="chip">YAZIO</span>
+          <span class="chip">Foodvisor</span><span class="chip">Cal AI</span><span class="chip">SnapCalorie</span><span class="chip">Cronometer</span>
+          <span class="chip">MacroFactor</span><span class="chip">MyNetDiary</span><span class="chip">FatSecret</span><span class="chip">Carb Manager</span>
+          <span class="chip">Noom</span><span class="chip">WW</span><span class="chip">Fooducate</span><span class="chip">AteMate</span>
+          <span class="chip">See How You Eat</span><span class="chip">PlateAI</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Next</p>
+          <h2>次にやること</h2>
+        </div>
+        <p class="note">このサマリーに問題がなければ、上位8件を画像付きで深掘りし、次にAI食事パートナー用のスタイルタイルを作ります。</p>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="kicker">Sources</p>
+          <h2>主な参照先</h2>
+        </div>
+        <ul class="source-list">
+          <li><a href="https://apps.apple.com/jp/app/id687287242">あすけん App Store</a></li>
+          <li><a href="https://apps.apple.com/jp/app/id963055562">カロミル App Store</a></li>
+          <li><a href="https://apps.apple.com/jp/app/id1124333484">カロママプラス App Store</a></li>
+          <li><a href="https://apps.apple.com/us/app/myfitnesspal-calorie-counter/id341232718">MyFitnessPal App Store</a></li>
+          <li><a href="https://lifesum.com/">Lifesum</a></li>
+          <li><a href="https://www.yazio.com/en">YAZIO</a></li>
+          <li><a href="https://www.snapcalorie.com/">SnapCalorie</a></li>
+          <li><a href="https://cronometer.com/index.html">Cronometer</a></li>
+          <li><a href="https://www.atemate.com/">AteMate</a></li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
