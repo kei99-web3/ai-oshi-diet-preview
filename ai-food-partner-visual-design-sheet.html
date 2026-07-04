@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-store">
+<title>AI食事パートナー 定量デザインシート</title>
+<link rel="stylesheet" href="./design-tokens.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:var(--surface-base);color:var(--ink-main);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif;line-height:var(--lh-body)}.wrap{max-width:1180px;margin:0 auto;padding:20px 14px 72px}.hero{padding:28px 0 18px}.kicker{margin:0 0 var(--space-2);color:var(--trust-metric);font-size:var(--text-note);font-weight:900;letter-spacing:.04em;text-transform:uppercase}h1{margin:0 0 var(--space-4);font-size:clamp(34px,8vw,68px);line-height:1.05}h2{margin:0;font-size:clamp(24px,5vw,38px);line-height:1.15}h3,p{margin:0}.lead,.muted,li{color:var(--ink-muted)}.pills{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}.pill{display:inline-flex;align-items:center;min-height:32px;border:1px solid var(--line-soft);border-radius:var(--radius-pill);background:var(--surface-raised);color:var(--trust-metric);padding:4px 11px;font-size:13px;font-weight:850}.section{margin:22px 0;padding:18px;border:1px solid var(--line-soft);border-radius:24px;background:var(--surface-raised);box-shadow:var(--shadow-card)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.seven{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-top:14px}.card{border:1px solid var(--line-soft);border-radius:var(--radius-m);background:#fff;padding:14px}.card b{display:block;margin-bottom:4px}.value{font-size:28px;line-height:1.1;font-weight:900;color:var(--trust-metric);font-variant-numeric:tabular-nums}.swatches{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}.swatch{min-height:106px;border:1px solid var(--line-soft);border-radius:18px;background:var(--c);padding:10px;display:flex;flex-direction:column;justify-content:flex-end}.swatch code{font-weight:900;background:rgba(255,255,255,.76);border-radius:999px;padding:3px 8px;width:max-content}.table{display:grid;grid-template-columns:1.05fr 1fr 1.4fr;gap:0;margin-top:14px;border:1px solid var(--line-soft);border-radius:16px;overflow:hidden}.cell{padding:10px 12px;border-right:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);background:#fff}.cell:nth-child(3n){border-right:0}.head{background:var(--surface-soft);font-weight:900}.spec-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.sample-ui{display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);gap:16px;align-items:start;margin-top:14px}.phone{background:var(--surface-raised);border:7px solid #fff;border-radius:34px;box-shadow:var(--shadow-float);padding:20px;min-height:560px;display:flex;flex-direction:column}.avatar{width:58px;height:58px;border-radius:var(--radius-avatar);background:linear-gradient(135deg,var(--brand-core),var(--accent-highlight));box-shadow:var(--shadow-card);position:relative}.avatar:after{content:"";position:absolute;top:17px;left:15px;width:7px;height:7px;border-radius:50%;background:var(--ink-main);box-shadow:21px 0 0 var(--ink-main),10px 18px 0 -2px var(--ink-main)}.h1sample{font-size:var(--text-h1);line-height:var(--lh-h1);font-weight:800}.bubble{border-radius:var(--radius-bubble);background:var(--surface-soft);padding:12px;margin:14px 0;font-weight:800}.choices{display:flex;flex-wrap:wrap;gap:8px}.choice{min-height:40px;border:1px solid var(--line-soft);border-radius:var(--radius-pill);background:#fff;padding:8px 12px;font-weight:800}.choice.selected{background:var(--accent-highlight);border-color:transparent}.input{height:54px;border:1px solid var(--line-soft);border-radius:var(--radius-s);background:#fff;padding:14px 16px;color:var(--ink-muted);display:flex;align-items:center}.cta{width:100%;min-height:var(--cta-height);border:0;border-radius:var(--radius-button);background:var(--brand-core);color:var(--ink-on-brand);font:inherit;font-size:var(--text-cta);font-weight:900;margin-top:auto}.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.metric{border-radius:var(--radius-s);background:#fff;border:1px solid var(--line-soft);padding:10px}.metric small{display:block;color:var(--trust-metric);font-size:var(--text-note);font-weight:900}.metric strong{display:block;color:var(--trust-metric);font-variant-numeric:tabular-nums;font-size:22px;line-height:1.1}.density-bars{display:grid;gap:9px;margin-top:14px}.bar{height:22px;border-radius:999px;background:var(--surface-soft);overflow:hidden}.bar span{display:block;height:100%;background:var(--brand-core);width:var(--w)}@media(max-width:900px){.grid,.spec-grid,.sample-ui,.swatches{grid-template-columns:1fr}.seven{grid-template-columns:repeat(2,minmax(0,1fr))}.table{grid-template-columns:1fr}.cell{border-right:0}.head:not(:first-child){margin-top:8px}.phone{min-height:auto}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="hero">
+<p class="kicker">Visual Quant Sheet / Direction 1</p>
+<h1>見た目の数値だけを固定する。</h1>
+<p class="lead">コピー、画面構成、キャラクター方針は既存正本を使います。このシートは、色、文字、余白、密度、UI部品、数値表現の実装判断だけに使います。</p>
+<div class="pills"><span class="pill">7項目</span><span class="pill">定量ルール</span><span class="pill">既存画面ベース</span><span class="pill">design-tokens.css参照</span></div>
+</section>
+
+<section class="section">
+<p class="kicker">Seven Items</p>
+<h2>固定する7項目</h2>
+<div class="seven">
+<div class="card"><b>1 型</b><p class="muted">Partner-first Warm Utility</p></div>
+<div class="card"><b>2 色</b><p class="muted">生成り、コーラル、信頼グリーン</p></div>
+<div class="card"><b>3 文字</b><p class="muted">7段階だけ</p></div>
+<div class="card"><b>4 余白</b><p class="muted">4px grid</p></div>
+<div class="card"><b>5 密度</b><p class="muted">低〜中密度</p></div>
+<div class="card"><b>6 部品</b><p class="muted">CTA/Chip/Card/Bubble</p></div>
+<div class="card"><b>7 数値</b><p class="muted">3チップ、目安必須</p></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">1. Pattern</p>
+<h2>デザインの型</h2>
+<div class="grid">
+<div class="card"><b>基準幅</b><div class="value">375px</div><p class="muted">最小360px、最大480pxの1カラム。</p></div>
+<div class="card"><b>画面ルール</b><div class="value">1判断</div><p class="muted">主CTAは1画面1つ。フォーム画面は最大3項目。</p></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">2. Color</p>
+<h2>色</h2>
+<div class="swatches">
+<div class="swatch" style="--c:var(--surface-base)"><code>base</code><span>#FFF4E6</span></div>
+<div class="swatch" style="--c:var(--surface-raised)"><code>raised</code><span>#FFFBF4</span></div>
+<div class="swatch" style="--c:var(--brand-core)"><code>brand</code><span>#E8735A</span></div>
+<div class="swatch" style="--c:var(--trust-metric)"><code>metric</code><span>#3A6B5C</span></div>
+</div>
+<div class="density-bars"><div><b>Surface 70〜85%</b><div class="bar"><span style="--w:78%"></span></div></div><div><b>Brand 3〜8%</b><div class="bar"><span style="--w:6%"></span></div></div><div><b>Metric 0〜5%</b><div class="bar"><span style="--w:4%"></span></div></div></div>
+</section>
+
+<section class="section">
+<p class="kicker">3. Type</p>
+<h2>文字</h2>
+<div class="table">
+<div class="cell head">Token</div><div class="cell head">Size</div><div class="cell head">Use</div>
+<div class="cell">display</div><div class="cell">32〜51px</div><div class="cell">リビール専用</div>
+<div class="cell">h1</div><div class="cell">22px</div><div class="cell">画面見出し</div>
+<div class="cell">body</div><div class="cell">16px</div><div class="cell">本文/返事</div>
+<div class="cell">note</div><div class="cell">13px</div><div class="cell">目安/注記</div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">4-6. Space / Density / Components</p>
+<h2>余白・密度・UI部品</h2>
+<div class="spec-grid">
+<div class="card"><b>余白</b><p class="muted">画面左右20px。セクション24px。カードpadding16px。チップgap8px。</p></div>
+<div class="card"><b>密度</b><p class="muted">主要ブロック3つまで。カード2枚まで。メトリクス3個固定。</p></div>
+<div class="card"><b>UI部品</b><p class="muted">CTA高さ54px、入力54px、カード角丸16px、写真角丸24px。</p></div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">7. Numeric</p>
+<h2>数値表現</h2>
+<div class="sample-ui">
+<div class="phone">
+<div class="avatar"></div>
+<h3 class="h1sample" style="margin-top:20px">今日のごはん、見せて？</h3>
+<div class="bubble">見せてくれてありがとう。今日はここまでで十分です。</div>
+<div class="metric-row"><div class="metric"><small>目安</small><strong>450</strong><span>kcal</span></div><div class="metric"><small>たんぱく</small><strong>25g</strong></div><div class="metric"><small>次</small><strong>一品</strong></div></div>
+<button class="cta">この子と続ける</button>
+</div>
+<div class="grid">
+<div class="card"><b>数値ルール</b><p class="muted">kcalは整数、gは整数、kgは小数1桁。すべて「目安」。</p></div>
+<div class="card"><b>禁止</b><p class="muted">赤い警告、100点満点、A/B/C評価、正確に計測。</p></div>
+<div class="card"><b>入力</b><div class="input">今の体重 例: 58.4kg</div></div>
+<div class="card"><b>選択肢</b><div class="choices"><span class="choice selected">自分で作る</span><span class="choice">サンプル</span></div></div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<p class="kicker">Source</p>
+<p class="muted">Markdown: docs/rebuild/30_ui/VISUAL_DESIGN_QUANT_SHEET.md<br>Base canon: docs/rebuild/30_ui/CANONICAL_DESIGN_SHEET.md<br>Tokens: web/design-tokens.css</p>
+</section>
+</main>
+</body>
+</html>
