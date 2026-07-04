@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <title>N1フェーズ締め 実装渡しパッケージ | AI食事パートナー</title>
+    <link rel="stylesheet" href="./design-tokens.css">
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--surface-base);
+        color: var(--ink-main);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+        line-height: var(--lh-body);
+      }
+      main {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        padding: 28px 16px 56px;
+      }
+      header {
+        padding: 20px 0 24px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      .kicker {
+        margin: 0 0 8px;
+        color: var(--brand-core);
+        font-size: var(--text-note);
+        font-weight: 800;
+      }
+      h1, h2, h3, p { margin: 0; }
+      h1 {
+        max-width: 720px;
+        font-size: 36px;
+        line-height: var(--lh-display);
+        font-weight: 800;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: var(--text-h1);
+        line-height: var(--lh-h1);
+      }
+      h3 {
+        font-size: var(--text-h2);
+        line-height: var(--lh-h2);
+      }
+      .lead {
+        max-width: 720px;
+        margin-top: 12px;
+        color: var(--ink-muted);
+        font-size: var(--text-sub);
+      }
+      .status {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .pill {
+        display: inline-flex;
+        min-height: 34px;
+        align-items: center;
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-pill);
+        background: var(--surface-raised);
+        padding: 4px 11px;
+        font-size: var(--text-note);
+        font-weight: 800;
+      }
+      .pill.good { background: var(--surface-soft); color: var(--brand-core); }
+      .pill.warn { background: rgba(245, 197, 86, 0.22); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .card {
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-m);
+        background: var(--surface-raised);
+        box-shadow: var(--shadow-card);
+        padding: 16px;
+      }
+      .card p, li, td, th {
+        color: var(--ink-muted);
+        font-size: var(--text-note);
+        line-height: var(--lh-note);
+      }
+      .card strong { color: var(--ink-main); }
+      .flow {
+        margin-top: 14px;
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-m);
+        background: var(--surface-raised);
+        padding: 16px;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-weight: 800;
+      }
+      table {
+        width: 100%;
+        margin-top: 14px;
+        border-collapse: separate;
+        border-spacing: 0;
+        overflow: hidden;
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-m);
+        background: var(--surface-raised);
+      }
+      th, td {
+        padding: 11px 12px;
+        border-bottom: 1px solid var(--line-soft);
+        text-align: left;
+        vertical-align: top;
+      }
+      th {
+        color: var(--ink-main);
+        font-weight: 800;
+        background: var(--surface-soft);
+      }
+      tr:last-child td { border-bottom: 0; }
+      .next {
+        border-color: rgba(232, 115, 90, 0.35);
+        background: var(--surface-soft);
+      }
+      a {
+        color: var(--brand-core);
+        font-weight: 800;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 3px;
+      }
+      code {
+        border: 1px solid var(--line-soft);
+        border-radius: 8px;
+        background: #fff;
+        padding: 1px 6px;
+        color: var(--ink-main);
+      }
+      @media (max-width: 760px) {
+        main { padding: 20px 12px 48px; }
+        h1 { font-size: 30px; }
+        .grid { grid-template-columns: 1fr; }
+        table { display: block; overflow-x: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="kicker">N1 Phase Close / 2026-07-05</p>
+        <h1>オンボーディング実装渡しパッケージ</h1>
+        <p class="lead">大枠フローは維持し、例外QA・イベント記録・製本化を完了させるための確認資料です。sample経路と10代関係性のE2Eまで確認済みなので、次はG3/UI画像化へ進めます。</p>
+        <div class="status">
+          <span class="pill good">大枠フロー承認済み</span>
+          <span class="pill good">イベント契約更新</span>
+          <span class="pill good">例外QA追加</span>
+          <span class="pill good">sample/10代 E2E通過</span>
+          <span class="pill warn">生成失敗スタブ未実装</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>結論</h2>
+        <div class="grid">
+          <div class="card"><h3>進めてよい</h3><p>G3/UI画像化へ進んでOK。大枠の順番は再設計しない。</p></div>
+          <div class="card"><h3>QA通過</h3><p>sample経路E2E、10代関係性E2E、通常オンボーディングE2Eまで確認済み。</p></div>
+          <div class="card"><h3>API前必須</h3><p>実画像生成APIの前に、生成失敗・再試行・フォールバックをスタブ検証。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>変更禁止の大枠フロー</h2>
+        <div class="flow">start → custom/sample → appearance → food goal → relationship → generation/wait → first meal → reveal/feedback → paywall intent</div>
+      </section>
+
+      <section>
+        <h2>今回対応済み</h2>
+        <table>
+          <tr><th>対象</th><th>対応</th></tr>
+          <tr><td>例外QA</td><td>10代見た目年齢では「恋人」を非表示。除外・置換イベントも記録。</td></tr>
+          <tr><td>データ記録</td><td>食事返信イベントとレポート本体に、使用したキャラクターシートID/revision/version/sourceを保存。</td></tr>
+          <tr><td>イベント</td><td>サンプル選択、絵柄、食事目的、外見選択、関係性/進め方、初回返信準備を追加記録。</td></tr>
+          <tr><td>E2E</td><td>10代関係性制限、sample経路、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
+          <tr><td>文言</td><td>旧カロリー表示を `カロリー管理` / `カロリー` / `料金` に整理。</td></tr>
+          <tr><td>PWAキャッシュ</td><td>`20260705-phase-close-v1` へ更新。</td></tr>
+          <tr><td>Claude</td><td>3.5固定モデルは404。現行sonnetで読み取り専用レビューし、指摘を採用。</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>QA証跡</h2>
+        <table>
+          <tr><th>ID</th><th>内容</th><th>状態</th></tr>
+          <tr><td>TC-EX-001</td><td>10代見た目年齢で「恋人」が出ないこと、`relationship_options_filtered` が残ること。</td><td>pass</td></tr>
+          <tr><td>TC-EX-002</td><td>sample経路で6体選択から初回返信、仮ペイウォールまで通ること。</td><td>pass</td></tr>
+          <tr><td>TC-EX-003</td><td>返信イベントと `reports[]` にキャラクターシート情報が残ること。</td><td>pass</td></tr>
+          <tr><td>TC-EX-004</td><td>画像生成失敗、再試行、サンプルフォールバックのスタブ検証。</td><td>実画像生成API前</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>今確認したい質問</h2>
+        <table>
+          <tr><th>質問</th><th>推奨</th></tr>
+          <tr><td>10代見た目年齢では「恋人」を非表示で確定してよいか</td><td>確定</td></tr>
+          <tr><td>sample経路E2EをG3前ブロッカーにするか</td><td>追加済みのためブロッカー解除</td></tr>
+          <tr><td>実画像生成APIの前に失敗スタブを作るか</td><td>作る</td></tr>
+          <tr><td>N1では外部AnalyticsなしでlocalStorage証跡でよいか</td><td>よい</td></tr>
+          <tr><td>自由記述/参考URL本文はイベントに送らず、状態保存だけでよいか</td><td>よい</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>正本ファイル</h2>
+        <div class="grid">
+          <div class="card"><h3>製本Markdown</h3><p><code>docs/rebuild/60_handoff/N1_PHASE_CLOSE_IMPLEMENTATION_PACKAGE_2026-07-05.md</code></p></div>
+          <div class="card"><h3>イベント契約</h3><p><code>docs/rebuild/40_test/EVENT_CONTRACT_N1.md</code></p></div>
+          <div class="card"><h3>例外QA</h3><p><code>docs/rebuild/40_test/EXCEPTION_QA_N1_2026-07-05.md</code></p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>次アクション</h2>
+        <div class="card next">
+          <h3>G3へ進める</h3>
+          <p>次は、この仕様HTMLとデザイン正本を入力にして、主要画面のスマホUI画像化に進みます。実画像生成APIへ進む前に、生成失敗・再試行・サンプルフォールバックのスタブ検証を追加します。</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

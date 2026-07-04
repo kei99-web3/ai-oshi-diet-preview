@@ -1,4 +1,4 @@
-﻿const STORAGE_KEY = "aiFoodTrainerPwaState.v14";
+const STORAGE_KEY = "aiFoodTrainerPwaState.v14";
 const LEGACY_STORAGE_PREFIXES = ["aiOshiDietPwaState.", "aiFoodTrainerPwaState.v1", "aiFoodTrainerPwaState.v2", "aiFoodTrainerPwaState.v3", "aiFoodTrainerPwaState.v4", "aiFoodTrainerPwaState.v5", "aiFoodTrainerPwaState.v6", "aiFoodTrainerPwaState.v7", "aiFoodTrainerPwaState.v8", "aiFoodTrainerPwaState.v9", "aiFoodTrainerPwaState.v10", "aiFoodTrainerPwaState.v11", "aiFoodTrainerPwaState.v12", "aiFoodTrainerPwaState.v13"];
 const TRAINER_SHEET_VERSION = 2;
 const app = document.querySelector("#app");
@@ -8,7 +8,7 @@ const TABS = [
   { id: "memory", label: "好みメモ", short: "メモ" },
   { id: "plan", label: "進め方", short: "進め方" },
   { id: "quality", label: "返信チェック", short: "返信" },
-  { id: "ops", label: "料金目安", short: "料金" }
+  { id: "ops", label: "料金", short: "料金" }
 ];
 
 const PERSONAS = {
@@ -60,7 +60,7 @@ const RUBRIC = [
   { key: "safety", label: "安全ゲート", max: 20, note: "低摂取、嘔吐、下剤、自傷、未成年、医療混在を先に扱う" },
   { key: "empathy", label: "感情受容", max: 20, note: "報告した行動を肯定し、食べた量で人格評価しない" },
   { key: "personalization", label: "個別化", max: 15, note: "ニックネーム、目標、見た目、記憶を自然に参照する" },
-  { key: "nutrition", label: "栄養のわかりやすさ", max: 20, note: "カロリーと栄養バランスは目安として出し、曖昧な時は確認する" },
+  { key: "nutrition", label: "栄養のわかりやすさ", max: 20, note: "カロリーと栄養バランスは補助情報として出し、曖昧な時は確認する" },
   { key: "nextAction", label: "次の一手", max: 15, note: "行動を1つに絞り、今日できる表現にする" },
   { key: "voice", label: "パートナーらしさ", max: 10, note: "押しつけず、継続したくなる声かけにする" }
 ];
@@ -95,7 +95,7 @@ const GOAL_OPTIONS = [
 const METHOD_OPTIONS = [
   { value: "食事バランス", label: "食事バランス", copy: "迷ったらこれ。主食、たんぱく質、野菜を整える。" },
   { value: "PFC・マクロ", label: "PFC・マクロ", copy: "数字で管理したい人向け。筋トレや減量と相性がよい。" },
-  { value: "カロリー目安", label: "カロリー目安", copy: "体重を落とす時に使いやすい。" },
+  { value: "カロリー管理", label: "カロリー管理", copy: "体重を落とす時に使いやすい。" },
   { value: "ゆる糖質オフ", label: "ゆる糖質オフ", copy: "夜や間食を整えたい人向け。" },
   { value: "相談しながら", label: "相談しながら", copy: "まだ決めきれない人向け。" }
 ];
@@ -151,8 +151,8 @@ const LOOK_PRESETS = {
     appearance: "アクア系ロング、近未来ウェア、透明感のあるセミリアル調",
     copy: "華やかで、最初に強く目を引く食事パートナー",
     readyCopy: "表情差分と全身まで固定した未来系シート",
-    previewAsset: "assets/trainer-previews/01_mina_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/01_miku_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/01_mina_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/01_miku_motif_character_sheet.png",
     sheetSource: "01_miku_motif_character_sheet.png"
   },
   yui: {
@@ -168,8 +168,8 @@ const LOOK_PRESETS = {
     appearance: "ナチュラルな暗めミディアム、淡い服装、透明感のあるアニメ調",
     copy: "毎日の食事を気軽に見てもらいやすい、やさしい雰囲気",
     readyCopy: "表情と角度が揃った生活寄りのシート",
-    previewAsset: "assets/trainer-previews/02_rei_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/02_yui_aragaki_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/02_rei_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/02_yui_aragaki_motif_character_sheet.png",
     sheetSource: "02_yui_aragaki_motif_character_sheet.png"
   },
   asuna: {
@@ -185,8 +185,8 @@ const LOOK_PRESETS = {
     appearance: "明るいブラウンの長めヘア、上品な白系衣装、王道ヒロイン感のある表情",
     copy: "少し憧れ感があり、明るく前向きに整えてくれる雰囲気",
     readyCopy: "髪型と服装ディテールが厚いヒロイン系シート",
-    previewAsset: "assets/trainer-previews/03_kana_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/03_asuna_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/03_kana_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/03_asuna_motif_character_sheet.png",
     sheetSource: "03_asuna_motif_character_sheet.png"
   },
   isagi: {
@@ -202,8 +202,8 @@ const LOOK_PRESETS = {
     appearance: "黒髪ショート、黒い服、鋭い目元、ストイックな実写寄り男性",
     copy: "短く具体的に、今日の改善点を絞ってくれる雰囲気",
     readyCopy: "強い目線と全身バランスを固定した男性シート",
-    previewAsset: "assets/trainer-previews/04_sou_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/04_isagi_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/04_sou_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/04_isagi_motif_character_sheet.png",
     sheetSource: "04_isagi_motif_character_sheet.png"
   },
   meguro: {
@@ -219,8 +219,8 @@ const LOOK_PRESETS = {
     appearance: "黒髪ミディアム、黒いハイカラー衣装、落ち着いた中性的な男性",
     copy: "近すぎず、でも毎日会いたくなる静かな魅力",
     readyCopy: "表情差分が多いアイドル寄り男性シート",
-    previewAsset: "assets/trainer-previews/05_haru_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/05_meguro_ren_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/05_haru_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/05_meguro_ren_motif_character_sheet.png",
     sheetSource: "05_meguro_ren_motif_character_sheet.png"
   },
   gojo: {
@@ -236,8 +236,8 @@ const LOOK_PRESETS = {
     appearance: "銀髪、黒いハイカラー衣装、クールで印象に残るセミリアル男性",
     copy: "特別感があり、はっきり次の一手を示してくれる雰囲気",
     readyCopy: "髪・目・服のディテールが強い銀髪男性シート",
-    previewAsset: "assets/trainer-previews/06_ao_onboarding_preview.webp",
-    sheetAsset: "assets/character-sheets/06_gojo_motif_character_sheet.png",
+    previewAsset: "/assets/trainer-previews/06_ao_onboarding_preview.webp",
+    sheetAsset: "/assets/character-sheets/06_gojo_motif_character_sheet.png",
     sheetSource: "06_gojo_motif_character_sheet.png"
   }
 };
@@ -375,6 +375,7 @@ function defaultState() {
       accessories: "",
       avoidLookNote: "",
       relationship: "やさしい先輩",
+      relationshipFilterLoggedAge: "",
       voiceMemo: "",
       impression: "clean",
       lookCustomNote: "",
@@ -383,6 +384,9 @@ function defaultState() {
       adjustHow: "",
       adjustAvoid: "",
       paywallIntent: "",
+      paywallSeenAt: "",
+      paywallIntentClickedAt: "",
+      paywallDismissedAt: "",
       trainerSheet: null,
       sheetEditDraft: "",
       trainerImageData: "",
@@ -430,7 +434,7 @@ function loadState() {
     if (!raw) return defaultState();
     const parsed = JSON.parse(raw);
     const base = defaultState();
-    return {
+    const next = {
       ...base,
       ...parsed,
       profile: { ...base.profile, ...(parsed.profile || {}) },
@@ -438,6 +442,11 @@ function loadState() {
       ledger: { ...base.ledger, ...(parsed.ledger || {}) },
       activeTab: TABS.some((tab) => tab.id === parsed.activeTab) ? parsed.activeTab : "report"
     };
+    const legacyCalorieMethod = "\u30ab\u30ed\u30ea\u30fc\u76ee\u5b89";
+    if (next.profile.method === legacyCalorieMethod) {
+      next.profile.method = "カロリー管理";
+    }
+    return next;
   } catch {
     return defaultState();
   }
@@ -542,6 +551,34 @@ function logEvent(type, payload = {}) {
   });
   state.events = state.events.slice(0, 80);
   saveState();
+}
+
+function isTeenAppearance(profile = state.profile) {
+  return String(profile.appearanceAge || "").startsWith("10代");
+}
+
+function relationshipOptionsForProfile(profile = state.profile) {
+  if (!isTeenAppearance(profile)) return RELATIONSHIP_OPTIONS;
+  return RELATIONSHIP_OPTIONS.filter((option) => option !== "恋人");
+}
+
+function ensureRelationshipOptionsFitProfile() {
+  const options = relationshipOptionsForProfile(state.profile);
+  const age = state.profile.appearanceAge || "";
+  if (isTeenAppearance(state.profile) && state.profile.relationshipFilterLoggedAge !== age) {
+    logEvent("relationship_options_filtered", { appearanceAge: age, removed: ["恋人"] });
+    state.profile.relationshipFilterLoggedAge = age;
+  }
+  if (!options.includes(state.profile.relationship)) {
+    const from = state.profile.relationship;
+    const to = options[0] || "やさしい先輩";
+    state.profile.relationship = to;
+    logEvent("relationship_value_replaced", { appearanceAge: age, from, to });
+  }
+  if (!isTeenAppearance(state.profile) && state.profile.relationshipFilterLoggedAge) {
+    state.profile.relationshipFilterLoggedAge = "";
+  }
+  return options;
 }
 
 function keywordCount(text, words) {
@@ -859,6 +896,7 @@ function trainerFromSheet(sheet = state.profile.trainerSheet) {
 
 function lockTrainerSheet() {
   state.profile.trainerSheet = buildTrainerSheet(state.profile);
+  logEvent("trainer_sheet_created", trainerSheetEventPayload(state.profile.trainerSheet));
   return state.profile.trainerSheet;
 }
 
@@ -868,6 +906,16 @@ function ensureTrainerSheet() {
     saveState();
   }
   return state.profile.trainerSheet;
+}
+
+function trainerSheetEventPayload(sheet = state.profile.trainerSheet) {
+  return {
+    trainerSheetId: sheet?.id || "",
+    trainerSheetVersion: Number(sheet?.version || TRAINER_SHEET_VERSION),
+    trainerSheetRevision: Number(sheet?.revision || 0),
+    trainerSheetSource: sheet?.source || "",
+    trainerSheetSourceFile: sheet?.characterSheetFormat?.sourceFile || ""
+  };
 }
 
 function invalidateTrainerSheet({ clearImage = true } = {}) {
@@ -1058,11 +1106,11 @@ function buildReply(text, analysis, profile = state.profile) {
 
   if (analysis.safety.level === "yellow") {
     return `${nickname}さん、正直に書いてくれてありがとう。食べられなかった日や吐き気・下剤・過度な運動が絡む日は、減量の成果として扱わず、体を守る日として見ます。\n\n` +
-      `栄養の目安は出せますが、今日は数字より回復が先です。水分と、食べられそうなら消化の軽いものを少量。明日も低摂取が続くなら、ひとりで抱えず相談先につなぎましょう。\n\n` +
+      `栄養の推定は出せますが、今日は数字より回復が先です。水分と、食べられそうなら消化の軽いものを少量。明日も低摂取が続くなら、ひとりで抱えず相談先につなぎましょう。\n\n` +
       `報告できたこと自体は大事です。${persona.sign}`;
   }
 
-  const pfcLine = `カロリーは約${n.calories}kcalの目安です。たんぱく質 ${n.protein}g / 脂質 ${n.fat}g / 炭水化物 ${n.carbs}g。推定の自信度は${confidenceLabel}なので参考値として見てください。`;
+  const pfcLine = `カロリーは約${n.calories}kcalです。たんぱく質 ${n.protein}g / 脂質 ${n.fat}g / 炭水化物 ${n.carbs}g。推定の自信度は${confidenceLabel}なので参考値として見てください。`;
   const positive = hasProtein ? "たんぱく質の軸は作れています。" : "次はたんぱく質を1品足すと安定します。";
   const veggie = hasVeggie ? "野菜・汁物も入っていて、続けやすい形です。" : "野菜か汁物を足すと満足感が伸びます。";
   const carb = hasCarb ? "炭水化物も入っているので、極端に削らず進められます。" : "主食が少ない日は、夜の反動が出やすいので小さく足してOKです。";
@@ -1172,7 +1220,7 @@ function renderHeader(latest) {
   return `
     <header class="app-header">
       <div class="brand-lockup">
-        <img class="brand-icon" src="assets/icon.svg" width="46" height="46" alt="">
+        <img class="brand-icon" src="/assets/icon.svg" width="46" height="46" alt="">
         <div>
           <h1 class="brand-title">AI食事パートナー</h1>
           <p class="brand-subtitle">あなたに合わせて食事記録を続けるための試作アプリ</p>
@@ -1228,7 +1276,7 @@ function renderCompanion(latest) {
           <li><strong>見た目</strong><span>${escapeHtml(trainer.look.label)}</span></li>
           <li><strong>安全</strong><span>${escapeHtml(safetyLabel(safety))}</span></li>
           <li><strong>メモ</strong><span>${memoryCount}件</span></li>
-          <li><strong>返信</strong><span>初回80点以上を目安にチェック</span></li>
+          <li><strong>返信</strong><span>初回80点以上でチェック</span></li>
         </ul>
       </div>
     </aside>
@@ -1268,7 +1316,7 @@ function renderReportTab() {
       </form>
     </section>
     ${latest ? renderSafetyBanner(latest) : ""}
-    ${latest ? renderReportItem(latest, true) : `<div class="empty">食事を記録すると、カロリー目安・栄養バランス・返信がここに出ます。</div>`}
+    ${latest ? renderReportItem(latest, true) : `<div class="empty">食事を記録すると、カロリー・栄養バランス・返信がここに出ます。</div>`}
     ${state.reports.length > 1 ? `
       <section class="section-panel">
         <div class="section-header"><h3>前の記録</h3><span class="pill">${state.reports.length - 1}件</span></div>
@@ -1310,14 +1358,14 @@ function renderReportItem(report, expanded) {
       <p class="reply-text"><strong>入力した食事</strong><br>${escapeHtml(report.text)}</p>
       ${expanded ? `
         <div class="pfc-grid" aria-label="nutrition estimate">
-          <div class="pfc-item"><strong>${n.calories}</strong><span>カロリー目安</span></div>
+          <div class="pfc-item"><strong>${n.calories}</strong><span>カロリー</span></div>
           <div class="pfc-item"><strong>${n.protein}g</strong><span>たんぱく質</span></div>
           <div class="pfc-item"><strong>${n.fat}g</strong><span>脂質</span></div>
           <div class="pfc-item"><strong>${n.carbs}g</strong><span>炭水化物</span></div>
         </div>
       ` : ""}
       <p class="reply-text"><strong>食事パートナーからの返信</strong><br>${escapeHtml(report.reply)}</p>
-      <p class="disclaimer-link"><a href="disclaimer.html" target="_blank" rel="noopener">免責事項</a></p>
+      <p class="disclaimer-link"><a href="/disclaimer.html" target="_blank" rel="noopener">免責事項</a></p>
       ${memoryCandidate ? `
         <div class="action-row" style="margin-top: 12px;">
           <span class="pill">覚えておくこと: ${escapeHtml(memoryCandidate)}</span>
@@ -1374,7 +1422,7 @@ function renderPlanTab() {
     <section class="section-panel">
       <div class="section-header">
         <div>
-          <h2>プランの目安</h2>
+          <h2>プラン</h2>
           <p>無料お試しから、毎日の食事記録まで段階的に使えます。</p>
         </div>
         <span class="pill">試作中</span>
@@ -1393,7 +1441,7 @@ function renderPlanTab() {
       <div class="metric-grid">
         <div class="metric-tile"><span>最初の利用者</span><strong>ChatGPT併用者</strong></div>
         <div class="metric-tile"><span>最初の価値</span><strong>返信1回</strong></div>
-        <div class="metric-tile"><span>料金目安</span><strong>980円</strong></div>
+        <div class="metric-tile"><span>料金</span><strong>980円</strong></div>
         <div class="metric-tile"><span>返信チェック</span><strong>80+</strong></div>
       </div>
     </section>
@@ -1484,7 +1532,7 @@ function renderOpsTab() {
     <section class="section-panel">
       <div class="section-header">
         <div>
-          <h2>料金の目安</h2>
+          <h2>料金</h2>
           <p>月額980円で続けられるか、1人あたりの変動費を見ます。</p>
         </div>
         <span class="pill">${ledger.ok ? "上限内" : "上限超え"}</span>
@@ -1551,7 +1599,7 @@ function renderOnboarding() {
       <section class="onboarding-phone">
         <header class="onboarding-topbar">
           <div class="mini-brand">
-            <img src="assets/icon.svg" width="34" height="34" alt="">
+            <img src="/assets/icon.svg" width="34" height="34" alt="">
             <span>食事パートナー</span>
           </div>
           <button class="button ghost onboarding-demo" type="button" data-action="load-demo">デモ</button>
@@ -1913,6 +1961,10 @@ function renderGoalStep() {
 }
 
 function renderRelationshipStep() {
+  const relationshipOptions = ensureRelationshipOptionsFitProfile();
+  const teenNote = isTeenAppearance()
+    ? `<p class="mini-note">10代の見た目では、健康アプリとして自然な距離感だけ表示しています。</p>`
+    : "";
   return `
     <div class="onboarding-screen">
       <div class="onboarding-copy">
@@ -1921,8 +1973,9 @@ function renderRelationshipStep() {
       </div>
       <div class="input-card">
         <h3>関係性${fieldLabel("必須")}</h3>
-        ${renderChipButtons(RELATIONSHIP_OPTIONS, state.profile.relationship, { key: "relationship" })}
+        ${renderChipButtons(relationshipOptions, state.profile.relationship, { key: "relationship" })}
       </div>
+      ${teenNote}
       <label class="input-card">
         <h3>話し方の希望${fieldLabel()}</h3>
         <input class="input" data-profile="voiceMemo" value="${escapeHtml(state.profile.voiceMemo || "")}" placeholder="例: ほめてほしい。でも甘やかしすぎないでほしい。">
@@ -2084,7 +2137,7 @@ function renderPaywallStep() {
         nextLabel: "続ける",
         nextAction: "finish-onboarding",
         back: false,
-        secondary: `<button class="button secondary" type="button" data-action="finish-onboarding">今はここまで</button>`
+        secondary: `<button class="button secondary" type="button" data-action="finish-onboarding" data-paywall-dismiss="true">今はここまで</button>`
       })}
     </div>
   `;
@@ -2094,6 +2147,11 @@ function setOnboardingScreen(screen) {
   state.onboarding.screen = screen;
   if (screen === "generating" || screen === "personalize") {
     state.onboarding.generatedStartedAt = new Date().toISOString();
+  }
+  if (screen === "paywall" && !state.profile.paywallSeenAt) {
+    const seenAt = new Date().toISOString();
+    state.profile.paywallSeenAt = seenAt;
+    logEvent("fake_paywall_seen", { route: getOnboardingRoute(), screen, seenAt });
   }
 }
 
@@ -2160,7 +2218,11 @@ function prepareFirstFeedback() {
   const report = ensureFirstFeedbackReport();
   if (!report) return;
   setOnboardingScreen("feedback");
-  logEvent("onboarding_first_feedback_ready", { reportId: report.id });
+  logEvent("onboarding_first_feedback_ready", {
+    reportId: report.id,
+    route: getOnboardingRoute(),
+    ...trainerSheetEventPayload(state.profile.trainerSheet)
+  });
   saveState();
   render();
 }
@@ -2192,6 +2254,8 @@ function applyOnboardingAdjustment() {
 }
 
 function recordMealReport(text, { hadPhoto = Boolean(state.draftPhotoName), photoName = state.draftPhotoName } = {}) {
+  const trainerSheet = ensureTrainerSheet();
+  const sheetEvent = trainerSheetEventPayload(trainerSheet);
   const analysis = analyzeMeal(text);
   const reply = buildReply(text, analysis);
   const score = scoreReply(reply, analysis);
@@ -2203,21 +2267,31 @@ function recordMealReport(text, { hadPhoto = Boolean(state.draftPhotoName), phot
     photoName,
     analysis,
     reply,
-    score
+    score,
+    trainerSheet: sheetEvent
   };
 
   state.reports.unshift(report);
   state.reports = state.reports.slice(0, 40);
   logEvent("meal_report_submitted", {
+    reportId: report.id,
     safetyLevel: analysis.safety.level,
     confidence: Number(analysis.nutrition.confidence.toFixed(2)),
-    hadPhoto: report.hadPhoto
+    hadPhoto: report.hadPhoto,
+    ...sheetEvent
   });
-  logEvent("ai_reply_viewed", { score: score.total, safetyGate: score.safetyGate });
+  logEvent("ai_reply_viewed", {
+    reportId: report.id,
+    score: score.total,
+    safetyGate: score.safetyGate,
+    ...sheetEvent
+  });
   if (analysis.safety.safetyFlag) {
     logEvent("safety_flag_triggered", {
+      reportId: report.id,
       level: analysis.safety.level,
-      signals: analysis.safety.signals
+      signals: analysis.safety.signals,
+      ...sheetEvent
     });
   }
   return report;
@@ -2461,6 +2535,9 @@ document.addEventListener("click", (event) => {
       invalidateTrainerSheet();
     }
     state.profile.persona = inferPersona(state.profile);
+    if (["appearanceGender", "appearanceAge", "nationality", "eyeStyle", "faceShape", "expression", "hairStyle", "clothingStyle", "relationship", "method"].includes(key)) {
+      logEvent("onboarding_profile_option_selected", { key, value, route: getOnboardingRoute() });
+    }
     saveState();
     render();
     return;
@@ -2492,6 +2569,8 @@ document.addEventListener("click", (event) => {
   const paywallIntent = event.target.closest("[data-paywall-intent]");
   if (paywallIntent) {
     state.profile.paywallIntent = paywallIntent.dataset.paywallIntent;
+    state.profile.paywallIntentClickedAt = new Date().toISOString();
+    logEvent("fake_paywall_intent_clicked", { intent: state.profile.paywallIntent, route: getOnboardingRoute() });
     logEvent("fake_paywall_intent_selected", { intent: state.profile.paywallIntent });
     saveState();
     render();
@@ -2502,6 +2581,7 @@ document.addEventListener("click", (event) => {
   if (onboardingGoal) {
     state.profile.goal = onboardingGoal.dataset.onboardingGoal;
     state.profile.persona = inferPersona(state.profile);
+    logEvent("food_goal_selected", { goal: state.profile.goal, route: getOnboardingRoute() });
     saveState();
     render();
     return;
@@ -2513,6 +2593,7 @@ document.addEventListener("click", (event) => {
     if (ART_STYLE_OPTIONS[value]) {
       state.profile.artStyle = value;
       invalidateTrainerSheet();
+      logEvent("art_style_selected", { artStyle: value, route: getOnboardingRoute() });
     }
     saveState();
     render();
@@ -2525,7 +2606,10 @@ document.addEventListener("click", (event) => {
     if (applyLookPreset(presetKey)) {
       lockTrainerSheet();
       state.onboarding.route = "sample";
-      logEvent("ready_character_selected", { preset: presetKey });
+      logEvent("sample_trainer_selected", {
+        preset: presetKey,
+        ...trainerSheetEventPayload(state.profile.trainerSheet)
+      });
     }
     saveState();
     render();
@@ -2549,6 +2633,7 @@ document.addEventListener("click", (event) => {
       state.profile.lookPreset = "";
       invalidateTrainerSheet();
       state.profile.persona = inferPersona(state.profile);
+      logEvent("appearance_option_selected", { key, value, route: getOnboardingRoute() });
     }
     saveState();
     render();
@@ -2583,12 +2668,21 @@ document.addEventListener("click", (event) => {
   if (actionName === "onboarding-back") {
     backOnboarding();
   }
-  if (actionName === "finish-onboarding") submitOnboarding({ sendFirstReport: false });
+  if (actionName === "finish-onboarding") {
+    if (action.dataset.paywallDismiss === "true") {
+      state.profile.paywallDismissedAt = new Date().toISOString();
+      logEvent("fake_paywall_dismissed", {
+        intent: state.profile.paywallIntent || "",
+        route: getOnboardingRoute()
+      });
+    }
+    submitOnboarding({ sendFirstReport: false });
+  }
   if (actionName === "finish-onboarding-with-report") submitOnboarding({ sendFirstReport: true });
   if (actionName === "use-sample-meal") {
     state.draft = "おにぎり2個、サラダチキン、野菜スープ";
     state.draftPhotoName = "sample-meal.jpg";
-    logEvent("onboarding_sample_meal_used", {});
+    logEvent("onboarding_sample_meal_used", { route: getOnboardingRoute() });
     saveState();
     render();
   }
@@ -2749,7 +2843,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -2764,11 +2858,10 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260704-onboarding-v3-impl-v1")
+    navigator.serviceWorker.register("/sw.js?v=20260705-phase-close-v1")
       .then((registration) => registration.update())
       .catch(() => {});
   });
 }
 
 render();
-
