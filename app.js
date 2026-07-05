@@ -1712,8 +1712,12 @@ function renderStartStep() {
           <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
           <p>ダイエットを続けやすく。写真1枚で返事。1回まで修正無料。</p>
         </div>
-        <button class="g3-hotspot is-start-custom" type="button" data-action="start-custom" aria-label="じぶんの担当をつくる"></button>
-        <button class="g3-hotspot is-start-sample" type="button" data-action="start-sample" aria-label="サンプルから選ぶ"></button>
+        <button class="g3-image-button is-start-custom" type="button" data-action="start-custom" aria-label="じぶんの担当をつくる">
+          <img src="assets/g3-ui-buttons/g3-btn-001-start-custom.png" alt="">
+        </button>
+        <button class="g3-image-button is-start-sample" type="button" data-action="start-sample" aria-label="サンプルから選ぶ">
+          <img src="assets/g3-ui-buttons/g3-btn-001-start-sample.png" alt="">
+        </button>
       </div>
     </div>
   `;
@@ -2034,8 +2038,12 @@ function renderFirstReportStep() {
         </label>
         <input class="file-input" id="onboarding-photo-input" type="file" accept="image/*" data-photo>
         <textarea class="g3-first-meal-text" data-draft aria-label="食事メモ" placeholder="例：おにぎり2個、サラダチキン、野菜スープ">${escapeHtml(state.draft)}</textarea>
-        <button class="g3-first-meal-sample" type="button" data-action="use-sample-meal" aria-label="サンプルを入れる"></button>
-        <button class="g3-first-meal-next" type="button" data-action="onboarding-next" aria-label="ご対面へ進む"></button>
+        <button class="g3-first-meal-sample g3-image-button" type="button" data-action="use-sample-meal" aria-label="サンプルを入れる">
+          <img src="assets/g3-ui-buttons/g3-btn-006-sample-meal.png" alt="">
+        </button>
+        <button class="g3-first-meal-next g3-image-button" type="button" data-action="onboarding-next" aria-label="ご対面へ進む">
+          <img src="assets/g3-ui-buttons/g3-btn-006-next.png" alt="">
+        </button>
       </div>
     </div>
   `;
@@ -3051,7 +3059,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24" || key === "ai-food-trainer-pwa-v25")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3066,7 +3074,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v2", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v3", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });

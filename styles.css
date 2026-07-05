@@ -2802,7 +2802,7 @@ a {
 .g3-canon-stage {
   position: relative;
   width: min(100%, 390px);
-  min-height: 100dvh;
+  aspect-ratio: 390 / 844;
   margin: 0 auto;
   overflow: hidden;
   background-position: top center;
@@ -2814,34 +2814,43 @@ a {
   background-image: url("assets/g3-ui-images/g3-img-001-start.png");
 }
 
-.g3-hotspot {
+.g3-image-button {
   position: absolute;
   z-index: 2;
   display: block;
   border: 0;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0);
+  padding: 0;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(232, 115, 90, 0.16);
 }
 
-.g3-hotspot:focus-visible {
+.g3-image-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.g3-image-button:focus-visible {
   outline: 3px solid rgba(232, 115, 90, 0.72);
   outline-offset: 2px;
 }
 
-.g3-hotspot.is-start-custom {
-  left: 5.2%;
-  top: 73.4%;
-  width: 89.6%;
-  height: 8.6%;
+.g3-image-button.is-start-custom {
+  left: 5.64%;
+  top: 74.41%;
+  width: 88.72%;
+  height: 8.06%;
 }
 
-.g3-hotspot.is-start-sample {
-  left: 5.2%;
-  top: 83.4%;
-  width: 89.6%;
-  height: 7.7%;
+.g3-image-button.is-start-sample {
+  left: 5.64%;
+  top: 84.6%;
+  width: 88.72%;
+  height: 7.11%;
 }
 
 .style-screen .style-grid {
@@ -3313,7 +3322,7 @@ a {
 .g3-first-report-stage {
   position: relative;
   width: min(100%, 390px);
-  min-height: 100dvh;
+  aspect-ratio: 390 / 844;
   margin: 0 auto;
   overflow: hidden;
   background: #fff7ec url("assets/g3-ui-images/g3-img-006-first-meal.png") top center / 100% auto no-repeat;
@@ -3391,18 +3400,18 @@ a {
 }
 
 .g3-first-meal-sample {
-  left: 8.7%;
-  top: 70.1%;
-  width: 82.6%;
+  left: 11.03%;
+  top: 68.48%;
+  width: 77.95%;
   height: 5.7%;
   border-radius: 999px;
 }
 
 .g3-first-meal-next {
-  left: 8.7%;
-  top: 88.1%;
-  width: 82.6%;
-  height: 7.2%;
+  left: 7.18%;
+  top: 88.63%;
+  width: 85.64%;
+  height: 6.4%;
   border-radius: 999px;
 }
 
