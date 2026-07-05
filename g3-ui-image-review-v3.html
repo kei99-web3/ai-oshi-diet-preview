@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>G3 UI画像レビュー | AI食事パートナー</title>
+  <style>
+    :root {
+      --bg: #fff4e6;
+      --paper: #fffbf4;
+      --ink: #33261f;
+      --muted: #75665c;
+      --line: #eadbcc;
+      --accent: #e8735a;
+      --soft: #ffe1d7;
+      --ok: #4f8d72;
+      --shadow: 0 18px 44px rgba(82, 53, 35, .10);
+      font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 12% 0, rgba(232, 115, 90, .14), transparent 28rem), var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+    header {
+      display: grid;
+      gap: 16px;
+      padding: 12px 0 28px;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      font-size: clamp(28px, 6vw, 44px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 31px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 251, 244, .78);
+      color: var(--muted);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .pill.good {
+      border-color: rgba(79, 141, 114, .30);
+      background: rgba(79, 141, 114, .10);
+      color: #346c55;
+      font-weight: 700;
+    }
+    .contact {
+      width: min(100%, 980px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .contact img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 34px 0 14px;
+    }
+    .section-head h2 {
+      font-size: 22px;
+      line-height: 1.35;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 18px;
+    }
+    article {
+      display: grid;
+      gap: 14px;
+      align-content: start;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 251, 244, .88);
+      box-shadow: var(--shadow);
+    }
+    .id {
+      display: inline-flex;
+      width: fit-content;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: #9f4532;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h3 {
+      font-size: 17px;
+      line-height: 1.42;
+    }
+    .scr {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    figure {
+      display: grid;
+      justify-content: center;
+      gap: 8px;
+      margin: 0;
+    }
+    figure img {
+      display: block;
+      width: min(100%, 390px);
+      height: auto;
+      border: 1px solid rgba(51, 38, 31, .08);
+      border-radius: 20px;
+      background: var(--paper);
+      box-shadow: 0 14px 30px rgba(82, 53, 35, .13);
+    }
+    figcaption {
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+    }
+    .checks {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255, 244, 230, .75);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .checks strong {
+      color: var(--ink);
+      font-size: 13px;
+    }
+    textarea {
+      width: 100%;
+      min-height: 112px;
+      resize: vertical;
+      padding: 12px 13px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fffefa;
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    textarea:focus {
+      outline: 3px solid rgba(232, 115, 90, .20);
+      border-color: var(--accent);
+    }
+    .note {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 251, 244, .82);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .note strong { color: var(--ink); }
+    @media (max-width: 680px) {
+      main { width: min(100% - 22px, 460px); padding-top: 18px; }
+      .section-head { align-items: start; flex-direction: column; }
+      article { padding: 13px; border-radius: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="pills">
+        <span class="pill good">G3 UI画像化</span>
+        <span class="pill">更新日: 2026-07-05 v3</span>
+        <span class="pill">390x844 PNG</span>
+        <span class="pill">Direction 1: わたしの担当</span>
+      </div>
+      <h1>UI画像レビュー</h1>
+      <p class="lead">Codex Image2で生成したオンボーディング主要9画面です。オーナーレビューを受け、001はダイエット目的、003は参考画像追加、004はパーソナライズ生成中の文脈へ差し替え済みです。002はサンプル選択後の画面として元の構成へ戻しました。</p>
+      <div class="contact">
+        <img src="assets/g3-ui-images/g3-ui-image-contact-sheet.png" alt="G3 UI画像9枚のコンタクトシート">
+      </div>
+    </header>
+
+    <div class="section-head">
+      <h2>画面別レビュー</h2>
+      <span class="pill">レビュー欄はこの端末に自動保存</span>
+    </div>
+
+    <section class="grid" aria-label="G3 UI images">
+      <article>
+        <span class="id">G3-IMG-001</span>
+        <h3>開始・作り方の分岐</h3>
+        <p class="scr">SCR-ONB-001</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-001-start.png" alt="G3-IMG-001 開始・作り方の分岐">
+          <figcaption>痩せたい目的を前面に出し、担当作成をその手段として見せる。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>「痩せたいから使う」と「自分の担当を作る」が同時に伝わるか。</span></div>
+        <textarea data-review-key="g3-img-001" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-002</span>
+        <h3>サンプル選択</h3>
+        <p class="scr">SCR-ONB-002</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-002-sample-selection.png" alt="G3-IMG-002 サンプル選択">
+          <figcaption>サンプル選択後の画面。気になる人を選び、この人にする。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>SCR-ONB-001でサンプルを選んだ後、迷わず1人を選んで確定できるか。</span></div>
+        <textarea data-review-key="g3-img-002" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-003</span>
+        <h3>見た目の基本と参考</h3>
+        <p class="scr">SCR-ONB-004</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-003-appearance-reference.png" alt="G3-IMG-003 見た目の基本と参考URL">
+          <figcaption>必須と任意が分かり、参考URL/参考画像がなくても進める。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>仕様側では参考URLに加えて任意の参考画像も受ける。項目が重すぎないか。</span></div>
+        <textarea data-review-key="g3-img-003" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-004</span>
+        <h3>生成中</h3>
+        <p class="scr">SCR-ONB-009</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-004-generating.png" alt="G3-IMG-004 生成中">
+          <figcaption>60秒の待ち時間を「あなたのためのパートナーが生まれる時間」にする。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>「あなたのためにパーソナライズして作っている」文脈が伝わるか。</span></div>
+        <textarea data-review-key="g3-img-004" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-005</span>
+        <h3>生成できない時</h3>
+        <p class="scr">SCR-ONB-009F</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-005-generation-retry.png" alt="G3-IMG-005 生成できない時">
+          <figcaption>入力が残っていて、再試行かサンプルへ逃げられる。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>内部reasonCodeはAPI遅延、混雑、障害、入力/参照画像の不受理、無料枠/予算上限など。ユーザーには入力保持と再試行/サンプル逃げ道を見せる。</span></div>
+        <textarea data-review-key="g3-img-005" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-006</span>
+        <h3>初回食事入力</h3>
+        <p class="scr">SCR-ONB-012</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-006-first-meal.png" alt="G3-IMG-006 初回食事入力">
+          <figcaption>写真がなくても、覚えている範囲で進める。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>フォーム感が強すぎず、直前の食事を軽く出せるか。</span></div>
+        <textarea data-review-key="g3-img-006" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-007</span>
+        <h3>ご対面</h3>
+        <p class="scr">SCR-ONB-010</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-007-reveal.png" alt="G3-IMG-007 ご対面">
+          <figcaption>「会えた」感情の山。ここで特別感を出す。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>自分専用の食事パートナーができた感覚があるか。</span></div>
+        <textarea data-review-key="g3-img-007" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-008</span>
+        <h3>初回フィードバック</h3>
+        <p class="scr">SCR-ONB-013</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-008-first-feedback.png" alt="G3-IMG-008 初回フィードバック">
+          <figcaption>食事を見てもらえた感覚と、応援画像枠。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>具体的で優しいフィードバックに見えるか。差別化が伝わるか。</span></div>
+        <textarea data-review-key="g3-img-008" placeholder="レビューを書く"></textarea>
+      </article>
+
+      <article>
+        <span class="id">G3-IMG-009</span>
+        <h3>仮ペイウォール</h3>
+        <p class="scr">SCR-ONB-014</p>
+        <figure>
+          <img src="assets/g3-ui-images/g3-img-009-paywall.png" alt="G3-IMG-009 仮ペイウォール">
+          <figcaption>機能解放ではなく、担当との継続として見せる。</figcaption>
+        </figure>
+        <div class="checks"><strong>確認観点</strong><span>課金前提の圧ではなく、続きを選びたくなるか。</span></div>
+        <textarea data-review-key="g3-img-009" placeholder="レビューを書く"></textarea>
+      </article>
+    </section>
+
+    <section class="note" aria-label="review note">
+      <strong>次の見方</strong>
+      <span>大枠承認できる画面は実装へ渡し、違和感が強い画面だけ再生成または実装側のUI補正対象にします。</span>
+      <span>画像内の日本語は生成画像なので多少揺れます。実装時は正本HTML/仕様書側の文言を採用します。</span>
+    </section>
+  </main>
+
+  <script>
+    const prefix = 'ai-oshi-diet:g3-ui-image-review:';
+    document.querySelectorAll('textarea[data-review-key]').forEach((textarea) => {
+      const key = prefix + textarea.dataset.reviewKey;
+      textarea.value = localStorage.getItem(key) || '';
+      textarea.addEventListener('input', () => localStorage.setItem(key, textarea.value));
+    });
+  </script>
+</body>
+</html>
