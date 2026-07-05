@@ -1704,42 +1704,17 @@ function renderChipButtons(options, selected, { key = "", action = "profile-set"
 
 function renderStartStep() {
   return `
-    <div class="onboarding-screen start-screen">
-      <div class="start-hero-panel">
-        <p class="hero-handwriting">あなたのダイエットを、<br>一緒にサポート!</p>
-        <div class="preview-stage" aria-label="sample partners">
-          ${Object.entries(LOOK_PRESETS).map(([key, preset], index) => {
-            const look = buildPresetLookConfig(key);
-            return `<img class="preview-face is-${index + 1}" src="${escapeHtml(look.previewAsset || look.sheetAsset)}" alt="${escapeHtml(preset.name)}">`;
-          }).join("")}
-        </div>
-        <div class="start-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span><span></span><span></span></div>
-        <div class="diet-proof">
-          <strong><span><mark>痩せたい</mark>から、</span><br><span>ひとりで頑張らない。</span></strong>
+    <div class="onboarding-screen start-screen g3-canon-screen">
+      <div class="g3-canon-stage is-start" role="group" aria-labelledby="onboarding-title">
+        <div class="sr-only">
+          <p class="step-kicker">${stepKicker("start")}</p>
+          <h2 id="onboarding-title">痩せたいから、ひとりで頑張らない。</h2>
           <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
+          <p>ダイエットを続けやすく。写真1枚で返事。1回まで修正無料。</p>
         </div>
-        <div class="promise-pills" aria-label="promise">
-          <span class="is-diet">${startIcon("food")}ダイエットを<br>続けやすく</span>
-          <span class="is-photo">${startIcon("camera")}写真1枚で<br>返事</span>
-          <span class="is-retry">${startIcon("refresh")}1回まで<br>修正無料</span>
-        </div>
+        <button class="g3-hotspot is-start-custom" type="button" data-action="start-custom" aria-label="じぶんの担当をつくる"></button>
+        <button class="g3-hotspot is-start-sample" type="button" data-action="start-sample" aria-label="サンプルから選ぶ"></button>
       </div>
-      <div class="onboarding-copy">
-        <p class="step-kicker">${stepKicker("start")}</p>
-        <h2 id="onboarding-title">まず、担当をつくる</h2>
-        <p>痩せたい理由はそのままに。続けたくなる相手を先に決めます。</p>
-      </div>
-      <button class="route-card is-primary" type="button" data-action="start-custom">
-        <span class="route-icon is-wand" aria-hidden="true">${startIcon("wand")}</span>
-        <strong>じぶんの担当をつくる</strong>
-        <span aria-hidden="true">›</span>
-      </button>
-      <button class="route-card" type="button" data-action="start-sample">
-        <span class="route-icon is-soft is-people" aria-hidden="true">${startIcon("users")}</span>
-        <strong>サンプルから選ぶ</strong>
-        <span aria-hidden="true">›</span>
-      </button>
-      <p class="trust-note">いつでも変更できます。まだ迷っても大丈夫。</p>
     </div>
   `;
 }
@@ -1757,42 +1732,45 @@ function startIcon(name) {
 }
 
 function renderSampleStep() {
-  if (!state.profile.lookPreset) applyLookPreset("yui");
-  const selected = state.profile.lookPreset || "yui";
+  if (!state.profile.lookPreset) applyLookPreset("asuna");
+  const selected = state.profile.lookPreset || "asuna";
   const selectedLook = buildPresetLookConfig(selected);
   const selectedPreset = LOOK_PRESETS[selected] || LOOK_PRESETS.yui;
+  const selectedImage = selectedLook.previewAsset || selectedLook.sheetAsset;
   return `
-    <div class="onboarding-screen sample-screen">
-      <div class="sample-hero">
-        ${renderTrainerVisual(selectedLook, "hero")}
-        <div>
-          <span>選択中</span>
-          <strong>${escapeHtml(selectedPreset.name)}</strong>
-        </div>
-      </div>
-      <div class="onboarding-copy">
-        <p class="step-kicker">${stepKicker("sample")}</p>
+    <div class="onboarding-screen sample-screen sample-canon-screen">
+      <div class="sample-step-dots" aria-label="ステップ 2 / 7"><span>1</span><span class="is-active">2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+      <div class="onboarding-copy sample-title">
         <h2 id="onboarding-title">気になる人を1人選ぶ</h2>
+      </div>
+      <div class="sample-hero-canon">
+        <img src="${escapeHtml(selectedImage)}" alt="${escapeHtml(selectedPreset.name)}">
+        <span class="sample-name-badge">${escapeHtml(selectedPreset.name)} ✦</span>
+        <span class="sample-check" aria-hidden="true">✓</span>
       </div>
       <div class="sample-grid">
         ${Object.entries(LOOK_PRESETS).map(([key, preset]) => {
           const look = buildPresetLookConfig(key);
+          const src = look.previewAsset || look.sheetAsset;
           return `
             <button class="sample-card ${selected === key ? "is-selected" : ""}" type="button" data-ready-character="${escapeHtml(key)}" aria-pressed="${selected === key}">
-              ${renderTrainerVisual(look, "card")}
-              <span>${escapeHtml(preset.name)}</span>
+              <img src="${escapeHtml(src)}" alt="${escapeHtml(preset.name)}">
+              <span class="sr-only">${escapeHtml(preset.name)}</span>
             </button>
           `;
         }).join("")}
       </div>
-      ${renderOnboardingActions({ nextLabel: "この人にする" })}
+      ${renderOnboardingActions({
+        nextLabel: "この人にする",
+        secondary: `<button class="sample-custom-link" type="button" data-action="start-custom">自分で作る</button>`
+      })}
     </div>
   `;
 }
 
 function styleSamplePreset(styleKey) {
-  if (styleKey === "photo") return "sou";
-  if (styleKey === "semi") return "mina";
+  if (styleKey === "photo") return "isagi";
+  if (styleKey === "semi") return "miku";
   return "yui";
 }
 
@@ -2267,7 +2245,7 @@ function advanceOnboarding() {
   const flow = getOnboardingFlow();
   const index = onboardingIndex(screen);
   if (screen === "sample" && !state.profile.lookPreset) {
-    applyLookPreset("yui");
+    applyLookPreset("asuna");
   }
   if (["clothes", "relationship", "sample"].includes(screen)) {
     lockTrainerSheet();
@@ -2462,7 +2440,7 @@ function loadDemo() {
     currentWeight: "",
     targetWeight: "",
     artStyle: "anime",
-    lookPreset: "yui",
+    lookPreset: "asuna",
     appearanceGender: "女性",
     appearanceAge: "20代前半",
     nationality: "日本",
@@ -2865,7 +2843,7 @@ document.addEventListener("click", (event) => {
   }
   if (actionName === "start-sample") {
     state.onboarding.route = "sample";
-    if (!state.profile.lookPreset) applyLookPreset("yui");
+    if (!state.profile.lookPreset) applyLookPreset("asuna");
     setOnboardingScreen("sample");
     logEvent("onboarding_route_selected", { route: "sample" });
     saveState();
@@ -3070,7 +3048,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3085,7 +3063,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v5", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v1", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });

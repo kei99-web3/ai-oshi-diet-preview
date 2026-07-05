@@ -1,11 +1,20 @@
-const CACHE_NAME = "ai-food-trainer-pwa-v23";
+const CACHE_NAME = "ai-food-trainer-pwa-v24";
 const scopeUrl = (path) => new URL(path, self.registration.scope).toString();
 const ASSETS = [
   scopeUrl("index.html"),
   scopeUrl("disclaimer.html"),
-  scopeUrl("styles.css?v=20260705-g3-n1-v5"),
-  scopeUrl("app.js?v=20260705-g3-n1-v5"),
-  scopeUrl("manifest.webmanifest?v=20260705-g3-n1-v5"),
+  scopeUrl("styles.css?v=20260705-g3-canon-v1"),
+  scopeUrl("app.js?v=20260705-g3-canon-v1"),
+  scopeUrl("manifest.webmanifest?v=20260705-g3-canon-v1"),
+  scopeUrl("assets/g3-ui-images/g3-img-001-start.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-002-sample-selection.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-003-appearance-reference.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-004-generating.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-005-generation-retry.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-006-first-meal.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-007-reveal.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-008-first-feedback.png"),
+  scopeUrl("assets/g3-ui-images/g3-img-009-paywall.png"),
   scopeUrl("assets/trainer-previews/01_mina_onboarding_preview.webp"),
   scopeUrl("assets/trainer-previews/02_rei_onboarding_preview.webp"),
   scopeUrl("assets/trainer-previews/03_kana_onboarding_preview.webp"),
