@@ -1,5 +1,5 @@
-const STORAGE_KEY = "aiFoodTrainerPwaState.v15";
-const LEGACY_STORAGE_PREFIXES = ["aiOshiDietPwaState.", "aiFoodTrainerPwaState.v1", "aiFoodTrainerPwaState.v2", "aiFoodTrainerPwaState.v3", "aiFoodTrainerPwaState.v4", "aiFoodTrainerPwaState.v5", "aiFoodTrainerPwaState.v6", "aiFoodTrainerPwaState.v7", "aiFoodTrainerPwaState.v8", "aiFoodTrainerPwaState.v9", "aiFoodTrainerPwaState.v10", "aiFoodTrainerPwaState.v11", "aiFoodTrainerPwaState.v12", "aiFoodTrainerPwaState.v13", "aiFoodTrainerPwaState.v14"];
+const STORAGE_KEY = "aiFoodTrainerPwaState.v16";
+const LEGACY_STORAGE_PREFIXES = ["aiOshiDietPwaState.", "aiFoodTrainerPwaState.v1", "aiFoodTrainerPwaState.v2", "aiFoodTrainerPwaState.v3", "aiFoodTrainerPwaState.v4", "aiFoodTrainerPwaState.v5", "aiFoodTrainerPwaState.v6", "aiFoodTrainerPwaState.v7", "aiFoodTrainerPwaState.v8", "aiFoodTrainerPwaState.v9", "aiFoodTrainerPwaState.v10", "aiFoodTrainerPwaState.v11", "aiFoodTrainerPwaState.v12", "aiFoodTrainerPwaState.v13", "aiFoodTrainerPwaState.v14", "aiFoodTrainerPwaState.v15"];
 const TRAINER_SHEET_VERSION = 2;
 const app = document.querySelector("#app");
 
@@ -340,7 +340,7 @@ const SAMPLE_ONBOARDING_FLOW = ["start", "sample", "goal", "relationship", "firs
 
 function defaultState() {
   return {
-    version: 15,
+    version: 16,
     activeTab: "report",
     draft: "",
     draftPhotoName: "",
@@ -3001,7 +3001,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v2", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v3", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
