@@ -1,8 +1,9 @@
-﻿{
+{
   "name": "AI食事パートナー",
   "short_name": "食事パートナー",
   "description": "あなたに合わせた食事パートナーが、食事記録・栄養バランス・安全サインを一緒に見ます。",
-  "start_url": "./",
+  "start_url": ".",
+  "scope": ".",
   "display": "standalone",
   "background_color": "#f7f4ec",
   "theme_color": "#315d5a",
@@ -15,4 +16,3 @@
     }
   ]
 }
-
