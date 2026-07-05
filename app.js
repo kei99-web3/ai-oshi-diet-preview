@@ -1499,6 +1499,7 @@ function renderQualityTab() {
 
 function renderOpsTab() {
   const ledger = calculateLedger();
+  const researchRows = buildResearchInputRows();
   return `
     <section class="section-panel">
       <div class="section-header">
@@ -1524,6 +1525,28 @@ function renderOpsTab() {
         ${renderLedgerRow("csMinutes", "手動対応", `${ledger.rates.csMinute}円 / 1分`, "number")}
         ${renderLedgerRow("manualCostYen", "その他コスト", "その他の手動変動費", "number")}
       </div>
+    </section>
+    <section class="section-panel">
+      <div class="section-header">
+        <div>
+          <h3>研究用入力ログ</h3>
+          <p>この端末に保存された自由記述、参考URL、食事本文を初期分析用に確認します。外部送信はまだありません。</p>
+        </div>
+        <span class="pill">${researchRows.length}件</span>
+      </div>
+      <div class="sample-toolbar">
+        <button class="button" type="button" data-action="copy-research-export">コピー</button>
+        <button class="button secondary" type="button" data-action="download-research-export">JSON保存</button>
+      </div>
+      <div class="event-list" style="margin-top: 12px;">
+        ${researchRows.slice(0, 8).map((row) => `
+          <article class="event-row">
+            <div class="event-meta"><span class="pill">${escapeHtml(row.label)}</span><span>${escapeHtml(row.source)}</span></div>
+            <code>${escapeHtml(row.value)}</code>
+          </article>
+        `).join("") || `<div class="empty">自由記述や食事本文が入るとここに表示されます。</div>`}
+      </div>
+      <p class="mini-note">複数ユーザー分を自動で見るには、次フェーズでDB/APIへの保存先を追加します。</p>
     </section>
     <section class="section-panel">
       <div class="section-header">
@@ -2444,6 +2467,114 @@ function downloadSamples() {
   saveState();
 }
 
+function buildResearchInputRows() {
+  const rows = [];
+  const add = (label, source, value) => {
+    const clean = Array.isArray(value) ? value.filter(Boolean).join("\n") : String(value || "").trim();
+    if (!clean) return;
+    rows.push({ label, source, value: clean });
+  };
+  add("見た目メモ", "profile.lookCustomNote", state.profile.lookCustomNote);
+  add("避けたい見た目", "profile.avoidLookNote", state.profile.avoidLookNote);
+  add("参考URL", "profile.referenceUrls", normalizeReferenceUrls(state.profile.referenceUrls));
+  add("話し方の希望", "profile.voiceMemo", state.profile.voiceMemo);
+  add("調整: 場所", "profile.adjustWhere", state.profile.adjustWhere);
+  add("調整: 内容", "profile.adjustHow", state.profile.adjustHow);
+  add("調整: NG", "profile.adjustAvoid", state.profile.adjustAvoid);
+  state.reports.forEach((report, index) => add(`食事本文 #${index + 1}`, `reports[${index}].text`, report.text));
+  return rows;
+}
+
+function buildResearchExport() {
+  const sheet = state.profile.trainerSheet || null;
+  const rows = buildResearchInputRows();
+  return {
+    schemaVersion: 1,
+    exportedAt: new Date().toISOString(),
+    storageKey: STORAGE_KEY,
+    note: "初期分析用の研究エクスポート。events[]には本文を複製せず、このexportにだけ原文を含める。",
+    onboarding: {
+      route: state.onboarding.route,
+      screen: state.onboarding.screen,
+      firstReportId: state.onboarding.firstReportId
+    },
+    profile: {
+      goal: state.profile.goal,
+      method: state.profile.method,
+      artStyle: state.profile.artStyle,
+      lookPreset: state.profile.lookPreset,
+      appearanceGender: state.profile.appearanceGender,
+      appearanceAge: state.profile.appearanceAge,
+      nationality: state.profile.nationality,
+      relationship: state.profile.relationship,
+      nickname: state.profile.nickname,
+      currentWeight: state.profile.currentWeight,
+      targetWeight: state.profile.targetWeight,
+      lookCustomNote: state.profile.lookCustomNote,
+      avoidLookNote: state.profile.avoidLookNote,
+      referenceUrlsRaw: state.profile.referenceUrls,
+      referenceUrls: normalizeReferenceUrls(state.profile.referenceUrls),
+      voiceMemo: state.profile.voiceMemo,
+      adjustWhere: state.profile.adjustWhere,
+      adjustHow: state.profile.adjustHow,
+      adjustAvoid: state.profile.adjustAvoid
+    },
+    trainerSheet: sheet ? {
+      id: sheet.id,
+      revision: sheet.revision,
+      source: sheet.source,
+      visual: sheet.visual,
+      voice: sheet.voice,
+      editInstruction: sheet.editInstruction || "",
+      characterSheetText: sheet.characterSheetText || buildLocalCharacterSheetText(sheet, state.profile)
+    } : null,
+    reports: state.reports.map((report) => ({
+      id: report.id,
+      at: report.at,
+      text: report.text,
+      hadPhoto: Boolean(report.hadPhoto),
+      photoName: report.photoName || "",
+      trainerSheet: report.trainerSheet || null
+    })),
+    inputRows: rows,
+    eventSummary: state.events.map((event) => ({
+      type: event.type,
+      at: event.at,
+      payloadKeys: Object.keys(event.payload || {})
+    }))
+  };
+}
+
+function researchExportMeta(exportData = buildResearchExport()) {
+  return {
+    rowCount: exportData.inputRows.length,
+    reportCount: exportData.reports.length,
+    referenceUrlCount: exportData.profile.referenceUrls.length,
+    hasTrainerSheet: Boolean(exportData.trainerSheet)
+  };
+}
+
+function copyResearchExport() {
+  const exportData = buildResearchExport();
+  copyText(JSON.stringify(exportData, null, 2))
+    .then(() => showToast("研究用入力ログをコピーしました。"))
+    .catch(() => showToast("コピーできませんでした。"));
+  logEvent("research_export_copied", researchExportMeta(exportData));
+}
+
+function downloadResearchExport() {
+  const exportData = buildResearchExport();
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = `ai-food-partner-research-export-${new Date().toISOString().slice(0, 10)}.json`;
+  anchor.click();
+  URL.revokeObjectURL(url);
+  logEvent("research_export_downloaded", researchExportMeta(exportData));
+  saveState();
+}
+
 function resetLedger() {
   state.ledger = defaultState().ledger;
   logEvent("ledger_reset", {});
@@ -2687,6 +2818,8 @@ document.addEventListener("click", (event) => {
   if (actionName === "reset-demo") resetDemo();
   if (actionName === "generate-samples") generateSamples();
   if (actionName === "download-samples") downloadSamples();
+  if (actionName === "copy-research-export") copyResearchExport();
+  if (actionName === "download-research-export") downloadResearchExport();
   if (actionName === "reset-ledger") resetLedger();
   if (actionName === "remember-candidate") {
     const report = state.reports.find((item) => item.id === action.dataset.reportId);
@@ -2824,7 +2957,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("/sw.js?v=20260705-owner-decisions-v1")
+    navigator.serviceWorker.register("/sw.js?v=20260705-research-export-v1")
       .then((registration) => registration.update())
       .catch(() => {});
   });

@@ -183,9 +183,10 @@
           <tr><td>例外QA</td><td>10代見た目年齢でも「恋人」を表示。除外・置換イベントは記録しない。</td></tr>
           <tr><td>データ記録</td><td>食事返信イベントとレポート本体に、使用したキャラクターシートID/revision/version/sourceを保存。</td></tr>
           <tr><td>イベント</td><td>サンプル選択、絵柄、食事目的、外見選択、関係性/進め方、初回返信準備を追加記録。</td></tr>
+          <tr><td>研究用ログ</td><td>自由記述、参考URL、食事本文を端末内からコピー/JSON保存できる研究用入力ログを追加。</td></tr>
           <tr><td>E2E</td><td>10代関係性表示、sample経路、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
           <tr><td>文言</td><td>旧カロリー表示を `カロリー管理` / `カロリー` / `料金` に整理。</td></tr>
-          <tr><td>PWAキャッシュ</td><td>`20260705-owner-decisions-v1` へ更新。</td></tr>
+          <tr><td>PWAキャッシュ</td><td>`20260705-research-export-v1` へ更新。</td></tr>
           <tr><td>Claude</td><td>3.5固定モデルは404。現行sonnetで読み取り専用レビューし、指摘を採用。</td></tr>
         </table>
       </section>
@@ -210,6 +211,7 @@
           <tr><td>実画像生成APIの前に失敗スタブを作るか</td><td>必須</td></tr>
           <tr><td>N1では外部AnalyticsなしでlocalStorage証跡でよいか</td><td>N1 OK</td></tr>
           <tr><td>自由記述/参考URLは生成に使い、計測イベントには本文を複製しない方針でよいか</td><td>よい</td></tr>
+          <tr><td>初期分析で本文を見たい場合、N1は端末内の研究用エクスポートでよいか</td><td>よい</td></tr>
         </table>
       </section>
 

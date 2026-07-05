@@ -1,10 +1,10 @@
-const CACHE_NAME = "ai-food-trainer-pwa-v17";
+const CACHE_NAME = "ai-food-trainer-pwa-v18";
 const ASSETS = [
   "/index.html",
   "/disclaimer.html",
-  "/styles.css?v=20260705-owner-decisions-v1",
-  "/app.js?v=20260705-owner-decisions-v1",
-  "/manifest.webmanifest?v=20260705-owner-decisions-v1",
+  "/styles.css?v=20260705-research-export-v1",
+  "/app.js?v=20260705-research-export-v1",
+  "/manifest.webmanifest?v=20260705-research-export-v1",
   "/assets/trainer-previews/01_mina_onboarding_preview.webp",
   "/assets/trainer-previews/02_rei_onboarding_preview.webp",
   "/assets/trainer-previews/03_kana_onboarding_preview.webp",
