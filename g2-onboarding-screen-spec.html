@@ -1791,7 +1791,7 @@
         </div>
         <div class="summary-card">
           <h3>重い経路</h3>
-          <p>こだわる人は、参考URL、顔、髪、服、関係性をタップ中心で作れる。</p>
+          <p>こだわる人は、参考URL/参考画像、顔、髪、服、関係性をタップ中心で作れる。</p>
         </div>
       </section>
 
@@ -1821,11 +1821,11 @@
 
       <section class="note-panel">
         <h2>フロー全体</h2>
-        <p>サンプル経路は短く、カスタム経路は顔と人物像の作成に寄せます。どちらも最後は初回食事報告、フィードバック、継続したくなる行動選択まで進めます。参考URLがある場合は早い段階で読み込み、以降の選択肢を仮選択済みにします。</p>
+        <p>サンプル経路は短く、カスタム経路は顔と人物像の作成に寄せます。どちらも最後は初回食事報告、フィードバック、継続したくなる行動選択まで進めます。参考URL/参考画像がある場合は早い段階で読み込み、以降の選択肢を仮選択済みにします。</p>
         <div class="flow-strip" aria-label="flow overview">
           <div class="flow-step"><strong>001 分岐</strong><span>自分で作る / サンプルから選ぶ</span></div>
           <div class="flow-step"><strong>002 サンプル</strong><span>顔アップ6人から選ぶ</span></div>
-          <div class="flow-step"><strong>003-007 外見</strong><span>絵柄・年齢・国籍・参考URL・顔・髪・服</span></div>
+          <div class="flow-step"><strong>003-007 外見</strong><span>絵柄・年齢・国籍・参考URL/画像・顔・髪・服</span></div>
           <div class="flow-step"><strong>007T 生成開始</strong><span>裏側で見た目生成を開始</span></div>
           <div class="flow-step"><strong>008A 目的</strong><span>維持 / 減量 / 増量 / 食生活改善</span></div>
           <div class="flow-step"><strong>008B 関係性</strong><span>距離感と呼ばれ方</span></div>
@@ -1835,8 +1835,8 @@
         <div class="flow-tree" aria-label="user flow tree">
           <div class="tree-card root"><h3>開始</h3><p>食事パートナーを作るか、サンプルから選ぶ。</p></div>
           <div class="tree-lane">
-            <div class="tree-card"><h3>カスタム経路</h3><p>絵柄 → 見た目の性別/年齢/国籍/参考URL → 顔 → 髪 → 服/アクセサリー/NG → 生成開始 → 食事目的/体重 → 関係性/呼ばれ方 → 食事入力 → ご対面。</p></div>
-            <div class="tree-card"><h3>サンプル経路</h3><p>6人から選ぶ → 食事目的/体重 → 関係性/呼ばれ方 → 初回食事入力。外見調整、任意補足、参考URLは出さない。</p></div>
+            <div class="tree-card"><h3>カスタム経路</h3><p>絵柄 → 見た目の性別/年齢/国籍/参考URL・参考画像 → 顔 → 髪 → 服/アクセサリー/NG → 生成開始 → 食事目的/体重 → 関係性/呼ばれ方 → 食事入力 → ご対面。</p></div>
+            <div class="tree-card"><h3>サンプル経路</h3><p>6人から選ぶ → 食事目的/体重 → 関係性/呼ばれ方 → 初回食事入力。外見調整、任意補足、参考URL/参考画像は出さない。</p></div>
           </div>
           <div class="tree-card"><h3>共通ゴール</h3><p>初回食事入力 → 生成/選択した相手とご対面 → 必要なら1回だけ調整 → 初回食事フィードバック → 応援画像 → 継続したい行動を選ぶ。</p></div>
         </div>
@@ -1920,8 +1920,8 @@
                     <div class="face-chip"><img src="assets/trainer-previews/03_kana_onboarding_preview.webp" alt=""></div>
                   </div>
                 </div>
-                <h2>あなただけの<br>食事パートナーを作ろう</h2>
-                <p>顔も、呼び方も、あなた次第。</p>
+                <h2>痩せたいから、<br>ひとりで頑張らない。</h2>
+                <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
                 <div class="choice-card selected">
                   <div class="choice-icon">作</div>
                   <div><strong>自分で作る</strong><p>世界に一人の相棒にする</p></div>
@@ -1940,8 +1940,8 @@
               <span class="route-badge common">共通</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>UI総称は暫定で「食事パートナー」。短い情緒コピーでは「相棒」も使う。</li><li>カスタム作成を上、サンプル選択を下に置く。</li><li>上部の顔は6体が横に流れる見せ方にし、サンプルの幅を自然に伝える。</li><li>説明文は最小限にし、パーソナライズ価値を見出しで伝える。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面だけで「自分専用を作れる」と伝わるか。</li><li>サンプル選択が逃げ道として軽く見えるか。</li><li>「食事パートナー」という呼び方が直感的か。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>UI総称は暫定で「食事パートナー」。短い情緒コピーでは「相棒」も使う。</li><li>入口では「食事管理」より「痩せたい/ダイエットを続けたい」という目的を先に出す。</li><li>カスタム作成を上、サンプル選択を下に置く。</li><li>上部の顔は6体が横に流れる見せ方にし、サンプルの幅を自然に伝える。</li><li>説明文は最小限にし、パーソナライズ価値を見出しで伝える。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>この画面だけで「痩せたいから使う、その手段として自分専用を作る」と伝わるか。</li><li>サンプル選択が逃げ道として軽く見えるか。</li><li>「食事パートナー」という呼び方が直感的か。</li></ul></div>
             </div>
           </div>
         </article>
@@ -1951,7 +1951,8 @@
             <div class="phone-screen">
               <div class="phone-top"><div class="back">‹</div><div class="progress"><span style="width: 14%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>気になる人を一人選ぶ</h2>
+                <h2>サンプルからも始められます</h2>
+                <p>作るのが面倒な人は、サンプルでOK。</p>
                 <div class="featured-trainer"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
                 <div class="trainer-list compact">
                   <div class="trainer-card face-only selected"><img src="assets/trainer-previews/01_mina_onboarding_preview.webp" alt=""><strong>ミナ</strong></div>
@@ -1962,7 +1963,7 @@
                   <div class="trainer-card face-only"><img src="assets/trainer-previews/06_ao_onboarding_preview.webp" alt=""><strong>アオ</strong></div>
                 </div>
               </div>
-              <div class="phone-bottom"><button class="button">この人にする</button><button class="button secondary">やっぱり自分で作る</button></div>
+              <div class="phone-bottom"><button class="button">自分で作る</button><button class="button secondary">この人で始める</button></div>
             </div>
           </div>
           <div class="spec">
@@ -1971,8 +1972,8 @@
               <span class="route-badge">サンプル経路</span>
             </div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>選択中の1体を大きなポートレートで見せ、その下で6体から選ばせる。</li><li>説明文は置かず、名前とビジュアルだけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URLを出さない。</li><li>下半分が寂しく見えても、余計な機能を足さず「顔を選ぶ」ことに集中させる。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>1枚絵だけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が十分か。</li><li>選択肢を増やさなくても画面密度が成立するか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>選択中の1体を大きなポートレートで見せ、その下で6体から選ばせる。</li><li>自分で作る価値が主役なので、サンプル選択画面でも主CTAは「自分で作る」にする。</li><li>サンプルは「作るのが面倒な人向けの逃げ道」として、軽い副導線にする。</li><li>説明文は最小限にし、名前とビジュアルだけで選ばせる。</li><li>サンプル経路では外見調整、補足、参考URL/参考画像を出さない。</li><li>下半分が寂しく見えても、余計な機能を足さず「顔を選ぶ」ことに集中させる。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>1枚絵だけで魅力が伝わるか。</li><li>サンプル経路からカスタム作成へ戻れる導線が主導線として十分か。</li><li>選択肢を増やさなくても画面密度が成立するか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -2024,6 +2025,11 @@
                   <div class="input-line">イメージに近いURLを貼る</div>
                   <div class="loading-note">URLを読み込み中。そのまま入力を続けられます。</div>
                 </div>
+                <div class="input-card">
+                  <h3>参考画像<span class="field-label">任意</span></h3>
+                  <div class="input-line">画像があれば追加</div>
+                  <div class="loading-note">画像がなくても次へ進めます。</div>
+                </div>
               </div>
               <div class="phone-bottom"><button class="button">次へ</button></div>
             </div>
@@ -2031,8 +2037,8 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-004</p><h2>見た目の性別・年齢・国籍</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>「性別の印象」ではなく「見た目の性別」として聞く。</li><li>必須は見た目の性別と見た目年齢。国籍・ルーツと参考URLは任意。</li><li>見た目年齢は10代前半から60代以上まで選べる。</li><li>国籍・ルーツは「お任せ」を先頭に置き、その他も選べるようにする。</li><li>参考URLがある場合は、この画面内で読み込み表示を出す。読み込み中でもユーザーは次の入力を続けられる。</li><li>URL解析後、後続の顔、髪、服の候補を仮選択済みにする。</li><li>owner decisionにより、見た目年齢で後続の関係性候補はフィルタしない。</li></ul></div>
-              <div class="spec-block"><h3>判断ポイント</h3><ul><li>参考URLが任意だと分かるか。</li><li>読み込み中でも操作できることが伝わるか。</li><li>年齢・国籍の粒度が多すぎないか。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>「性別の印象」ではなく「見た目の性別」として聞く。</li><li>必須は見た目の性別と見た目年齢。国籍・ルーツ、参考URL、参考画像は任意。</li><li>見た目年齢は10代前半から60代以上まで選べる。</li><li>国籍・ルーツは「お任せ」を先頭に置き、その他も選べるようにする。</li><li>参考URLと参考画像は同じ画面内に置き、どちらも任意であることを明示する。</li><li>参考URL/参考画像がある場合は、この画面内で読み込み表示を出す。読み込み中でもユーザーは次の入力を続けられる。</li><li>URL/画像解析後、後続の顔、髪、服の候補を仮選択済みにする。</li><li>owner decisionにより、見た目年齢で後続の関係性候補はフィルタしない。</li></ul></div>
+              <div class="spec-block"><h3>判断ポイント</h3><ul><li>参考URLと参考画像が任意だと分かるか。</li><li>読み込み中でも操作できることが伝わるか。</li><li>年齢・国籍の粒度が多すぎないか。</li></ul></div>
             </div>
           </div>
         </article>
@@ -2055,7 +2061,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-005</p><h2>顔の雰囲気</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>AIパートナー/画像生成系の作り方を参考に、自由記述ではなく選択式を主にする。</li><li>「印象」「目元」「輪郭」「表情」に分け、ユーザーが顔を言語化しなくても選べるようにする。</li><li>参考URLがある場合は仮選択済みにする。</li><li>服装や場所より先に人物そのものを固める。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>AIパートナー/画像生成系の作り方を参考に、自由記述ではなく選択式を主にする。</li><li>「印象」「目元」「輪郭」「表情」に分け、ユーザーが顔を言語化しなくても選べるようにする。</li><li>参考URL/参考画像がある場合は仮選択済みにする。</li><li>服装や場所より先に人物そのものを固める。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>ユーザーが好きな顔を直感的に選べるか。</li><li>この語彙で生成結果のブレを減らせるか。</li><li>選択数が多すぎて疲れないか。</li></ul></div>
             </div>
           </div>
@@ -2083,7 +2089,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-006</p><h2>髪の長さと色</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>髪の長さはスキンヘッドから超ロングまでのスライダー型にする。</li><li>髪型はカテゴリ選択なので、ボタン選択式のままにする。</li><li>髪色は24色相当のパレットで選ぶ。</li><li>こだわりのあるユーザー向けに、色の自由記入欄を置く。</li><li>参考URLがある場合は長さ、髪型、色を仮選択済みにする。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>髪の長さはスキンヘッドから超ロングまでのスライダー型にする。</li><li>髪型はカテゴリ選択なので、ボタン選択式のままにする。</li><li>髪色は24色相当のパレットで選ぶ。</li><li>こだわりのあるユーザー向けに、色の自由記入欄を置く。</li><li>参考URL/参考画像がある場合は長さ、髪型、色を仮選択済みにする。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>長さが直感的に分かるか。</li><li>長さスライダーと髪型ボタンの役割が分かれるか。</li><li>髪型の選択肢が画像生成に効くか。</li></ul></div>
             </div>
           </div>
@@ -2107,7 +2113,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-007</p><h2>服・アクセサリー・NG</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>場所・背景の質問は廃止し、人物そのものに関わる服、アクセサリー、追加こだわり、NGを聞く。</li><li>服は選択式。アクセサリー、追加こだわり、避けたいものは任意の自由記入にする。</li><li>服の選択肢には、私服、スポーティ、制服風、白衣風、スーツ、ドレス、水着、メイド風、カフェ店員風など人気の見た目カテゴリを含める。</li><li>顔まわりの自由記述は削除し、顔はSCR-ONB-005の選択式に集約する。</li><li>参考URLはSCR-ONB-004へ統合済み。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>場所・背景の質問は廃止し、人物そのものに関わる服、アクセサリー、追加こだわり、NGを聞く。</li><li>服は選択式。アクセサリー、追加こだわり、避けたいものは任意の自由記入にする。</li><li>服の選択肢には、私服、スポーティ、制服風、白衣風、スーツ、ドレス、水着、メイド風、カフェ店員風など人気の見た目カテゴリを含める。</li><li>顔まわりの自由記述は削除し、顔はSCR-ONB-005の選択式に集約する。</li><li>参考URL/参考画像はSCR-ONB-004へ統合済み。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>任意項目であることが分かるか。</li><li>アクセサリーとNGの自由記入が重すぎないか。</li><li>水着などの衣装カテゴリを入れても、食事アプリとして違和感が強すぎないか。</li></ul></div>
             </div>
           </div>
@@ -2129,7 +2135,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-007T</p><h2>見た目完了の遷移</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>見た目質問から食事目的へ急に飛ぶ違和感を消すための短い遷移。</li><li>実装上は、参考URL解析や仮キャラクターシート生成の待ち時間として使う。</li><li>1.5〜3秒で自動遷移する。ユーザーに「続ける」を押させない。</li><li>文言は、他アプリのオンボードでよく使われる「もう少し」「あなた向けに準備中」「ここまでの内容を反映中」に寄せる。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>見た目質問から食事目的へ急に飛ぶ違和感を消すための短い遷移。</li><li>実装上は、参考URL/参考画像解析や仮キャラクターシート生成の待ち時間として使う。</li><li>1.5〜3秒で自動遷移する。ユーザーに「続ける」を押させない。</li><li>文言は、他アプリのオンボードでよく使われる「もう少し」「あなた向けに準備中」「ここまでの内容を反映中」に寄せる。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>食事質問へ自然につながるか。</li><li>待ち時間が演出として機能するか。</li></ul></div>
             </div>
           </div>
@@ -2192,8 +2198,8 @@
             <div class="phone-screen">
               <div class="phone-top"><span>生成中</span><div class="progress"><span style="width: 78%"></span></div></div>
               <div class="phone-body scroll">
-                <h2>相棒、誕生中。</h2>
-                <p>だいたい60秒。次に、さっきの食事を入力します。</p>
+                <h2>あなたのためのパートナー、誕生中。</h2>
+                <p>回答をもとに、担当をパーソナライズしています。</p>
                 <div class="loader" style="min-height:170px;"><div class="pulse">生成中</div></div>
                 <div class="tip-card"><strong>Tips</strong><p>このあと、さっきの食事を一言だけ。</p></div>
                 <div class="action-card"><div class="action-icon">飯</div><div><strong>このあと食事入力へ進みます</strong><p>最初の一言に使います</p></div></div>
@@ -2203,7 +2209,7 @@
           <div class="spec">
             <div class="spec-header"><div><p class="screen-id">SCR-ONB-009</p><h2>生成中</h2></div><span class="route-badge custom">カスタム</span></div>
             <div class="spec-body">
-              <div class="spec-block"><h3>仕様</h3><ul><li>生成待ちは約60秒前提。</li><li>単なるローディングではなく、Tipsと「このあと食事入力へ進む」案内を表示する。</li><li>数秒見せたあと、自動で初回食事入力へ遷移する。ユーザーに余計なボタンを押させない。</li><li>体重はSCR-ONB-008Aで入力済みの前提なので、この画面では出さない。</li><li>生成失敗時は入力データを保持し、「再試行」または「サンプルから選ぶ」を出す。</li><li>内部シートという言葉はユーザー向けには出さない。</li></ul></div>
+              <div class="spec-block"><h3>仕様</h3><ul><li>生成待ちは約60秒前提。</li><li>単なるローディングではなく、Tipsと「このあと食事入力へ進む」案内を表示する。</li><li>文脈は「あなたの雰囲気に合わせる」ではなく、「あなたのために担当をパーソナライズして作っている」とする。</li><li>数秒見せたあと、自動で初回食事入力へ遷移する。ユーザーに余計なボタンを押させない。</li><li>体重はSCR-ONB-008Aで入力済みの前提なので、この画面では出さない。</li><li>生成失敗時は入力データを保持し、「再試行」または「サンプルから選ぶ」を出す。</li><li>内部シートという言葉はユーザー向けには出さない。</li></ul></div>
               <div class="spec-block"><h3>判断ポイント</h3><ul><li>60秒待ちでも離脱しにくいか。</li><li>食事入力へ自動で進む流れが自然か。</li><li>生成演出が特別感につながるか。</li></ul></div>
             </div>
           </div>
@@ -2338,7 +2344,7 @@
           "SCR-ONB-001": "食事パートナーという呼び方で価値が伝わるか。6体の横スクロールは魅力に見えるか。",
           "SCR-ONB-002": "顔アップの6サンプルが魅力的に見えるか。説明なしで選べるか。",
           "SCR-ONB-003": "アニメ/実写/セミリアルの違いがサンプル顔で伝わるか。",
-          "SCR-ONB-004": "参考URLが任意だと分かるか。読み込み中でも入力を続けられる見せ方になっているか。",
+          "SCR-ONB-004": "参考URL/参考画像が任意だと分かるか。読み込み中でも入力を続けられる見せ方になっているか。",
           "SCR-ONB-005": "顔の印象/目元/輪郭/表情の選択で、作りたい顔を指定できそうか。",
           "SCR-ONB-006": "髪の長さスライダー、髪型ボタン、24色パレット、色の自由入力が直感的か。",
           "SCR-ONB-007": "服、アクセサリー、追加こだわり、NGの任意項目が重すぎず使えそうか。",
