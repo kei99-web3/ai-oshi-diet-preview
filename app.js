@@ -1,5 +1,5 @@
-const STORAGE_KEY = "aiFoodTrainerPwaState.v16";
-const LEGACY_STORAGE_PREFIXES = ["aiOshiDietPwaState.", "aiFoodTrainerPwaState.v1", "aiFoodTrainerPwaState.v2", "aiFoodTrainerPwaState.v3", "aiFoodTrainerPwaState.v4", "aiFoodTrainerPwaState.v5", "aiFoodTrainerPwaState.v6", "aiFoodTrainerPwaState.v7", "aiFoodTrainerPwaState.v8", "aiFoodTrainerPwaState.v9", "aiFoodTrainerPwaState.v10", "aiFoodTrainerPwaState.v11", "aiFoodTrainerPwaState.v12", "aiFoodTrainerPwaState.v13", "aiFoodTrainerPwaState.v14", "aiFoodTrainerPwaState.v15"];
+const STORAGE_KEY = "aiFoodTrainerPwaState.v17";
+const LEGACY_STORAGE_PREFIXES = ["aiOshiDietPwaState.", "aiFoodTrainerPwaState.v1", "aiFoodTrainerPwaState.v2", "aiFoodTrainerPwaState.v3", "aiFoodTrainerPwaState.v4", "aiFoodTrainerPwaState.v5", "aiFoodTrainerPwaState.v6", "aiFoodTrainerPwaState.v7", "aiFoodTrainerPwaState.v8", "aiFoodTrainerPwaState.v9", "aiFoodTrainerPwaState.v10", "aiFoodTrainerPwaState.v11", "aiFoodTrainerPwaState.v12", "aiFoodTrainerPwaState.v13", "aiFoodTrainerPwaState.v14", "aiFoodTrainerPwaState.v15", "aiFoodTrainerPwaState.v16"];
 const TRAINER_SHEET_VERSION = 2;
 const app = document.querySelector("#app");
 
@@ -340,7 +340,7 @@ const SAMPLE_ONBOARDING_FLOW = ["start", "sample", "goal", "relationship", "firs
 
 function defaultState() {
   return {
-    version: 16,
+    version: 17,
     activeTab: "report",
     draft: "",
     draftPhotoName: "",
@@ -482,6 +482,13 @@ function formatDate(value) {
   return new Intl.DateTimeFormat("ja-JP", {
     month: "2-digit",
     day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit"
+  }).format(new Date(value));
+}
+
+function formatTime(value) {
+  return new Intl.DateTimeFormat("ja-JP", {
     hour: "2-digit",
     minute: "2-digit"
   }).format(new Date(value));
@@ -732,7 +739,7 @@ function buildLookConfig(profile = state.profile) {
     impressionKey,
     appearance: preset?.appearance || `${artStyle.label}、${hairColor.copy}、${hairStyle.copy}、${outfitColor.copy}、${impression.face}`,
     copy: preset?.copy || impression.copy,
-    previewAsset: preset?.previewAsset || "",
+    previewAsset: preset?.previewAsset || LOOK_PRESETS[styleSamplePreset(artStyleKey)]?.previewAsset || "",
     sheetAsset: preset?.sheetAsset || "",
     sheetSource: preset?.sheetSource || "",
     sheetFormat: preset?.sheetAsset ? "multi_view_character_sheet_v1" : "",
@@ -1596,7 +1603,7 @@ function renderOnboarding() {
   const screen = getOnboardingScreen();
   return `
     <div class="onboarding-mobile" role="dialog" aria-modal="true" aria-labelledby="onboarding-title">
-      <section class="onboarding-phone">
+      <section class="onboarding-phone is-${escapeHtml(screen)}">
         <header class="onboarding-topbar">
           <div class="mini-brand">
             <img src="assets/icon.svg" width="34" height="34" alt="">
@@ -1699,16 +1706,21 @@ function renderStartStep() {
   return `
     <div class="onboarding-screen start-screen">
       <div class="start-hero-panel">
+        <p class="hero-handwriting">あなたのダイエットを、<br>一緒にサポート!</p>
         <div class="diet-proof">
-          <span>DIET PARTNER</span>
-          <strong>痩せたい毎日に、<br>あなたの担当を。</strong>
-          <p>写真や一言から食事を見て、次の一手まで返します。</p>
+          <strong><mark>痩せたい</mark>から、<br>ひとりで頑張らない。</strong>
+          <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
         </div>
-        <div class="preview-strip is-animated" aria-label="sample partners">
-          ${[...Object.entries(LOOK_PRESETS), ...Object.entries(LOOK_PRESETS)].map(([key, preset]) => {
+        <div class="preview-stage" aria-label="sample partners">
+          ${Object.entries(LOOK_PRESETS).map(([key, preset], index) => {
             const look = buildPresetLookConfig(key);
-            return `<img src="${escapeHtml(look.previewAsset || look.sheetAsset)}" alt="${escapeHtml(preset.name)}">`;
+            return `<img class="preview-face is-${index + 1}" src="${escapeHtml(look.previewAsset || look.sheetAsset)}" alt="${escapeHtml(preset.name)}">`;
           }).join("")}
+        </div>
+        <div class="promise-pills" aria-label="promise">
+          <span>ダイエットを<br>続けやすく</span>
+          <span>写真1枚で<br>返事</span>
+          <span>1回まで<br>修正無料</span>
         </div>
       </div>
       <div class="onboarding-copy">
@@ -1717,15 +1729,16 @@ function renderStartStep() {
         <p>痩せたい理由はそのままに。続けたくなる相手を先に決めます。</p>
       </div>
       <button class="route-card is-primary" type="button" data-action="start-custom">
-        <span class="route-icon">つくる</span>
-        <strong>自分で作る</strong>
-        <span>顔、髪、雰囲気まで選んで、あなた専用にします。</span>
+        <span class="route-icon">魔法</span>
+        <strong>じぶんの担当をつくる</strong>
+        <span aria-hidden="true">›</span>
       </button>
       <button class="route-card" type="button" data-action="start-sample">
-        <span class="route-icon is-soft">選ぶ</span>
+        <span class="route-icon is-soft">人</span>
         <strong>サンプルから選ぶ</strong>
-        <span>作るのが面倒なら、用意済みの6人からすぐ始められます。</span>
+        <span aria-hidden="true">›</span>
       </button>
+      <p class="trust-note">いつでも変更できます。まだ迷っても大丈夫。</p>
     </div>
   `;
 }
@@ -1773,7 +1786,7 @@ function styleSamplePreset(styleKey) {
 function renderStyleStep() {
   const selected = state.profile.artStyle;
   return `
-    <div class="onboarding-screen">
+    <div class="onboarding-screen style-screen">
       <div class="onboarding-copy">
         <p class="step-kicker">${stepKicker("style")}</p>
         <h2 id="onboarding-title">絵のタッチは？</h2>
@@ -2103,27 +2116,81 @@ function reportForOnboardingFeedback() {
 function renderFeedbackStep() {
   const report = reportForOnboardingFeedback();
   const trainer = state.profile.trainerSheet ? trainerFromSheet(state.profile.trainerSheet) : buildTrainerProfile(state.profile);
+  const n = report?.analysis?.nutrition || { calories: 0, protein: 0, fat: 0, carbs: 0, signals: {} };
+  const mealText = report?.text || "さけの塩焼き定食";
+  const veggieCopy = n.signals?.veggieHits ? "あと少し" : "少し足す";
+  const proteinCopy = n.protein >= 22 ? "ちょうどいい" : "少し足す";
+  const carbCopy = n.carbs >= 40 && n.carbs <= 75 ? "ちょうどいい" : "量を見る";
   return `
     <div class="onboarding-screen feedback-screen">
-      <div class="onboarding-copy">
-        <p class="step-kicker">${stepKicker("feedback")}</p>
-        <h2 id="onboarding-title">${escapeHtml(trainer.name)}からの一言</h2>
-      </div>
-      ${report ? renderReportItem(report, true) : `<div class="empty">食事を入れると、ここに最初の返信が出ます。</div>`}
-      <div class="generated-image-card">
+      <div class="feedback-profile">
         ${renderTrainerVisual(trainer.look, "mini")}
         <div>
-          <strong>応援画像を生成</strong>
-          <p>食事パートナーと今回の食事を反映した1枚を作ります。</p>
+          <strong>${escapeHtml(trainer.name)}</strong>
+          <span>あなた専用の食事パートナー</span>
         </div>
       </div>
-      ${renderOnboardingActions({ nextLabel: "続ける", back: false })}
+      <div class="partner-bubble">
+        <strong>見せてくれてありがとう。</strong>
+        <p>バランスの取れた、いい食事だね。いくつか気づいたことをシェアするね。</p>
+      </div>
+      <article class="meal-summary-card">
+        <div class="meal-thumb" aria-hidden="true">
+          <span class="plate rice"></span>
+          <span class="plate soup"></span>
+          <span class="plate main"></span>
+          <span class="plate salad"></span>
+        </div>
+        <div>
+          <span class="meal-label">今日の食事</span>
+          <strong>${escapeHtml(mealText)}</strong>
+          <small>今日 ${formatTime(report?.at || new Date().toISOString())}</small>
+        </div>
+      </article>
+      <div class="metric-chip-row">
+        <span><em>たんぱく質</em><strong>${proteinCopy}</strong></span>
+        <span><em>野菜</em><strong>${veggieCopy}</strong></span>
+        <span><em>ごはん量</em><strong>${carbCopy}</strong></span>
+      </div>
+      <div class="feedback-story-card">
+        <section>
+          <span class="story-icon">太陽</span>
+          <div>
+            <strong>良かった点</strong>
+            <p>主菜と汁物が入っていて、次の食事へ戻しやすい内容です。</p>
+          </div>
+        </section>
+        <section>
+          <span class="story-icon">メモ</span>
+          <div>
+            <strong>今日のメモ</strong>
+            <p>野菜がもう少し増えると、満足感と食物繊維を取りやすくなります。</p>
+          </div>
+        </section>
+        <section>
+          <span class="story-icon">一手</span>
+          <div>
+            <strong>次の一手</strong>
+            <p>次の食事で、あと一品「野菜のおかず」を追加してみよう。</p>
+          </div>
+        </section>
+      </div>
+      <div class="support-art-card">
+        <div class="support-art-copy">
+          <strong>応援画像</strong>
+          <p>いい感じだよ!<br>この調子で一緒にがんばろうね。</p>
+        </div>
+        ${renderTrainerVisual(trainer.look, "support")}
+        <div class="support-meal" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+      ${renderOnboardingActions({ nextLabel: "次の食事も見せる", back: false })}
     </div>
   `;
 }
 
 function renderPaywallStep() {
   const selected = state.profile.paywallIntent;
+  const trainer = state.profile.trainerSheet ? trainerFromSheet(state.profile.trainerSheet) : buildTrainerProfile(state.profile);
   const actions = [
     ["grow", "相棒を育てる", "見た目や言葉づかいを調整"],
     ["meal", "もう1食見てもらう", "次の食事もすぐ返してもらう"],
@@ -2131,16 +2198,20 @@ function renderPaywallStep() {
   ];
   return `
     <div class="onboarding-screen paywall-screen">
-      <div class="onboarding-copy">
-        <p class="step-kicker">${stepKicker("paywall")}</p>
-        <h2 id="onboarding-title">このまま、もっと一緒に</h2>
-        <p>次にやりたいことを選んでください。</p>
+      <div class="paywall-hero">
+        <div>
+          <h2 id="onboarding-title">このまま、<br>もっと一緒に</h2>
+          <p>${escapeHtml(trainer.name)}と一緒なら、あなたの毎日がちゃんと変わっていきます。</p>
+        </div>
+        ${renderTrainerVisual(trainer.look, "paywall")}
       </div>
+      <p class="paywall-lead">次にしたいことを選んでください</p>
       <div class="action-list">
         ${actions.map(([value, title, copy]) => `
           <button class="action-card ${selected === value ? "is-selected" : ""}" type="button" data-paywall-intent="${value}" aria-pressed="${selected === value}">
-            <div class="action-icon">${value === "meal" ? "飯" : value === "data" ? "kg" : "顔"}</div>
+            <div class="action-icon">${value === "meal" ? "飯" : value === "data" ? "kg" : "芽"}</div>
             <div><strong>${escapeHtml(title)}</strong><p>${escapeHtml(copy)}</p></div>
+            <span class="action-arrow" aria-hidden="true">›</span>
           </button>
         `).join("")}
       </div>
@@ -2986,7 +3057,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3001,7 +3072,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v3", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v4", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
