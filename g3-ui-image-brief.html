@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <title>G3 UI画像化ブリーフ | AI食事パートナー</title>
+    <link rel="stylesheet" href="./design-tokens.css">
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--surface-base);
+        color: var(--ink-main);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+        line-height: var(--lh-body);
+      }
+      main {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        padding: 28px 16px 56px;
+      }
+      header {
+        padding: 18px 0 24px;
+        border-bottom: 1px solid var(--line-soft);
+      }
+      h1, h2, h3, p { margin: 0; }
+      h1 {
+        max-width: 760px;
+        font-size: 34px;
+        line-height: var(--lh-display);
+        font-weight: 800;
+      }
+      h2 {
+        margin-top: 28px;
+        font-size: var(--text-h1);
+        line-height: var(--lh-h1);
+      }
+      h3 {
+        font-size: var(--text-h2);
+        line-height: var(--lh-h2);
+      }
+      .kicker {
+        margin-bottom: 8px;
+        color: var(--brand-core);
+        font-size: var(--text-note);
+        font-weight: 800;
+      }
+      .lead {
+        max-width: 760px;
+        margin-top: 12px;
+        color: var(--ink-muted);
+        font-size: var(--text-sub);
+      }
+      .status {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .pill {
+        display: inline-flex;
+        min-height: 32px;
+        align-items: center;
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-pill);
+        background: var(--surface-raised);
+        padding: 4px 11px;
+        font-size: var(--text-note);
+        font-weight: 800;
+      }
+      .pill.good { background: var(--surface-soft); color: var(--brand-core); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .card, .screen {
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-card);
+        background: var(--surface-raised);
+        padding: 16px;
+        box-shadow: var(--shadow-card);
+      }
+      .card p, .screen p, li {
+        margin-top: 8px;
+        color: var(--ink-muted);
+        font-size: var(--text-note);
+      }
+      .screen-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .screen strong {
+        display: block;
+        margin-top: 6px;
+        font-size: var(--text-h2);
+      }
+      .screen ul {
+        margin: 10px 0 0;
+        padding-left: 18px;
+      }
+      table {
+        width: 100%;
+        margin-top: 12px;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line-soft);
+        border-radius: var(--radius-card);
+        background: var(--surface-raised);
+      }
+      th, td {
+        border-bottom: 1px solid var(--line-soft);
+        padding: 11px;
+        text-align: left;
+        vertical-align: top;
+        font-size: var(--text-note);
+      }
+      th { color: var(--ink-muted); }
+      code {
+        border-radius: 8px;
+        background: rgba(58, 107, 92, 0.1);
+        padding: 2px 6px;
+        color: var(--trust-metric);
+        font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      }
+      .next {
+        border-color: rgba(232, 115, 90, 0.35);
+        background: linear-gradient(180deg, var(--surface-raised), var(--surface-soft));
+      }
+      @media (max-width: 760px) {
+        main { padding: 22px 14px 48px; }
+        h1 { font-size: 30px; }
+        .grid, .screen-list { grid-template-columns: 1fr; }
+        table { display: block; overflow-x: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="kicker">G3 UI Image Brief / 2026-07-05</p>
+        <h1>UI画像化ブリーフ</h1>
+        <p class="lead">N1で承認済みのオンボーディングを、Direction 1「わたしの担当」の見た目へ落とすための画像生成ブリーフです。次はこの内容をCodex Image2 / codex:rescueへ渡します。</p>
+        <div class="status">
+          <span class="pill good">9画面</span>
+          <span class="pill good">390x844</span>
+          <span class="pill good">スマホ前提</span>
+          <span class="pill">G3正本ドラフト</span>
+        </div>
+      </header>
+
+      <section>
+        <h2>結論</h2>
+        <div class="grid">
+          <div class="card"><h3>作るもの</h3><p>開始、サンプル、見た目、生成中、失敗、食事入力、ご対面、初回返信、仮ペイウォールの9枚。</p></div>
+          <div class="card"><h3>守るもの</h3><p>大枠フローは変えず、Partner-first Warm Utilityに沿って見た目だけ具体化。</p></div>
+          <div class="card"><h3>次の一手</h3><p>G3-IMG-001から順に画像生成し、HTMLレビューシートへ並べる。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>入力正本</h2>
+        <table>
+          <tr><th>種類</th><th>ファイル</th></tr>
+          <tr><td>画面仕様</td><td><code>web/g2-onboarding-screen-spec.html</code></td></tr>
+          <tr><td>デザイン正本</td><td><code>docs/rebuild/30_ui/CANONICAL_DESIGN_SHEET.md</code></td></tr>
+          <tr><td>定量デザイン</td><td><code>docs/rebuild/30_ui/VISUAL_DESIGN_QUANT_SHEET.md</code></td></tr>
+          <tr><td>N1境界</td><td><code>docs/rebuild/60_handoff/N1_PHASE_CLOSE_IMPLEMENTATION_PACKAGE_2026-07-05.md</code></td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>共通ルール</h2>
+        <div class="grid">
+          <div class="card"><h3>画面</h3><p>390x844px。ブラウザUIや端末フレームなし。アプリ画面だけ。</p></div>
+          <div class="card"><h3>UI</h3><p>主CTAは1つ。左右20px。カード入れ子禁止。数字は控えめ。</p></div>
+          <div class="card"><h3>空気</h3><p>食卓の温度、清潔な日常感、こちらを見てくれる担当感。</p></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>画像化対象</h2>
+        <div class="screen-list">
+          <article class="screen">
+            <span class="pill">G3-IMG-001 / SCR-ONB-001</span>
+            <strong>開始・作り方の分岐</strong>
+            <p>自分専用を作れることを3秒で伝える。</p>
+            <ul><li>6体ポートレート</li><li>じぶんの担当をつくる</li><li>サンプルから選ぶ</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-002 / SCR-ONB-002</span>
+            <strong>サンプル選択</strong>
+            <p>顔アップだけで魅力を伝える。</p>
+            <ul><li>選択中1体を大きく</li><li>6体カード</li><li>説明文なし</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-003 / SCR-ONB-004</span>
+            <strong>見た目と参考URL</strong>
+            <p>参考URLは任意で、読み込み中でも進める。</p>
+            <ul><li>性別/年齢</li><li>国籍・ルーツ</li><li>参考URL任意</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-004 / SCR-ONB-009</span>
+            <strong>生成中</strong>
+            <p>60秒待ちを、担当が生まれる時間に変える。</p>
+            <ul><li>相棒、誕生中。</li><li>Tips</li><li>自動で食事入力へ</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-005 / SCR-ONB-009F</span>
+            <strong>生成失敗スタブ</strong>
+            <p>実画像生成API前の必須導線。</p>
+            <ul><li>入力内容は残る</li><li>もう一度つくる</li><li>サンプルから選ぶ</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-006 / SCR-ONB-012</span>
+            <strong>初回食事入力</strong>
+            <p>覚えている範囲で、軽く入力できる。</p>
+            <ul><li>写真追加</li><li>食事本文</li><li>サンプルを入れる</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-007 / SCR-ONB-010</span>
+            <strong>ご対面</strong>
+            <p>自分専用ができた感情の山を作る。</p>
+            <ul><li>会えました。</li><li>大きな正面ポートレート</li><li>少し調整</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-008 / SCR-ONB-013</span>
+            <strong>初回フィードバック</strong>
+            <p>ちゃんと見てもらえた感覚と具体性を両立する。</p>
+            <ul><li>顔と名前</li><li>良かった点/今日のメモ/次の一手</li><li>応援画像カード</li></ul>
+          </article>
+          <article class="screen">
+            <span class="pill">G3-IMG-009 / SCR-ONB-014</span>
+            <strong>仮ペイウォール</strong>
+            <p>機能解放ではなく、担当との継続として見せる。</p>
+            <ul><li>相棒を育てる</li><li>もう1食見てもらう</li><li>今はここまで</li></ul>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <h2>レビュー基準</h2>
+        <table>
+          <tr><th>質問</th><th>合格</th></tr>
+          <tr><td>自分専用の食事パートナー感があるか</td><td>3/5以上がYes</td></tr>
+          <tr><td>食事アプリとして信用できるか</td><td>3/5以上がYes</td></tr>
+          <tr><td>次へ進みたいか</td><td>3/5以上がYes</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <h2>Next Action</h2>
+        <div class="card next">
+          <h3>G3-IMG-001から生成</h3>
+          <p>このブリーフを入力に、9枚のUI画像を生成します。生成後は画像をHTMLレビューシートへ並べ、各画面ごとにレビュー欄を付けます。</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
