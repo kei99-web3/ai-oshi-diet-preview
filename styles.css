@@ -2348,24 +2348,56 @@ a {
 }
 
 .hero-handwriting {
-  margin: 0 auto -6px;
+  margin: 0 auto -2px;
   color: var(--brand);
   font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-  font-size: 1.12rem;
+  font-size: 1.02rem;
   font-weight: 800;
-  line-height: 1.45;
+  line-height: 1.36;
   text-align: center;
   transform: rotate(-3deg);
 }
 
 .start-hero-panel {
-  gap: 16px;
-  min-height: 594px;
-  padding: calc(22px + env(safe-area-inset-top)) 18px 22px;
+  position: relative;
+  gap: 11px;
+  min-height: auto;
+  padding: calc(24px + env(safe-area-inset-top)) 18px 15px;
   background:
-    radial-gradient(circle at 12% 16%, rgba(255, 255, 255, 0.86) 0 42px, transparent 43px),
-    radial-gradient(circle at 90% 10%, rgba(245, 197, 86, 0.23), transparent 28%),
-    linear-gradient(180deg, #fffaf1 0%, #fff3df 64%, #fff8ed 100%);
+    radial-gradient(circle at 8% 17%, rgba(255, 255, 255, 0.9) 0 42px, transparent 43px),
+    radial-gradient(circle at 92% 6%, rgba(245, 197, 86, 0.2), transparent 27%),
+    linear-gradient(180deg, #fffaf1 0%, #fff2df 58%, #fff8ef 100%);
+}
+
+.start-hero-panel::before,
+.start-hero-panel::after {
+  position: absolute;
+  z-index: 0;
+  color: rgba(239, 126, 93, 0.36);
+  font-family: Georgia, serif;
+  font-size: 2.3rem;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.start-hero-panel::before {
+  content: "♡";
+  top: calc(51px + env(safe-area-inset-top));
+  left: 38px;
+  transform: rotate(-12deg);
+}
+
+.start-hero-panel::after {
+  content: "〃";
+  top: calc(35px + env(safe-area-inset-top));
+  right: 32px;
+  color: rgba(239, 126, 93, 0.44);
+  transform: rotate(18deg);
+}
+
+.start-hero-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .diet-proof {
@@ -2374,9 +2406,33 @@ a {
 }
 
 .diet-proof strong {
-  max-width: 8.8em;
-  font-size: clamp(2.2rem, 10vw, 3.45rem);
-  line-height: 1.12;
+  position: relative;
+  width: 100%;
+  max-width: none;
+  color: var(--ink);
+  font-size: clamp(1.86rem, 8.5vw, 2.18rem);
+  font-weight: 950;
+  line-height: 1.18;
+}
+
+.diet-proof strong span {
+  display: inline-block;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.diet-proof strong::after {
+  content: "";
+  display: block;
+  width: 142px;
+  height: 10px;
+  margin: 5px auto 0;
+  border-bottom: 4px solid rgba(239, 126, 93, 0.72);
+  border-radius: 999px;
+  transform: rotate(-5deg);
 }
 
 .diet-proof mark {
@@ -2385,22 +2441,24 @@ a {
 }
 
 .diet-proof p {
-  max-width: 18em;
+  max-width: 18.6em;
   color: #6f5d53;
+  font-size: 0.88rem;
   font-weight: 800;
+  line-height: 1.48;
 }
 
 .preview-stage {
   position: relative;
-  min-height: 178px;
-  margin: 0 -12px;
+  min-height: 180px;
+  margin: 2px -18px 0;
 }
 
 .preview-face {
   position: absolute;
-  top: 22px;
-  width: 104px;
-  height: 152px;
+  top: 5px;
+  width: 88px;
+  height: 170px;
   border: 4px solid rgba(255, 255, 255, 0.94);
   border-radius: 999px;
   object-fit: cover;
@@ -2410,63 +2468,94 @@ a {
 }
 
 .preview-face.is-1 {
-  left: -18px;
+  left: -7px;
+  top: 24px;
   transform: rotate(-5deg);
 }
 
 .preview-face.is-2 {
-  left: 44px;
+  left: 52px;
   top: 12px;
   z-index: 2;
 }
 
 .preview-face.is-3 {
-  left: 106px;
-  top: 2px;
+  left: 113px;
+  width: 96px;
+  height: 186px;
+  top: 0;
   z-index: 3;
 }
 
 .preview-face.is-4 {
-  right: 110px;
-  top: 18px;
+  left: 185px;
+  top: 12px;
   z-index: 2;
 }
 
 .preview-face.is-5 {
-  right: 48px;
+  left: 246px;
   top: 10px;
   z-index: 3;
 }
 
 .preview-face.is-6 {
-  right: -16px;
-  top: 18px;
+  left: 309px;
+  top: 16px;
   transform: rotate(5deg);
+}
+
+.start-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: -2px 0 9px;
+}
+
+.start-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #efd8bd;
+}
+
+.start-dots .is-active {
+  width: 7px;
+  height: 7px;
+  background: var(--brand);
 }
 
 .promise-pills {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 4px;
+  gap: 9px;
+  margin-top: 5px;
 }
 
 .promise-pills span {
   display: grid;
-  min-height: 58px;
+  grid-template-rows: 18px auto;
+  gap: 3px;
+  min-height: 56px;
   place-items: center;
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.86);
   color: #6c5549;
   box-shadow: 0 10px 24px rgba(51, 38, 31, 0.08);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 900;
   line-height: 1.25;
   text-align: center;
 }
 
+.promise-pills svg {
+  width: 18px;
+  height: 18px;
+  color: var(--brand);
+}
+
 .start-screen {
-  gap: 14px;
+  gap: 12px;
 }
 
 .start-screen .onboarding-copy {
@@ -2474,16 +2563,16 @@ a {
 }
 
 .start-screen .route-card {
-  grid-template-columns: 48px minmax(0, 1fr) 20px;
-  min-height: 62px;
-  border-radius: 20px;
-  padding: 12px 14px;
+  grid-template-columns: 45px minmax(0, 1fr) 20px;
+  min-height: 58px;
+  border-radius: 15px;
+  padding: 10px 13px;
   font-size: 1rem;
 }
 
 .start-screen .route-card strong {
   grid-column: 2;
-  font-size: 1.06rem;
+  font-size: 1.03rem;
 }
 
 .start-screen .route-card span:not(.route-icon) {
@@ -2494,7 +2583,7 @@ a {
   border: 0;
   background: linear-gradient(180deg, #ff725c, #ec654f);
   color: #fff;
-  box-shadow: 0 16px 34px rgba(232, 115, 90, 0.32);
+  box-shadow: 0 12px 22px rgba(232, 115, 90, 0.3);
 }
 
 .start-screen .route-card.is-primary strong,
@@ -2508,11 +2597,19 @@ a {
 }
 
 .start-screen .route-icon {
-  width: 38px;
-  height: 38px;
+  position: relative;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
   background: rgba(255, 255, 255, 0.22);
   color: inherit;
-  font-size: 0.76rem;
+  font-size: 1rem;
+}
+
+.start-screen .route-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .start-screen .route-icon.is-soft {
@@ -2523,7 +2620,7 @@ a {
 .trust-note {
   margin: 0;
   color: var(--muted);
-  font-size: 0.76rem;
+  font-size: 0.72rem;
   font-weight: 800;
   text-align: center;
 }

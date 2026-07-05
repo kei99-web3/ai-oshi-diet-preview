@@ -1707,20 +1707,21 @@ function renderStartStep() {
     <div class="onboarding-screen start-screen">
       <div class="start-hero-panel">
         <p class="hero-handwriting">あなたのダイエットを、<br>一緒にサポート!</p>
-        <div class="diet-proof">
-          <strong><mark>痩せたい</mark>から、<br>ひとりで頑張らない。</strong>
-          <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
-        </div>
         <div class="preview-stage" aria-label="sample partners">
           ${Object.entries(LOOK_PRESETS).map(([key, preset], index) => {
             const look = buildPresetLookConfig(key);
             return `<img class="preview-face is-${index + 1}" src="${escapeHtml(look.previewAsset || look.sheetAsset)}" alt="${escapeHtml(preset.name)}">`;
           }).join("")}
         </div>
+        <div class="start-dots" aria-hidden="true"><span class="is-active"></span><span></span><span></span><span></span><span></span></div>
+        <div class="diet-proof">
+          <strong><span><mark>痩せたい</mark>から、</span><br><span>ひとりで頑張らない。</span></strong>
+          <p>あなた専用の食事パートナーが、今日のごはんを一緒に見ます。</p>
+        </div>
         <div class="promise-pills" aria-label="promise">
-          <span>ダイエットを<br>続けやすく</span>
-          <span>写真1枚で<br>返事</span>
-          <span>1回まで<br>修正無料</span>
+          <span class="is-diet">${startIcon("food")}ダイエットを<br>続けやすく</span>
+          <span class="is-photo">${startIcon("camera")}写真1枚で<br>返事</span>
+          <span class="is-retry">${startIcon("refresh")}1回まで<br>修正無料</span>
         </div>
       </div>
       <div class="onboarding-copy">
@@ -1729,18 +1730,30 @@ function renderStartStep() {
         <p>痩せたい理由はそのままに。続けたくなる相手を先に決めます。</p>
       </div>
       <button class="route-card is-primary" type="button" data-action="start-custom">
-        <span class="route-icon">魔法</span>
+        <span class="route-icon is-wand" aria-hidden="true">${startIcon("wand")}</span>
         <strong>じぶんの担当をつくる</strong>
         <span aria-hidden="true">›</span>
       </button>
       <button class="route-card" type="button" data-action="start-sample">
-        <span class="route-icon is-soft">人</span>
+        <span class="route-icon is-soft is-people" aria-hidden="true">${startIcon("users")}</span>
         <strong>サンプルから選ぶ</strong>
         <span aria-hidden="true">›</span>
       </button>
       <p class="trust-note">いつでも変更できます。まだ迷っても大丈夫。</p>
     </div>
   `;
+}
+
+function startIcon(name) {
+  const common = `viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"`;
+  const icons = {
+    food: `<svg ${common}><path d="M4 3v8"/><path d="M8 3v8"/><path d="M6 3v18"/><path d="M14 4h5v7h-5z"/><path d="M19 11v10"/></svg>`,
+    camera: `<svg ${common}><path d="M4 8h4l2-3h4l2 3h4v10H4z"/><circle cx="12" cy="13" r="3"/></svg>`,
+    refresh: `<svg ${common}><path d="M20 12a8 8 0 1 1-2.34-5.66"/><path d="M20 4v6h-6"/></svg>`,
+    wand: `<svg ${common}><path d="M15 4l5 5"/><path d="M13 6l5 5"/><path d="M3 21l12-12"/><path d="M6 4h.01"/><path d="M4 8h.01"/><path d="M10 3h.01"/></svg>`,
+    users: `<svg ${common}><path d="M16 11a4 4 0 1 0-8 0"/><path d="M4 20a8 8 0 0 1 16 0"/><path d="M18 8a3 3 0 0 1 3 3"/><path d="M21 20a6 6 0 0 0-3-5.2"/></svg>`
+  };
+  return icons[name] || "";
 }
 
 function renderSampleStep() {
@@ -3057,7 +3070,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3072,7 +3085,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v4", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v5", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
