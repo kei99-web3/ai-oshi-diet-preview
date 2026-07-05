@@ -152,12 +152,12 @@
       <header>
         <p class="kicker">N1 Phase Close / 2026-07-05</p>
         <h1>オンボーディング実装渡しパッケージ</h1>
-        <p class="lead">大枠フローは維持し、例外QA・イベント記録・製本化を完了させるための確認資料です。sample経路と10代関係性のE2Eまで確認済みなので、次はG3/UI画像化へ進めます。</p>
+        <p class="lead">大枠フローは維持し、例外QA・イベント記録・製本化を完了させるための確認資料です。owner decisionを反映し、sample経路と10代関係性表示のE2Eまで確認済みです。</p>
         <div class="status">
           <span class="pill good">大枠フロー承認済み</span>
           <span class="pill good">イベント契約更新</span>
           <span class="pill good">例外QA追加</span>
-          <span class="pill good">sample/10代 E2E通過</span>
+          <span class="pill good">sample/10代表示 E2E通過</span>
           <span class="pill warn">生成失敗スタブ未実装</span>
         </div>
       </header>
@@ -166,7 +166,7 @@
         <h2>結論</h2>
         <div class="grid">
           <div class="card"><h3>進めてよい</h3><p>G3/UI画像化へ進んでOK。大枠の順番は再設計しない。</p></div>
-          <div class="card"><h3>QA通過</h3><p>sample経路E2E、10代関係性E2E、通常オンボーディングE2Eまで確認済み。</p></div>
+          <div class="card"><h3>QA通過</h3><p>sample経路E2E、10代関係性表示E2E、通常オンボーディングE2Eまで確認済み。</p></div>
           <div class="card"><h3>API前必須</h3><p>実画像生成APIの前に、生成失敗・再試行・フォールバックをスタブ検証。</p></div>
         </div>
       </section>
@@ -180,12 +180,12 @@
         <h2>今回対応済み</h2>
         <table>
           <tr><th>対象</th><th>対応</th></tr>
-          <tr><td>例外QA</td><td>10代見た目年齢では「恋人」を非表示。除外・置換イベントも記録。</td></tr>
+          <tr><td>例外QA</td><td>10代見た目年齢でも「恋人」を表示。除外・置換イベントは記録しない。</td></tr>
           <tr><td>データ記録</td><td>食事返信イベントとレポート本体に、使用したキャラクターシートID/revision/version/sourceを保存。</td></tr>
           <tr><td>イベント</td><td>サンプル選択、絵柄、食事目的、外見選択、関係性/進め方、初回返信準備を追加記録。</td></tr>
-          <tr><td>E2E</td><td>10代関係性制限、sample経路、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
+          <tr><td>E2E</td><td>10代関係性表示、sample経路、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
           <tr><td>文言</td><td>旧カロリー表示を `カロリー管理` / `カロリー` / `料金` に整理。</td></tr>
-          <tr><td>PWAキャッシュ</td><td>`20260705-phase-close-v1` へ更新。</td></tr>
+          <tr><td>PWAキャッシュ</td><td>`20260705-owner-decisions-v1` へ更新。</td></tr>
           <tr><td>Claude</td><td>3.5固定モデルは404。現行sonnetで読み取り専用レビューし、指摘を採用。</td></tr>
         </table>
       </section>
@@ -194,7 +194,7 @@
         <h2>QA証跡</h2>
         <table>
           <tr><th>ID</th><th>内容</th><th>状態</th></tr>
-          <tr><td>TC-EX-001</td><td>10代見た目年齢で「恋人」が出ないこと、`relationship_options_filtered` が残ること。</td><td>pass</td></tr>
+          <tr><td>TC-EX-001</td><td>10代見た目年齢でも「恋人」が出ること、フィルタ系イベントが残らないこと。</td><td>pass</td></tr>
           <tr><td>TC-EX-002</td><td>sample経路で6体選択から初回返信、仮ペイウォールまで通ること。</td><td>pass</td></tr>
           <tr><td>TC-EX-003</td><td>返信イベントと `reports[]` にキャラクターシート情報が残ること。</td><td>pass</td></tr>
           <tr><td>TC-EX-004</td><td>画像生成失敗、再試行、サンプルフォールバックのスタブ検証。</td><td>実画像生成API前</td></tr>
@@ -205,10 +205,10 @@
         <h2>今確認したい質問</h2>
         <table>
           <tr><th>質問</th><th>推奨</th></tr>
-          <tr><td>10代見た目年齢では「恋人」を非表示で確定してよいか</td><td>確定</td></tr>
+          <tr><td>10代見た目年齢でも「恋人」を表示するか</td><td>表示する</td></tr>
           <tr><td>sample経路E2EをG3前ブロッカーにするか</td><td>追加済みのためブロッカー解除</td></tr>
-          <tr><td>実画像生成APIの前に失敗スタブを作るか</td><td>作る</td></tr>
-          <tr><td>N1では外部AnalyticsなしでlocalStorage証跡でよいか</td><td>よい</td></tr>
+          <tr><td>実画像生成APIの前に失敗スタブを作るか</td><td>必須</td></tr>
+          <tr><td>N1では外部AnalyticsなしでlocalStorage証跡でよいか</td><td>N1 OK</td></tr>
           <tr><td>自由記述/参考URL本文はイベントに送らず、状態保存だけでよいか</td><td>よい</td></tr>
         </table>
       </section>

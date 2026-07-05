@@ -375,7 +375,6 @@ function defaultState() {
       accessories: "",
       avoidLookNote: "",
       relationship: "やさしい先輩",
-      relationshipFilterLoggedAge: "",
       voiceMemo: "",
       impression: "clean",
       lookCustomNote: "",
@@ -551,34 +550,6 @@ function logEvent(type, payload = {}) {
   });
   state.events = state.events.slice(0, 80);
   saveState();
-}
-
-function isTeenAppearance(profile = state.profile) {
-  return String(profile.appearanceAge || "").startsWith("10代");
-}
-
-function relationshipOptionsForProfile(profile = state.profile) {
-  if (!isTeenAppearance(profile)) return RELATIONSHIP_OPTIONS;
-  return RELATIONSHIP_OPTIONS.filter((option) => option !== "恋人");
-}
-
-function ensureRelationshipOptionsFitProfile() {
-  const options = relationshipOptionsForProfile(state.profile);
-  const age = state.profile.appearanceAge || "";
-  if (isTeenAppearance(state.profile) && state.profile.relationshipFilterLoggedAge !== age) {
-    logEvent("relationship_options_filtered", { appearanceAge: age, removed: ["恋人"] });
-    state.profile.relationshipFilterLoggedAge = age;
-  }
-  if (!options.includes(state.profile.relationship)) {
-    const from = state.profile.relationship;
-    const to = options[0] || "やさしい先輩";
-    state.profile.relationship = to;
-    logEvent("relationship_value_replaced", { appearanceAge: age, from, to });
-  }
-  if (!isTeenAppearance(state.profile) && state.profile.relationshipFilterLoggedAge) {
-    state.profile.relationshipFilterLoggedAge = "";
-  }
-  return options;
 }
 
 function keywordCount(text, words) {
@@ -1961,10 +1932,6 @@ function renderGoalStep() {
 }
 
 function renderRelationshipStep() {
-  const relationshipOptions = ensureRelationshipOptionsFitProfile();
-  const teenNote = isTeenAppearance()
-    ? `<p class="mini-note">10代の見た目では、健康アプリとして自然な距離感だけ表示しています。</p>`
-    : "";
   return `
     <div class="onboarding-screen">
       <div class="onboarding-copy">
@@ -1973,9 +1940,8 @@ function renderRelationshipStep() {
       </div>
       <div class="input-card">
         <h3>関係性${fieldLabel("必須")}</h3>
-        ${renderChipButtons(relationshipOptions, state.profile.relationship, { key: "relationship" })}
+        ${renderChipButtons(RELATIONSHIP_OPTIONS, state.profile.relationship, { key: "relationship" })}
       </div>
-      ${teenNote}
       <label class="input-card">
         <h3>話し方の希望${fieldLabel()}</h3>
         <input class="input" data-profile="voiceMemo" value="${escapeHtml(state.profile.voiceMemo || "")}" placeholder="例: ほめてほしい。でも甘やかしすぎないでほしい。">
@@ -2858,7 +2824,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("/sw.js?v=20260705-phase-close-v1")
+    navigator.serviceWorker.register("/sw.js?v=20260705-owner-decisions-v1")
       .then((registration) => registration.update())
       .catch(() => {});
   });
