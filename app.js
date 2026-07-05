@@ -151,8 +151,8 @@ const LOOK_PRESETS = {
     appearance: "アクア系ロング、近未来ウェア、透明感のあるセミリアル調",
     copy: "華やかで、最初に強く目を引く食事パートナー",
     readyCopy: "表情差分と全身まで固定した未来系シート",
-    previewAsset: "/assets/trainer-previews/01_mina_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/01_miku_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/01_mina_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/01_miku_motif_character_sheet.png",
     sheetSource: "01_miku_motif_character_sheet.png"
   },
   yui: {
@@ -168,8 +168,8 @@ const LOOK_PRESETS = {
     appearance: "ナチュラルな暗めミディアム、淡い服装、透明感のあるアニメ調",
     copy: "毎日の食事を気軽に見てもらいやすい、やさしい雰囲気",
     readyCopy: "表情と角度が揃った生活寄りのシート",
-    previewAsset: "/assets/trainer-previews/02_rei_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/02_yui_aragaki_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/02_rei_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/02_yui_aragaki_motif_character_sheet.png",
     sheetSource: "02_yui_aragaki_motif_character_sheet.png"
   },
   asuna: {
@@ -185,8 +185,8 @@ const LOOK_PRESETS = {
     appearance: "明るいブラウンの長めヘア、上品な白系衣装、王道ヒロイン感のある表情",
     copy: "少し憧れ感があり、明るく前向きに整えてくれる雰囲気",
     readyCopy: "髪型と服装ディテールが厚いヒロイン系シート",
-    previewAsset: "/assets/trainer-previews/03_kana_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/03_asuna_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/03_kana_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/03_asuna_motif_character_sheet.png",
     sheetSource: "03_asuna_motif_character_sheet.png"
   },
   isagi: {
@@ -202,8 +202,8 @@ const LOOK_PRESETS = {
     appearance: "黒髪ショート、黒い服、鋭い目元、ストイックな実写寄り男性",
     copy: "短く具体的に、今日の改善点を絞ってくれる雰囲気",
     readyCopy: "強い目線と全身バランスを固定した男性シート",
-    previewAsset: "/assets/trainer-previews/04_sou_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/04_isagi_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/04_sou_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/04_isagi_motif_character_sheet.png",
     sheetSource: "04_isagi_motif_character_sheet.png"
   },
   meguro: {
@@ -219,8 +219,8 @@ const LOOK_PRESETS = {
     appearance: "黒髪ミディアム、黒いハイカラー衣装、落ち着いた中性的な男性",
     copy: "近すぎず、でも毎日会いたくなる静かな魅力",
     readyCopy: "表情差分が多いアイドル寄り男性シート",
-    previewAsset: "/assets/trainer-previews/05_haru_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/05_meguro_ren_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/05_haru_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/05_meguro_ren_motif_character_sheet.png",
     sheetSource: "05_meguro_ren_motif_character_sheet.png"
   },
   gojo: {
@@ -236,8 +236,8 @@ const LOOK_PRESETS = {
     appearance: "銀髪、黒いハイカラー衣装、クールで印象に残るセミリアル男性",
     copy: "特別感があり、はっきり次の一手を示してくれる雰囲気",
     readyCopy: "髪・目・服のディテールが強い銀髪男性シート",
-    previewAsset: "/assets/trainer-previews/06_ao_onboarding_preview.webp",
-    sheetAsset: "/assets/character-sheets/06_gojo_motif_character_sheet.png",
+    previewAsset: "assets/trainer-previews/06_ao_onboarding_preview.webp",
+    sheetAsset: "assets/character-sheets/06_gojo_motif_character_sheet.png",
     sheetSource: "06_gojo_motif_character_sheet.png"
   }
 };
@@ -1197,7 +1197,7 @@ function renderHeader(latest) {
   return `
     <header class="app-header">
       <div class="brand-lockup">
-        <img class="brand-icon" src="/assets/icon.svg" width="46" height="46" alt="">
+        <img class="brand-icon" src="assets/icon.svg" width="46" height="46" alt="">
         <div>
           <h1 class="brand-title">AI食事パートナー</h1>
           <p class="brand-subtitle">あなたに合わせて食事記録を続けるための試作アプリ</p>
@@ -1342,7 +1342,7 @@ function renderReportItem(report, expanded) {
         </div>
       ` : ""}
       <p class="reply-text"><strong>食事パートナーからの返信</strong><br>${escapeHtml(report.reply)}</p>
-      <p class="disclaimer-link"><a href="/disclaimer.html" target="_blank" rel="noopener">免責事項</a></p>
+      <p class="disclaimer-link"><a href="disclaimer.html" target="_blank" rel="noopener">免責事項</a></p>
       ${memoryCandidate ? `
         <div class="action-row" style="margin-top: 12px;">
           <span class="pill">覚えておくこと: ${escapeHtml(memoryCandidate)}</span>
@@ -1599,7 +1599,7 @@ function renderOnboarding() {
       <section class="onboarding-phone">
         <header class="onboarding-topbar">
           <div class="mini-brand">
-            <img src="/assets/icon.svg" width="34" height="34" alt="">
+            <img src="assets/icon.svg" width="34" height="34" alt="">
             <span>食事パートナー</span>
           </div>
           <button class="button ghost onboarding-demo" type="button" data-action="load-demo">デモ</button>
@@ -3001,7 +3001,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("/sw.js?v=20260705-g3-n1-v1")
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-n1-v2", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
