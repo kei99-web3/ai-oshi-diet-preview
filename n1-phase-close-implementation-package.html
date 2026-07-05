@@ -152,12 +152,13 @@
       <header>
         <p class="kicker">N1 Phase Close / 2026-07-05</p>
         <h1>オンボーディング実装渡しパッケージ</h1>
-        <p class="lead">大枠フローは維持し、例外QA・イベント記録・製本化を完了させるための確認資料です。owner decisionを反映し、sample経路と10代関係性表示のE2Eまで確認済みです。</p>
+        <p class="lead">大枠フローは維持し、G3正本UIの実装・セルフQA・イベント記録・製本化まで反映した確認資料です。最新版は <code>20260705-g3-canon-v7</code> / Service Worker <code>ai-food-trainer-pwa-v30</code> です。</p>
         <div class="status">
           <span class="pill good">大枠フロー承認済み</span>
           <span class="pill good">イベント契約更新</span>
           <span class="pill good">例外QA追加</span>
-          <span class="pill good">sample/10代表示 E2E通過</span>
+          <span class="pill good">sample/10代/ハル固定 E2E通過</span>
+          <span class="pill good">G3セルフQA済み</span>
           <span class="pill warn">生成失敗スタブ未実装</span>
         </div>
       </header>
@@ -165,8 +166,8 @@
       <section>
         <h2>結論</h2>
         <div class="grid">
-          <div class="card"><h3>進めてよい</h3><p>G3/UI画像化へ進んでOK。大枠の順番は再設計しない。</p></div>
-          <div class="card"><h3>QA通過</h3><p>sample経路E2E、10代関係性表示E2E、通常オンボーディングE2Eまで確認済み。</p></div>
+          <div class="card"><h3>現フェーズ完了</h3><p>G3正本UIの実装とセルフQAは完了扱い。大枠の順番は再設計しない。</p></div>
+          <div class="card"><h3>QA通過</h3><p>sample経路、10代関係性表示、ハル選択固定、通常オンボーディングE2Eまで確認済み。</p></div>
           <div class="card"><h3>API前必須</h3><p>実画像生成APIの前に、生成失敗・再試行・フォールバックをスタブ検証。</p></div>
         </div>
       </section>
@@ -184,9 +185,10 @@
           <tr><td>データ記録</td><td>食事返信イベントとレポート本体に、使用したキャラクターシートID/revision/version/sourceを保存。</td></tr>
           <tr><td>イベント</td><td>サンプル選択、絵柄、食事目的、外見選択、関係性/進め方、初回返信準備を追加記録。</td></tr>
           <tr><td>研究用ログ</td><td>自由記述、参考URL、食事本文を端末内からコピー/JSON保存できる研究用入力ログを追加。</td></tr>
-          <tr><td>E2E</td><td>10代関係性表示、sample経路、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
+          <tr><td>E2E</td><td>10代関係性表示、sample経路、ハル選択固定、通常オンボーディングを確認。証跡JSONとスクリーンショットを保存。</td></tr>
+          <tr><td>G3 UI</td><td>画像貼り込み部分と実操作UIを分離。初回食事メモの透け、最終フィードバックの顔アイコン、応援画像プロンプトをセルフQAで確認。</td></tr>
           <tr><td>文言</td><td>旧カロリー表示を `カロリー管理` / `カロリー` / `料金` に整理。</td></tr>
-          <tr><td>PWAキャッシュ</td><td>`20260705-research-export-v1` へ更新。</td></tr>
+          <tr><td>PWAキャッシュ</td><td>`20260705-g3-canon-v7` / `ai-food-trainer-pwa-v30` へ更新。</td></tr>
           <tr><td>Claude</td><td>3.5固定モデルは404。現行sonnetで読み取り専用レビューし、指摘を採用。</td></tr>
         </table>
       </section>
@@ -198,21 +200,17 @@
           <tr><td>TC-EX-001</td><td>10代見た目年齢でも「恋人」が出ること、フィルタ系イベントが残らないこと。</td><td>pass</td></tr>
           <tr><td>TC-EX-002</td><td>sample経路で6体選択から初回返信、仮ペイウォールまで通ること。</td><td>pass</td></tr>
           <tr><td>TC-EX-003</td><td>返信イベントと `reports[]` にキャラクターシート情報が残ること。</td><td>pass</td></tr>
-          <tr><td>TC-EX-004</td><td>画像生成失敗、再試行、サンプルフォールバックのスタブ検証。</td><td>実画像生成API前</td></tr>
+          <tr><td>TC-EX-004</td><td>ハル選択時に、最終画面の名前・丸アイコン・シート参照・応援画像プロンプトが一致すること。</td><td>pass</td></tr>
+          <tr><td>TC-EX-005</td><td>画像生成失敗、再試行、サンプルフォールバックのスタブ検証。</td><td>実画像生成API前</td></tr>
         </table>
       </section>
 
       <section>
         <h2>今確認したい質問</h2>
-        <table>
-          <tr><th>質問</th><th>推奨</th></tr>
-          <tr><td>10代見た目年齢でも「恋人」を表示するか</td><td>表示する</td></tr>
-          <tr><td>sample経路E2EをG3前ブロッカーにするか</td><td>追加済みのためブロッカー解除</td></tr>
-          <tr><td>実画像生成APIの前に失敗スタブを作るか</td><td>必須</td></tr>
-          <tr><td>N1では外部AnalyticsなしでlocalStorage証跡でよいか</td><td>N1 OK</td></tr>
-          <tr><td>自由記述/参考URLは生成に使い、計測イベントには本文を複製しない方針でよいか</td><td>よい</td></tr>
-          <tr><td>初期分析で本文を見たい場合、N1は端末内の研究用エクスポートでよいか</td><td>よい</td></tr>
-        </table>
+        <div class="card">
+          <h3>現時点では追加確認なし</h3>
+          <p>次にユーザー判断が必要になるのは、実AI接続・DB/API・有償API利用の具体案を出すタイミングです。</p>
+        </div>
       </section>
 
       <section>
@@ -227,8 +225,8 @@
       <section>
         <h2>次アクション</h2>
         <div class="card next">
-          <h3>G3へ進める</h3>
-          <p>次は、この仕様HTMLとデザイン正本を入力にして、主要画面のスマホUI画像化に進みます。実画像生成APIへ進む前に、生成失敗・再試行・サンプルフォールバックのスタブ検証を追加します。</p>
+          <h3>次フェーズへ進める</h3>
+          <p>次は、実AI接続前の生成失敗スタブ、キャラクターシート/ポートレート/応援画像/食事フィードバックのAPI設計、サーバー/DB/イベント保存設計に進みます。</p>
         </div>
       </section>
     </main>
