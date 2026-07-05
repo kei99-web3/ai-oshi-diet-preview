@@ -1,11 +1,11 @@
-const CACHE_NAME = "ai-food-trainer-pwa-v24";
+const CACHE_NAME = "ai-food-trainer-pwa-v25";
 const scopeUrl = (path) => new URL(path, self.registration.scope).toString();
 const ASSETS = [
   scopeUrl("index.html"),
   scopeUrl("disclaimer.html"),
-  scopeUrl("styles.css?v=20260705-g3-canon-v1"),
-  scopeUrl("app.js?v=20260705-g3-canon-v1"),
-  scopeUrl("manifest.webmanifest?v=20260705-g3-canon-v1"),
+  scopeUrl("styles.css?v=20260705-g3-canon-v2"),
+  scopeUrl("app.js?v=20260705-g3-canon-v2"),
+  scopeUrl("manifest.webmanifest?v=20260705-g3-canon-v2"),
   scopeUrl("assets/g3-ui-images/g3-img-001-start.png"),
   scopeUrl("assets/g3-ui-images/g3-img-002-sample-selection.png"),
   scopeUrl("assets/g3-ui-images/g3-img-003-appearance-reference.png"),

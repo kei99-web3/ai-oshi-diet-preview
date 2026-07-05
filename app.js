@@ -2022,20 +2022,21 @@ function renderGeneratingStep() {
 
 function renderFirstReportStep() {
   return `
-    <div class="onboarding-screen first-report-screen">
-      <div class="onboarding-copy">
-        <p class="step-kicker">${stepKicker("firstReport")}</p>
-        <h2 id="onboarding-title">さっき、何食べた？</h2>
-        <p>このサービスを開く直前に食べたものを、覚えている範囲でOK。</p>
+    <div class="onboarding-screen first-report-screen g3-first-report-screen">
+      <div class="g3-first-report-stage" role="group" aria-labelledby="onboarding-title">
+        <div class="sr-only">
+          <p class="step-kicker">${stepKicker("firstReport")}</p>
+          <h2 id="onboarding-title">さっき、何食べた？</h2>
+          <p>このサービスを開く直前に食べたものを、覚えている範囲でOK。</p>
+        </div>
+        <label class="g3-first-meal-photo" for="onboarding-photo-input" aria-label="写真を追加">
+          ${state.draftPhotoName ? `<span>${escapeHtml(state.draftPhotoName)}</span>` : ""}
+        </label>
+        <input class="file-input" id="onboarding-photo-input" type="file" accept="image/*" data-photo>
+        <textarea class="g3-first-meal-text" data-draft aria-label="食事メモ" placeholder="例：おにぎり2個、サラダチキン、野菜スープ">${escapeHtml(state.draft)}</textarea>
+        <button class="g3-first-meal-sample" type="button" data-action="use-sample-meal" aria-label="サンプルを入れる"></button>
+        <button class="g3-first-meal-next" type="button" data-action="onboarding-next" aria-label="ご対面へ進む"></button>
       </div>
-      <div class="helper-row"><button class="mini-button" type="button" data-action="use-sample-meal">サンプルを入れる</button></div>
-      <label class="meal-photo" for="onboarding-photo-input">${state.draftPhotoName ? escapeHtml(state.draftPhotoName) : "写真を追加"}</label>
-      <input class="file-input" id="onboarding-photo-input" type="file" accept="image/*" data-photo>
-      <textarea class="textarea onboarding-meal" data-draft placeholder="例：おにぎり2個、サラダチキン、野菜スープ">${escapeHtml(state.draft)}</textarea>
-      ${renderOnboardingActions({
-        nextLabel: "ご対面へ進む",
-        secondary: `<button class="button secondary onboarding-skip" type="button" data-action="use-sample-meal">サンプルで進む</button>`
-      })}
     </div>
   `;
 }
@@ -2044,31 +2045,33 @@ function renderRevealStep() {
   const sheet = ensureTrainerSheet();
   const trainer = trainerFromSheet(sheet);
   return `
-    <div class="onboarding-screen reveal-screen">
-      <div class="onboarding-copy">
+    <div class="onboarding-screen reveal-screen g3-reveal-screen">
+      <div class="onboarding-copy reveal-copy">
         <p class="step-kicker">${stepKicker("reveal")}</p>
         <h2 id="onboarding-title">会えました。</h2>
         <p>あなた専用の食事パートナーです。</p>
       </div>
-      <div class="reveal-portrait">
+      <div class="reveal-portrait is-hero">
         ${renderTrainerVisual(trainer.look, "hero")}
       </div>
-      <div class="name-edit">
-        <strong>${escapeHtml(trainer.name)}</strong>
-        <span>名前はあとで変更できます</span>
+      <div class="reveal-confirm-card">
+        <div class="name-edit">
+          <strong>${escapeHtml(trainer.name)}</strong>
+          <span>名前はあとで変更できます</span>
+        </div>
+        <div class="feedback-card">
+          <strong>${escapeHtml(trainer.name)}が担当します</strong>
+          <p>${escapeHtml(state.profile.nickname || "あなた")}、今日から一緒に見ていくね。さっきの食事、ちゃんと届いています。</p>
+        </div>
+        <p class="mini-note">顔、名前、言葉づかいはあとから変えられます。</p>
+        ${renderOnboardingActions({
+          nextLabel: `${trainer.name}と始める`,
+          nextAction: "prepare-first-feedback",
+          secondary: getOnboardingRoute() === "sample"
+            ? `<button class="button secondary" type="button" data-action="start-sample">6人から選び直す</button><button class="button secondary" type="button" data-action="start-custom">自分で作る</button>`
+            : `<button class="button secondary" type="button" data-action="onboarding-adjust">少し調整</button>`
+        })}
       </div>
-      <div class="feedback-card">
-        <strong>${escapeHtml(trainer.name)}が担当します</strong>
-        <p>${escapeHtml(state.profile.nickname || "あなた")}、今日から一緒に見ていくね。さっきの食事、ちゃんと届いています。</p>
-      </div>
-      <p class="mini-note">顔、名前、言葉づかいはあとから変えられます。</p>
-      ${renderOnboardingActions({
-        nextLabel: `${trainer.name}と始める`,
-        nextAction: "prepare-first-feedback",
-        secondary: getOnboardingRoute() === "sample"
-          ? `<button class="button secondary" type="button" data-action="start-sample">6人から選び直す</button><button class="button secondary" type="button" data-action="start-custom">自分で作る</button>`
-          : `<button class="button secondary" type="button" data-action="onboarding-adjust">少し調整</button>`
-      })}
     </div>
   `;
 }
@@ -3048,7 +3051,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3063,7 +3066,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v1", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v2", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
