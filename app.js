@@ -1038,6 +1038,10 @@ function renderTrainerVisual(look = buildLookConfig(state.profile), size = "norm
   return renderTrainerAvatar(look, size);
 }
 
+function renderTrainerFaceVisual(look = buildLookConfig(state.profile)) {
+  return renderTrainerVisual(look, "feedback-face");
+}
+
 function normalizeReferenceUrls(value = "") {
   return String(value)
     .split(/\s+/)
@@ -1098,6 +1102,26 @@ function buildTrainerImagePrompt(sheet = ensureTrainerSheet(), profile = state.p
     `避けるもの: ${rules.avoid || "文字、ロゴ、透かし、過度な露出、医療広告のような表現。"}`,
     "",
     "固定プロフィール",
+    fixedProfileText
+  ];
+  return lines.join("\n");
+}
+
+function buildSupportImagePrompt(report, sheet = ensureTrainerSheet(), profile = state.profile) {
+  const fixedProfileText = characterSheetTextForPrompt(sheet, profile);
+  const mealText = String(report?.text || "").trim() || "今回入力された食事";
+  const lines = [
+    "日本向けのスマホアプリで、初回食事フィードバックの後に表示する応援画像を1枚生成してください。",
+    "目的は、ユーザーが「自分の食事と担当パートナーが反映されている」と感じ、次の食事も報告したくなることです。",
+    "下のlatestキャラクターシートを固定し、同じ担当食事パートナーとして一貫した外見で描いてください。",
+    "今回の食事内容も画面内の雰囲気や食卓に反映してください。ただし、画像内に文字や説明文は入れないでください。",
+    "画角: スマホ画面内の横長カードで見やすい、担当パートナーと食事が一緒に映る構図。",
+    "雰囲気: 明るく、押しつけず、ダイエットを続けたくなる。医療広告や過度なビフォーアフター表現にはしない。",
+    "避けるもの: 文字、ロゴ、透かし、数値の断定、医療広告風、過度な露出。",
+    "",
+    `今回の食事: ${mealText}`,
+    "",
+    "latestキャラクターシート",
     fixedProfileText
   ];
   return lines.join("\n");
@@ -2160,10 +2184,11 @@ function renderFeedbackStep() {
   const veggieCopy = n.signals?.veggieHits ? "あと少し" : "少し足す";
   const proteinCopy = n.protein >= 22 ? "ちょうどいい" : "少し足す";
   const carbCopy = n.carbs >= 40 && n.carbs <= 75 ? "ちょうどいい" : "量を見る";
+  const supportImageReady = Boolean(report?.supportImagePrompt);
   return `
     <div class="onboarding-screen feedback-screen">
       <div class="feedback-profile">
-        ${renderTrainerVisual(trainer.look, "mini")}
+        ${renderTrainerFaceVisual(trainer.look)}
         <div>
           <strong>${escapeHtml(trainer.name)}</strong>
           <span>あなた専用の食事パートナー</span>
@@ -2193,21 +2218,18 @@ function renderFeedbackStep() {
       </div>
       <div class="feedback-story-card">
         <section>
-          <span class="story-icon">太陽</span>
           <div>
             <strong>良かった点</strong>
             <p>主菜と汁物が入っていて、次の食事へ戻しやすい内容です。</p>
           </div>
         </section>
         <section>
-          <span class="story-icon">メモ</span>
           <div>
             <strong>今日のメモ</strong>
             <p>野菜がもう少し増えると、満足感と食物繊維を取りやすくなります。</p>
           </div>
         </section>
         <section>
-          <span class="story-icon">一手</span>
           <div>
             <strong>次の一手</strong>
             <p>次の食事で、あと一品「野菜のおかず」を追加してみよう。</p>
@@ -2216,8 +2238,8 @@ function renderFeedbackStep() {
       </div>
       <div class="support-art-card">
         <div class="support-art-copy">
-          <strong>応援画像</strong>
-          <p>いい感じだよ!<br>この調子で一緒にがんばろうね。</p>
+          <span>${supportImageReady ? "応援画像生成待ち" : "応援画像"}</span>
+          <strong>この食事をもとに1枚生成</strong>
         </div>
         ${renderTrainerVisual(trainer.look, "support")}
         <div class="support-meal" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -2392,6 +2414,7 @@ function recordMealReport(text, { hadPhoto = Boolean(state.draftPhotoName), phot
     score,
     trainerSheet: sheetEvent
   };
+  report.supportImagePrompt = buildSupportImagePrompt(report, trainerSheet, state.profile);
 
   state.reports.unshift(report);
   state.reports = state.reports.slice(0, 40);
@@ -2406,6 +2429,11 @@ function recordMealReport(text, { hadPhoto = Boolean(state.draftPhotoName), phot
     reportId: report.id,
     score: score.total,
     safetyGate: score.safetyGate,
+    ...sheetEvent
+  });
+  logEvent("support_image_prompt_ready", {
+    reportId: report.id,
+    promptVersion: "support_image_v1",
     ...sheetEvent
   });
   if (analysis.safety.safetyFlag) {
@@ -3096,7 +3124,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24" || key === "ai-food-trainer-pwa-v25" || key === "ai-food-trainer-pwa-v26" || key === "ai-food-trainer-pwa-v27")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24" || key === "ai-food-trainer-pwa-v25" || key === "ai-food-trainer-pwa-v26" || key === "ai-food-trainer-pwa-v27" || key === "ai-food-trainer-pwa-v28")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3111,7 +3139,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v5", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v6", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });

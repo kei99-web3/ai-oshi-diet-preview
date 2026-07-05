@@ -2002,6 +2002,35 @@ a {
   border-radius: 10px;
 }
 
+.trainer-avatar.is-feedback-face,
+.trainer-photo.is-feedback-face {
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+}
+
+.trainer-photo.is-feedback-face {
+  object-fit: cover;
+  object-position: center 24%;
+}
+
+.trainer-avatar.is-feedback-face .avatar-body,
+.trainer-avatar.is-feedback-face .avatar-neck {
+  display: none;
+}
+
+.trainer-avatar.is-feedback-face .avatar-head {
+  left: 19%;
+  top: 19%;
+  width: 62%;
+  height: 58%;
+}
+
+.trainer-avatar.is-feedback-face .avatar-hair {
+  top: -21%;
+  height: 42%;
+}
+
 .trainer-avatar .avatar-back,
 .trainer-avatar .avatar-neck,
 .trainer-avatar .avatar-body,
@@ -3092,26 +3121,12 @@ a {
 }
 
 .feedback-story-card section {
-  display: grid;
-  grid-template-columns: 42px minmax(0, 1fr);
-  gap: 10px;
+  display: block;
   padding: 9px 0;
 }
 
 .feedback-story-card section + section {
   border-top: 1px dashed rgba(122, 106, 95, 0.24);
-}
-
-.story-icon {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  background: #fff2d0;
-  color: var(--brand);
-  font-size: 0.7rem;
-  font-weight: 950;
 }
 
 .feedback-story-card strong {
@@ -3143,23 +3158,31 @@ a {
   left: 16px;
   top: 14px;
   z-index: 2;
+  max-width: 56%;
 }
 
-.support-art-copy strong {
+.support-art-copy span {
   display: block;
   color: #8a5f42;
   font-size: 0.86rem;
   font-weight: 950;
 }
 
+.support-art-copy strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 1.08rem;
+  font-weight: 950;
+  line-height: 1.35;
+}
+
 .support-art-copy p {
-  margin: 10px 0 0;
-  color: var(--brand);
-  font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-  font-size: 1rem;
-  font-weight: 900;
+  margin: 8px 0 0;
+  color: #6c5549;
+  font-size: 0.74rem;
+  font-weight: 800;
   line-height: 1.45;
-  transform: rotate(-8deg);
 }
 
 .trainer-photo.is-support,
