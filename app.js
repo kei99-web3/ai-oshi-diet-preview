@@ -428,6 +428,42 @@ function clearLegacyState() {
   }
 }
 
+function consumeReviewResetQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const shouldReset = params.get("reset") === "1" || params.get("clear") === "1";
+  if (!shouldReset) return false;
+
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+    clearLegacyState();
+  } catch {
+    // Keep review URLs usable even when browser storage is restricted.
+  }
+
+  try {
+    sessionStorage.clear();
+  } catch {
+    // Session storage may be unavailable in restricted browser contexts.
+  }
+
+  if ("caches" in window) {
+    caches.keys()
+      .then((keys) => Promise.all(
+        keys
+          .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key.startsWith("ai-food-trainer-pwa-"))
+          .map((key) => caches.delete(key))
+      ))
+      .catch(() => {});
+  }
+
+  params.delete("reset");
+  params.delete("clear");
+  params.set("fresh", Date.now().toString());
+  const query = params.toString();
+  window.history.replaceState(null, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
+  return true;
+}
+
 function loadState() {
   try {
     clearLegacyState();
@@ -453,6 +489,7 @@ function loadState() {
   }
 }
 
+consumeReviewResetQuery();
 let state = loadState();
 let toastTimer = 0;
 let onboardingAutoTimer = 0;
@@ -3059,7 +3096,7 @@ function clearLegacyClientCaches() {
   caches.keys()
     .then((keys) => Promise.all(
       keys
-        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24" || key === "ai-food-trainer-pwa-v25")
+        .filter((key) => key.startsWith("ai-oshi-diet-pwa-") || key === "ai-food-trainer-pwa-v1" || key === "ai-food-trainer-pwa-v2" || key === "ai-food-trainer-pwa-v3" || key === "ai-food-trainer-pwa-v4" || key === "ai-food-trainer-pwa-v5" || key === "ai-food-trainer-pwa-v6" || key === "ai-food-trainer-pwa-v7" || key === "ai-food-trainer-pwa-v8" || key === "ai-food-trainer-pwa-v9" || key === "ai-food-trainer-pwa-v10" || key === "ai-food-trainer-pwa-v11" || key === "ai-food-trainer-pwa-v12" || key === "ai-food-trainer-pwa-v13" || key === "ai-food-trainer-pwa-v14" || key === "ai-food-trainer-pwa-v15" || key === "ai-food-trainer-pwa-v16" || key === "ai-food-trainer-pwa-v17" || key === "ai-food-trainer-pwa-v18" || key === "ai-food-trainer-pwa-v19" || key === "ai-food-trainer-pwa-v20" || key === "ai-food-trainer-pwa-v21" || key === "ai-food-trainer-pwa-v22" || key === "ai-food-trainer-pwa-v23" || key === "ai-food-trainer-pwa-v24" || key === "ai-food-trainer-pwa-v25" || key === "ai-food-trainer-pwa-v26")
         .map((key) => caches.delete(key))
     ))
     .catch(() => {});
@@ -3074,7 +3111,7 @@ if ("serviceWorker" in navigator) {
   });
   window.addEventListener("load", () => {
     clearLegacyClientCaches();
-    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v3", { scope: "./" })
+    navigator.serviceWorker.register("sw.js?v=20260705-g3-canon-v4", { scope: "./" })
       .then((registration) => registration.update())
       .catch(() => {});
   });
