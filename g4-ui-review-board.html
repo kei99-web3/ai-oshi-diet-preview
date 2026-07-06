@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>G4 UI画像レビュー | AI食事パートナー</title>
+  <style>
+    :root {
+      --bg:#fff4e6; --paper:#fffbf4; --soft:#ffe4d7; --ink:#33261f; --muted:#7a6a5f;
+      --brand:#e8735a; --brand-deep:#bd5146; --green:#3a6b5c; --line:#ecd8ca;
+      font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(circle at 14% -3%, rgba(232,115,90,.16), transparent 340px), var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,244,230,.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .wrap { width: min(1180px, calc(100% - 28px)); margin: 0 auto; }
+    .hero { padding: 24px 0 14px; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(28px, 7vw, 46px); line-height: 1.16; letter-spacing: 0; }
+    .lead { margin-top: 10px; color: var(--muted); max-width: 820px; font-size: 15px; }
+    .eyebrow {
+      display:inline-flex; align-items:center; min-height:30px; padding:0 11px;
+      border:1px solid rgba(232,115,90,.28); border-radius:999px; background:#fff;
+      color:var(--brand-deep); font-size:12px; font-weight:900;
+    }
+    nav { display:flex; gap:8px; overflow-x:auto; padding: 0 0 12px; scrollbar-width:none; }
+    nav::-webkit-scrollbar { display:none; }
+    nav a {
+      flex:0 0 auto; min-height:38px; padding:8px 12px; border-radius:999px; border:1px solid var(--line);
+      background:#fff; color:var(--muted); text-decoration:none; font-size:13px; font-weight:900;
+    }
+    main { display:grid; gap:18px; padding:18px 0 56px; }
+    section.block {
+      border:1px solid var(--line); border-radius:22px; background:rgba(255,251,244,.94);
+      box-shadow:0 18px 42px rgba(51,38,31,.08); overflow:hidden;
+    }
+    .block-head { padding:16px; border-bottom:1px solid var(--line); background:rgba(255,228,215,.34); display:grid; gap:4px; }
+    .block-head small { color:var(--brand-deep); font-weight:900; }
+    .block-body { padding:16px; display:grid; gap:14px; }
+    .summary-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:12px; }
+    .summary-card, .note {
+      padding:14px; border:1px solid var(--line); border-radius:18px; background:#fff;
+    }
+    .summary-card b { display:block; font-size:20px; }
+    .note { color:var(--muted); }
+    .screen-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap:18px; }
+    .screen-card {
+      display:grid; gap:12px; padding:14px; border:1px solid var(--line); border-radius:22px; background:#fff;
+      box-shadow:0 14px 34px rgba(51,38,31,.07);
+    }
+    .screen-head { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+    .screen-head span {
+      display:inline-flex; align-items:center; min-height:26px; padding:0 9px; border-radius:999px;
+      background:rgba(232,115,90,.12); color:var(--brand-deep); font-size:12px; font-weight:900;
+    }
+    .screen-head span.ref { background:rgba(51,38,31,.1); color:var(--ink); }
+    .screen-head h3 { font-size:18px; line-height:1.35; }
+    figure { margin:0; display:grid; place-items:center; background:linear-gradient(180deg,#f0e2d4,#fff8ee); border-radius:24px; padding:14px; }
+    figure img { width:min(100%, 390px); height:auto; display:block; border-radius:22px; box-shadow:0 20px 42px rgba(51,38,31,.20); }
+    .meta { display:grid; gap:8px; }
+    .meta p { font-size:13px; color:var(--muted); }
+    .checklist { display:grid; gap:6px; padding-left:1.05em; color:var(--muted); font-size:13px; }
+    .review {
+      display:grid; gap:10px; padding:12px; border-radius:18px; background:var(--paper); border:1px solid var(--line);
+    }
+    .choices { display:flex; flex-wrap:wrap; gap:8px; }
+    label.choice {
+      min-height:34px; display:inline-flex; align-items:center; gap:6px; padding:0 10px;
+      border:1px solid var(--line); border-radius:999px; background:#fff; color:var(--muted);
+      font-size:12px; font-weight:900;
+    }
+    textarea {
+      width:100%; min-height:86px; resize:vertical; border:1px solid var(--line); border-radius:14px;
+      padding:11px; background:#fff; color:var(--ink); font:inherit;
+    }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; }
+    .pill { display:inline-flex; align-items:center; min-height:30px; padding:0 10px; border-radius:999px; background:#fff; border:1px solid var(--line); color:var(--muted); font-size:12px; font-weight:900; }
+    .pill.good { background:rgba(58,107,92,.1); color:var(--green); border-color:rgba(58,107,92,.2); }
+    .pill.warn { background:rgba(232,115,90,.1); color:var(--brand-deep); border-color:rgba(232,115,90,.22); }
+    @media (max-width: 760px) {
+      header { position: static; }
+      .summary-grid { grid-template-columns: 1fr; }
+      .screen-grid { grid-template-columns: 1fr; }
+      figure { padding:10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <span class="eyebrow">G4 UI Review</span>
+      <h1>オンボ後の画面正本レビュー</h1>
+      <p class="lead">OD-14で決定した3タブ構成（ホーム / パートナー / 設定）を前提に、MVP対象9枚と課金後参考4枚を並べています。ここで採用/修正/棄却を決めてから実装へ進みます。</p>
+    </div>
+    <div class="wrap">
+      <nav aria-label="ページ内ナビ">
+        <a href="#summary">概要</a>
+        <a href="#mvp">MVP 9枚</a>
+        <a href="#reference">課金後参考</a>
+        <a href="#out">対象外</a>
+        <a href="#next">次の判断</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="block" id="summary">
+      <div class="block-head"><small>Summary</small><h2>Fable5レビュー反映済み</h2></div>
+      <div class="block-body">
+        <div class="summary-grid">
+          <div class="summary-card"><b>9枚</b><p class="lead">MVP実装前にレビューする画面。G4-013を追加。</p></div>
+          <div class="summary-card"><b>4枚</b><p class="lead">課金βの参考。GO判定前は実装しない。</p></div>
+          <div class="summary-card"><b>3タブ</b><p class="lead">ホーム / パートナー / 設定を正とする。</p></div>
+        </div>
+        <div class="note">最重要レビュー対象は <b>G4-IMG-002 ホームD2+再訪</b> です。ここで「責められている」「失敗した」と感じるなら、プロダクトの核からズレています。</div>
+      </div>
+    </section>
+
+    <section class="block" id="mvp">
+      <div class="block-head"><small>MVP Screens</small><h2>MVP対象画像 9枚</h2></div>
+      <div class="block-body"><div class="screen-grid" id="mvp-grid"></div></div>
+    </section>
+
+    <section class="block" id="reference">
+      <div class="block-head"><small>Paid Beta Reference</small><h2>課金後参考画像 4枚</h2></div>
+      <div class="block-body">
+        <div class="note">この4枚は「将来こうなる」参考です。MVPでは表示・実装しません。画像にも「参考・未実装」を焼き込んでいます。</div>
+        <div class="screen-grid" id="reference-grid"></div>
+      </div>
+    </section>
+
+    <section class="block" id="out">
+      <div class="block-head"><small>Out of G4</small><h2>今回画像化しない画面</h2></div>
+      <div class="block-body">
+        <div class="pill-row">
+          <span class="pill">解析中: G3待機表現を再利用</span>
+          <span class="pill">フィードバックチャット: G3表現を継承</span>
+          <span class="pill">応援画像表示: 実生成画像が主役</span>
+          <span class="pill">問い合わせ: E25でQA</span>
+          <span class="pill">データ削除確認: 設定導線まで画像化</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="next">
+      <div class="block-head"><small>Review</small><h2>次に決めること</h2></div>
+      <div class="block-body">
+        <div class="note">各画像ごとに、採用 / 修正 / 棄却を選んでください。大枠OKなら、次は3タブ実装（E23）から進みます。</div>
+        <textarea data-review-global placeholder="全体レビューを書く欄です。例: 002の文言だけ修正、他は採用。"></textarea>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const mvpScreens = [
+      ["G4-IMG-001", "ホーム 初日", "assets/g4-ui-images/g4-img-001-home-first-day.png", "食事をまた報告したくなるか。パートナーの顔と一言が主役か。", ["価格や加入中表示がない", "今日の履歴が見える", "食事CTAが主役"]],
+      ["G4-IMG-002", "ホーム D2+再訪", "assets/g4-ui-images/g4-img-002-home-returning.png", "おかえり感があるか。サボりや失敗に見えないか。", ["責めない文言", "登録済みチップ", "食事CTAが自然"]],
+      ["G4-IMG-003", "食事入力 2回目以降", "assets/g4-ui-images/g4-img-003-meal-input.png", "30秒で報告できそうか。フォームが重くないか。", ["写真/テキストどちらでもOK", "時間帯タグ", "主CTAは1つ"]],
+      ["G4-IMG-004", "パートナー", "assets/g4-ui-images/g4-img-004-partner.png", "自分専属感と関係性が見えるか。設定画面に寄りすぎていないか。", ["肖像が主役", "呼ばれ方/関係性", "覚えていること"]],
+      ["G4-IMG-005", "パートナー調整", "assets/g4-ui-images/g4-img-005-partner-adjust.png", "無料操作と枠消費操作の違いが伝わるか。", ["NG欄", "残り枠", "確定まで旧肖像保持"]],
+      ["G4-IMG-006", "設定", "assets/g4-ui-images/g4-img-006-settings.png", "必要な管理へ迷わず辿り着けそうか。", ["プロフィール", "プランと登録", "法務/問い合わせ", "データ削除"]],
+      ["G4-IMG-007", "プランと登録 登録済み", "assets/g4-ui-images/g4-img-007-plan-registered.png", "登録済みが加入中に見えないか。", ["メールはマスク", "価格なし", "決済なし注記"]],
+      ["G4-IMG-008", "home_banner意向ゲート", "assets/g4-ui-images/g4-img-008-home-banner-gate.png", "ホーム文脈から自然に続けたいと思えるか。G3本体は再レビューしない。", ["無料継続導線", "価格なし", "パートナーは金銭を語らない"]],
+      ["G4-IMG-013", "応援画像枠超過カード", "assets/g4-ui-images/g4-img-013-motiv-quota.png", "枠切れでも責めず、明日また来たくなるか。", ["明日また無料で1枚", "警告色なし", "もっと見る導線"]]
+    ];
+    const referenceScreens = [
+      ["G4-IMG-009", "プラン管理 加入中", "assets/g4-ui-images/g4-img-009-paid-plan-management.png", "契約状態を静かに把握できるか。", ["参考・未実装", "具体金額なし", "解約導線を隠さない"]],
+      ["G4-IMG-010", "解約確認", "assets/g4-ui-images/g4-img-010-cancel.png", "引き止めや罪悪感がないか。", ["参考・未実装", "残るもの/変わるもの", "パートナーを悲しませない"]],
+      ["G4-IMG-011", "支払い失敗バナー", "assets/g4-ui-images/g4-img-011-past-due.png", "静かに知らせ、食事体験を壊していないか。", ["参考・未実装", "小バナー", "金銭発話なし"]],
+      ["G4-IMG-012", "ログイン/復元", "assets/g4-ui-images/g4-img-012-login-restore.png", "復元される/されないものが誤解なく分かるか。", ["参考・未実装", "Magic Link", "マージなし二択"]]
+    ];
+
+    function key(id, suffix) { return `aod.g4.review.${id}.${suffix}`; }
+    function renderCard(item, isRef) {
+      const [id, title, img, job, checks] = item;
+      const html = `
+        <article class="screen-card">
+          <div class="screen-head">
+            <div><h3>${id}<br>${title}</h3></div>
+            <span class="${isRef ? "ref" : ""}">${isRef ? "参考" : "MVP"}</span>
+          </div>
+          <figure><img src="${img}" alt="${id} ${title}"></figure>
+          <div class="meta">
+            <p><b>見ること:</b> ${job}</p>
+            <ul class="checklist">${checks.map((check) => `<li>${check}</li>`).join("")}</ul>
+          </div>
+          <div class="review">
+            <div class="choices">
+              <label class="choice"><input type="radio" name="${id}" value="adopt">採用</label>
+              <label class="choice"><input type="radio" name="${id}" value="revise">修正</label>
+              <label class="choice"><input type="radio" name="${id}" value="reject">棄却</label>
+            </div>
+            <textarea data-review="${id}" placeholder="${id}へのレビューを書く"></textarea>
+          </div>
+        </article>`;
+      return html;
+    }
+    document.querySelector("#mvp-grid").innerHTML = mvpScreens.map((screen) => renderCard(screen, false)).join("");
+    document.querySelector("#reference-grid").innerHTML = referenceScreens.map((screen) => renderCard(screen, true)).join("");
+
+    for (const input of document.querySelectorAll("textarea[data-review], textarea[data-review-global]")) {
+      const id = input.dataset.review || "global";
+      input.value = localStorage.getItem(key(id, "memo")) || "";
+      input.addEventListener("input", () => localStorage.setItem(key(id, "memo"), input.value));
+    }
+    for (const radio of document.querySelectorAll("input[type=radio]")) {
+      const saved = localStorage.getItem(key(radio.name, "status"));
+      if (saved === radio.value) radio.checked = true;
+      radio.addEventListener("change", () => localStorage.setItem(key(radio.name, "status"), radio.value));
+    }
+  </script>
+</body>
+</html>

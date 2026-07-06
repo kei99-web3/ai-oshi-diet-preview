@@ -1,0 +1,83 @@
+{
+  "generated_at": "2026-07-06T11:31:43.760Z",
+  "shots": [
+    {
+      "id": "g4-img-001-home-first-day",
+      "file": "assets/g4-ui-images/g4-img-001-home-first-day.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-002-home-returning",
+      "file": "assets/g4-ui-images/g4-img-002-home-returning.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-003-meal-input",
+      "file": "assets/g4-ui-images/g4-img-003-meal-input.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-004-partner",
+      "file": "assets/g4-ui-images/g4-img-004-partner.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-005-partner-adjust",
+      "file": "assets/g4-ui-images/g4-img-005-partner-adjust.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-006-settings",
+      "file": "assets/g4-ui-images/g4-img-006-settings.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-007-plan-registered",
+      "file": "assets/g4-ui-images/g4-img-007-plan-registered.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-008-home-banner-gate",
+      "file": "assets/g4-ui-images/g4-img-008-home-banner-gate.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-013-motiv-quota",
+      "file": "assets/g4-ui-images/g4-img-013-motiv-quota.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-009-paid-plan-management",
+      "file": "assets/g4-ui-images/g4-img-009-paid-plan-management.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-010-cancel",
+      "file": "assets/g4-ui-images/g4-img-010-cancel.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-011-past-due",
+      "file": "assets/g4-ui-images/g4-img-011-past-due.png",
+      "width": 390,
+      "height": 844
+    },
+    {
+      "id": "g4-img-012-login-restore",
+      "file": "assets/g4-ui-images/g4-img-012-login-restore.png",
+      "width": 390,
+      "height": 844
+    }
+  ]
+}
