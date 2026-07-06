@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>最終タブ構成 判断ボード | AI食事パートナー</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #fff4e6;
+      --paper: #fffbf4;
+      --paper-strong: #fff0df;
+      --ink: #31251f;
+      --muted: #75665c;
+      --line: #ead9c9;
+      --brand: #ef755f;
+      --brand-deep: #c94e43;
+      --green: #315d5a;
+      --blue: #456b8f;
+      --shadow: 0 18px 42px rgba(70, 43, 28, .10);
+      font-family: "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% -4%, rgba(239, 117, 95, .18), transparent 18rem),
+        linear-gradient(180deg, #fff4e6 0, #fffaf1 260px, #fff7ed 100%);
+      color: var(--ink);
+      line-height: 1.7;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1080px, calc(100% - 28px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 244, 230, .88);
+      border-bottom: 1px solid rgba(234, 217, 201, .78);
+    }
+    .hero { padding: 22px 0 14px; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 10px;
+      border: 1px solid rgba(239, 117, 95, .26);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .68);
+      color: var(--brand-deep);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    h1, h2, h3, p { margin: 0; }
+    h1 {
+      margin-top: 10px;
+      font-size: clamp(28px, 8vw, 48px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 0 0 12px;
+      scrollbar-width: none;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav a {
+      flex: 0 0 auto;
+      min-height: 38px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 251, 244, .86);
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    main { display: grid; gap: 16px; padding: 18px 0 48px; }
+    section, .card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 251, 244, .92);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .section-head {
+      display: grid;
+      gap: 6px;
+      padding: 18px 16px 12px;
+      border-bottom: 1px solid rgba(234, 217, 201, .82);
+      background: rgba(255, 240, 223, .74);
+    }
+    .section-head small {
+      color: var(--brand-deep);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    h2 { font-size: 21px; line-height: 1.35; letter-spacing: 0; }
+    h3 { font-size: 16px; line-height: 1.45; letter-spacing: 0; }
+    .body { display: grid; gap: 14px; padding: 16px; }
+    .summary {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid rgba(239, 117, 95, .28);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(239, 117, 95, .12), rgba(255, 255, 255, .74));
+    }
+    .summary strong { font-size: 18px; line-height: 1.45; }
+    .pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pill.good { border-color: rgba(49, 93, 90, .24); background: rgba(49, 93, 90, .08); color: var(--green); }
+    .pill.warn { border-color: rgba(239, 117, 95, .28); background: rgba(239, 117, 95, .10); color: var(--brand-deep); }
+    .grid { display: grid; gap: 12px; }
+    .cols { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .cols2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .option {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: #fff;
+    }
+    .option.recommended {
+      border-color: rgba(239, 117, 95, .45);
+      background: linear-gradient(180deg, #fff, #fff2e8);
+    }
+    .option .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--brand-deep);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .tab {
+      display: grid;
+      place-items: center;
+      min-height: 56px;
+      padding: 8px;
+      border-radius: 16px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+    }
+    .tab.muted {
+      background: #fff;
+      color: var(--muted);
+      border: 1px dashed var(--line);
+    }
+    .wireframes {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .phone {
+      display: grid;
+      gap: 10px;
+      min-height: 430px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: #fff9ef;
+      box-shadow: inset 0 0 0 5px rgba(49, 37, 31, .05);
+    }
+    .phone-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      min-height: 34px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 42%, #ffd1b9 0 24px, transparent 25px),
+        linear-gradient(135deg, #222, #74554b);
+      border: 3px solid #fff;
+      box-shadow: 0 8px 20px rgba(49, 37, 31, .14);
+    }
+    .block {
+      min-height: 46px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .block.cta {
+      display: grid;
+      place-items: center;
+      min-height: 54px;
+      background: linear-gradient(135deg, #f58a69, #ef6655);
+      color: #fff;
+      border: 0;
+      box-shadow: 0 12px 26px rgba(239, 117, 95, .22);
+    }
+    .bottom-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(234, 217, 201, .86);
+    }
+    .bottom-tabs span {
+      display: grid;
+      place-items: center;
+      min-height: 34px;
+      border-radius: 999px;
+      background: #fff;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+    }
+    .bottom-tabs span.active { background: var(--ink); color: #fff; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #fff;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: var(--paper-strong);
+      color: var(--ink);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: 0; }
+    ul { margin: 0; padding-left: 1.15em; }
+    li + li { margin-top: 4px; }
+    .flow {
+      display: grid;
+      gap: 8px;
+    }
+    .flow-step {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: "";
+      width: 2px;
+      height: 10px;
+      background: var(--line);
+      position: absolute;
+      left: 24px;
+      bottom: -11px;
+    }
+    .flow-step b { color: var(--green); }
+    textarea {
+      width: 100%;
+      min-height: 92px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+    .review-box {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+    }
+    .small { color: var(--muted); font-size: 12px; }
+    .callout {
+      padding: 12px;
+      border-left: 4px solid var(--brand);
+      border-radius: 14px;
+      background: #fff;
+      color: var(--muted);
+    }
+    .source-list a {
+      display: block;
+      padding: 10px 0;
+      color: var(--green);
+      font-weight: 900;
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+      overflow-wrap: anywhere;
+    }
+    .source-list a:last-child { border-bottom: 0; }
+    @media (max-width: 780px) {
+      header { position: static; }
+      .cols, .cols2, .wireframes { grid-template-columns: 1fr; }
+      .tabs { grid-template-columns: 1fr; }
+      table, thead, tbody, tr, th, td { display: block; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); }
+      td { border-bottom: 0; padding: 8px 10px; }
+      td::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--brand-deep);
+        font-size: 11px;
+        font-weight: 900;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <span class="eyebrow">OD-14 最終タブ構成</span>
+      <h1>何をタブに残すかを決めるための判断ボード</h1>
+      <p class="lead">Fable5レビューと正本をもとに、現行5タブからリリース向け3タブへ整理するかを判断するための資料です。スマホで上から読めば、そのまま意思決定できます。</p>
+    </div>
+    <div class="wrap nav" aria-label="ページ内ナビ">
+      <a href="#decision">結論</a>
+      <a href="#options">選択肢</a>
+      <a href="#screens">画面構成</a>
+      <a href="#journey">動線</a>
+      <a href="#migration">移行</a>
+      <a href="#qa">QA</a>
+      <a href="#review">判断欄</a>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="decision">
+      <div class="section-head">
+        <small>まずここだけ見ればOK</small>
+        <h2>Fable5推奨は「ホーム / パートナー / 設定」の3タブ</h2>
+      </div>
+      <div class="body">
+        <div class="summary">
+          <strong>推奨判断: 現行5タブを、ユーザー向け3タブに整理する。</strong>
+          <p>食事入力、フィードバック、意向ゲート、プラン登録はタブではなく、ホームや設定から開く画面として扱います。ユーザーが毎日触る場所を減らし、「食事を見てもらう」「相棒を感じる」「必要な管理をする」に集中させます。</p>
+          <div class="pill-row">
+            <span class="pill good">推奨</span>
+            <span class="pill">ホーム</span>
+            <span class="pill">パートナー</span>
+            <span class="pill">設定</span>
+            <span class="pill warn">返信チェックは撤去</span>
+            <span class="pill warn">料金タブは残さない</span>
+          </div>
+        </div>
+        <div class="callout">
+          判断ポイントは、機能数ではなく「次の食事を報告したくなるか」です。価格や運営情報を前面に出すほど、食事パートナー体験が薄くなります。
+        </div>
+      </div>
+    </section>
+
+    <section id="options">
+      <div class="section-head">
+        <small>選択肢</small>
+        <h2>最終判断の3案</h2>
+      </div>
+      <div class="body grid cols">
+        <article class="option recommended">
+          <div class="label"><span>A案</span><span>推奨</span></div>
+          <h3>3タブ: ホーム / パートナー / 設定</h3>
+          <div class="tabs">
+            <div class="tab">ホーム</div>
+            <div class="tab">パートナー</div>
+            <div class="tab">設定</div>
+          </div>
+          <p>毎日使う画面を絞る案。食事入力はホームから開き、プランや法務は設定へ置きます。</p>
+          <ul>
+            <li>ユーザーに迷いが少ない</li>
+            <li>「相棒と続ける」価値が濃く見える</li>
+            <li>実課金なし期間の誤認表示を避けやすい</li>
+          </ul>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>B案</span><span>代替</span></div>
+          <h3>4タブ: ホーム / 食事 / パートナー / 設定</h3>
+          <div class="tabs" style="grid-template-columns: repeat(4, minmax(0, 1fr));">
+            <div class="tab">ホーム</div>
+            <div class="tab">食事</div>
+            <div class="tab">相棒</div>
+            <div class="tab">設定</div>
+          </div>
+          <p>食事入力を常設タブにする案。入力導線は強くなりますが、ホームとの役割が重なります。</p>
+          <ul>
+            <li>食事報告だけは見つけやすい</li>
+            <li>タブが増えてアプリ感が重くなる</li>
+            <li>ホームの存在理由が弱くなる</li>
+          </ul>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>C案</span><span>非推奨</span></div>
+          <h3>現行5タブを維持</h3>
+          <div class="tabs" style="grid-template-columns: repeat(5, minmax(0, 1fr));">
+            <div class="tab muted">食事</div>
+            <div class="tab muted">メモ</div>
+            <div class="tab muted">進め方</div>
+            <div class="tab muted">返信</div>
+            <div class="tab muted">料金</div>
+          </div>
+          <p>実装を大きく変えない案。ただし、ユーザー向けと運営向けの情報が混ざります。</p>
+          <ul>
+            <li>短期の実装量は少ない</li>
+            <li>ユーザー体験が管理画面っぽくなる</li>
+            <li>返信チェックや料金表示が誤解を生みやすい</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="screens">
+      <div class="section-head">
+        <small>画面構成</small>
+        <h2>A案を採用した場合の主要画面</h2>
+      </div>
+      <div class="body">
+        <div class="wireframes" aria-label="3タブのワイヤーフレーム">
+          <article class="phone">
+            <div class="phone-top"><span>ホーム</span><span>今日</span></div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <div class="avatar" aria-hidden="true"></div>
+              <div>
+                <h3>おかえり</h3>
+                <p class="small">今日も一緒に見ていこう。</p>
+              </div>
+            </div>
+            <div class="block cta">食事を見てもらう</div>
+            <div class="block">今日の履歴: 昼ごはん / 夜ごはん</div>
+            <div class="block">前回の一言: 次は汁物を足せるといい</div>
+            <div class="bottom-tabs">
+              <span class="active">ホーム</span><span>パートナー</span><span>設定</span>
+            </div>
+          </article>
+
+          <article class="phone">
+            <div class="phone-top"><span>パートナー</span><span>編集</span></div>
+            <div class="avatar" style="width:120px;height:120px;margin:0 auto;" aria-hidden="true"></div>
+            <div class="block">名前 / 呼ばれ方 / 関係性</div>
+            <div class="block">覚えていること: 目的、苦手、食事方針</div>
+            <div class="block cta">見た目や話し方を調整する</div>
+            <div class="bottom-tabs">
+              <span>ホーム</span><span class="active">パートナー</span><span>設定</span>
+            </div>
+          </article>
+
+          <article class="phone">
+            <div class="phone-top"><span>設定</span><span>管理</span></div>
+            <div class="block">プロフィール / 体重 / 目標</div>
+            <div class="block">プランと登録</div>
+            <div class="block">お問い合わせ</div>
+            <div class="block">利用規約 / プライバシー / 免責</div>
+            <div class="block">データ削除</div>
+            <div class="bottom-tabs">
+              <span>ホーム</span><span>パートナー</span><span class="active">設定</span>
+            </div>
+          </article>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>画面</th><th>役割</th><th>置くもの</th><th>置かないもの</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="画面">ホーム</td>
+              <td data-label="役割">毎日の入口。次の食事報告へ戻す</td>
+              <td data-label="置くもの">パートナーの顔、今日の一言、食事報告CTA、今日の履歴、登録済みチップ</td>
+              <td data-label="置かないもの">価格表、返信品質チェック、内部コスト</td>
+            </tr>
+            <tr>
+              <td data-label="画面">パートナー</td>
+              <td data-label="役割">相棒との関係とカスタマイズ</td>
+              <td data-label="置くもの">見た目、名前、呼ばれ方、関係性、口調、覚えていること、調整</td>
+              <td data-label="置かないもの">決済情報、法務リンク</td>
+            </tr>
+            <tr>
+              <td data-label="画面">設定</td>
+              <td data-label="役割">プロフィール、登録、法務、データ管理</td>
+              <td data-label="置くもの">体重/目標/食事方針、プランと登録、問い合わせ、規約、データ削除</td>
+              <td data-label="置かないもの">開発者向け返信チェック、コスト台帳</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="section-head">
+        <small>ユーザー動線</small>
+        <h2>タブにしない画面は、スタック画面として開く</h2>
+      </div>
+      <div class="body grid cols2">
+        <div class="flow">
+          <div class="flow-step"><b>初回完了後</b><span>オンボーディング完了 → 初回フィードバック → 仮ペイウォール → ホーム</span></div>
+          <div class="flow-step"><b>毎日の利用</b><span>ホーム → 食事入力 → フィードバック → 応援画像 → ホーム</span></div>
+          <div class="flow-step"><b>相棒調整</b><span>パートナー → 見た目/口調/呼ばれ方の調整 → パートナー</span></div>
+          <div class="flow-step"><b>登録/管理</b><span>設定 → プランと登録 → 登録済み表示 / 解除 / 後の課金管理</span></div>
+        </div>
+        <div class="option">
+          <h3>なぜ「食事入力」をタブにしないか</h3>
+          <p>食事入力は毎日重要ですが、ホームの主CTAとして置く方が自然です。タブにすると「ホーム」と「食事」の役割が割れ、相棒の一言や今日の履歴から入力へ流す体験が弱くなります。</p>
+          <h3>なぜ「料金」をタブにしないか</h3>
+          <p>MVPでは実課金しないため、料金タブがあるだけで「もう課金できる」「加入中かも」と誤認されやすくなります。登録やプランは設定内で静かに扱う方が安全です。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="migration">
+      <div class="section-head">
+        <small>現行からの移行</small>
+        <h2>今ある5タブをどう扱うか</h2>
+      </div>
+      <div class="body">
+        <table>
+          <thead>
+            <tr><th>現行タブ</th><th>評価</th><th>移行先</th><th>受け入れ基準</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-label="現行タブ">食事記録</td>
+              <td data-label="評価">中核機能</td>
+              <td data-label="移行先">ホームへ昇格</td>
+              <td data-label="受け入れ基準">旧保存値でもホームへ安全復帰できる</td>
+            </tr>
+            <tr>
+              <td data-label="現行タブ">好みメモ</td>
+              <td data-label="評価">必要だが単独タブでは重い</td>
+              <td data-label="移行先">パートナーへ吸収</td>
+              <td data-label="受け入れ基準">メモ内容、関係性、呼ばれ方が消えない</td>
+            </tr>
+            <tr>
+              <td data-label="現行タブ">進め方</td>
+              <td data-label="評価">設定/プロフィール寄り</td>
+              <td data-label="移行先">設定へ吸収</td>
+              <td data-label="受け入れ基準">目的、進め方、体重/目標の編集ができる</td>
+            </tr>
+            <tr>
+              <td data-label="現行タブ">返信チェック</td>
+              <td data-label="評価">運営/開発向け</td>
+              <td data-label="移行先">消費者UIから撤去</td>
+              <td data-label="受け入れ基準">一般ユーザーに表示されない。必要なら開発者モード</td>
+            </tr>
+            <tr>
+              <td data-label="現行タブ">料金</td>
+              <td data-label="評価">意向計測、設定、運営情報が混在</td>
+              <td data-label="移行先">設定内のプランと登録</td>
+              <td data-label="受け入れ基準">実課金なし期間に誤認表示がない</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="qa">
+      <div class="section-head">
+        <small>実装とQAへの影響</small>
+        <h2>この判断で追加される確認項目</h2>
+      </div>
+      <div class="body grid cols2">
+        <div class="option">
+          <h3>実装でやること</h3>
+          <ul>
+            <li>タブ定義を3タブへ再構成する</li>
+            <li>旧タブの保存状態を新しい画面へ安全にフォールバックさせる</li>
+            <li>返信チェックと内部コスト表示を消費者UIから隠す</li>
+            <li>料金タブを設定内の「プランと登録」に分解する</li>
+            <li>G4のホーム/パートナー/設定画像を作り、レビュー後に実装する</li>
+          </ul>
+        </div>
+        <div class="option">
+          <h3>QAで見ること</h3>
+          <ul>
+            <li>E23: 旧タブ保存値の安全フォールバック</li>
+            <li>E24: 設定内プロフィール/体重/法務/データ管理</li>
+            <li>E25: 問い合わせフォームとイベント原文非混入</li>
+            <li>E32: 誤課金表示ゼロ監査</li>
+            <li>登録済みユーザーの再訪時に再勧誘しすぎないこと</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="review">
+      <div class="section-head">
+        <small>人間レビュー欄</small>
+        <h2>この画面を見て決めること</h2>
+      </div>
+      <div class="body">
+        <div class="review-box">
+          <h3>Q1. 最終タブは3タブで進めてよいですか？</h3>
+          <div class="pill-row">
+            <span class="pill good">A: ホーム / パートナー / 設定</span>
+            <span class="pill">B: ホーム / 食事 / パートナー / 設定</span>
+            <span class="pill warn">C: 現行5タブ維持</span>
+          </div>
+          <textarea placeholder="レビューを書く欄です。例: AでOK。食事入力はホームCTAで十分。"></textarea>
+        </div>
+        <div class="review-box">
+          <h3>Q2. 返信チェックは消費者UIから撤去でよいですか？</h3>
+          <textarea placeholder="例: 撤去でOK。開発者モードだけに残す。"></textarea>
+        </div>
+        <div class="review-box">
+          <h3>Q3. 料金タブは残さず、設定内の「プランと登録」に移してよいですか？</h3>
+          <textarea placeholder="例: OK。MVPでは価格非表示、意向計測だけ。"></textarea>
+        </div>
+        <div class="review-box">
+          <h3>Q4. G4画像レビューに進んでよいですか？</h3>
+          <p class="small">対象: ホーム初日、ホームD2以降、食事入力、パートナー、パートナー調整、設定、登録済み、意向ゲート。</p>
+          <textarea placeholder="例: OK。まずMVP対象8枚を出す。"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="section-head">
+        <small>参照正本</small>
+        <h2>この判断ボードの元資料</h2>
+      </div>
+      <div class="body source-list">
+        <a href="release-canon-index.html">リリース正本まとめHTML</a>
+        <a href="g3-ui-image-review.html">G3 UI画像レビュー</a>
+        <a href="g3-ui-image-review-v3.html">G3 UI画像レビュー v3</a>
+        <p class="small">元資料: PRODUCT_STRATEGY_MASTER、UI_RECONCILIATION_TAB_MAP、POST_PAYWALL_PRODUCT_SPEC、ACCOUNT_AND_ENTITLEMENT_SPEC、SUPPORT_LEGAL_CONTACT_SPEC、G4_UI_IMAGE_BRIEF。</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
